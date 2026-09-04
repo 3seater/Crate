@@ -11,6 +11,33 @@ import { useBasketPrices } from "@/domains/baskets/hooks/use-basket-prices";
 import { useEthPrice } from "@/domains/baskets/hooks/use-eth-price";
 import { HeroArt } from "@/domains/baskets/components/hero-art";
 import { ScrollProgress } from "@/domains/baskets/components/scroll-progress";
+import { formatUsdCompact } from "@/utils/format";
+
+// ─── Price formatting ─────────────────────────────────────────────────────────
+
+/**
+ * Formats a token price cleanly across the full range:
+ * ≥ $1000 → $1.2K | ≥ $1 → $1.24 | ≥ $0.01 → $0.0124
+ * ≥ $0.0001 → $0.000124 | < $0.0001 → up to 8 sig figs, no exponential
+ */
+function formatTokenPrice(priceUsd: number): string {
+  if (priceUsd === 0) {
+    return "$0";
+  }
+  if (priceUsd >= 1000) {
+    return formatUsdCompact(priceUsd);
+  }
+  if (priceUsd >= 1) {
+    return `$${priceUsd.toFixed(2)}`;
+  }
+  if (priceUsd >= 0.01) {
+    return `$${priceUsd.toFixed(4)}`;
+  }
+  if (priceUsd >= 0.0001) {
+    return `$${priceUsd.toFixed(6)}`;
+  }
+  return `$${Number(priceUsd.toPrecision(4)).toString()}`;
+}
 
 const TOKEN_COLOURS = [
   "#d4b2ff",
@@ -139,11 +166,13 @@ export function CrateCard({
 }) {
   // Use the first token's image for the orb if available
   const firstToken = crate.tokens[0];
-  const firstPrice = firstToken ? priceMap[firstToken.poolAddress] : undefined;
+  const firstPrice = firstToken
+    ? priceMap[firstToken.poolAddress.toLowerCase()]
+    : undefined;
 
   // Average 24h change across tokens that have data
   const changes = crate.tokens
-    .map((t) => priceMap[t.poolAddress]?.change24h)
+    .map((t) => priceMap[t.poolAddress.toLowerCase()]?.change24h)
     .filter((c): c is number => c != null);
   const avgChange =
     changes.length > 0
@@ -297,7 +326,9 @@ function BuyModal({
 
   const amountNum = Number.parseFloat(amount) || 0;
   const firstToken = crate.tokens[0];
-  const firstPrice = firstToken ? priceMap[firstToken.poolAddress] : undefined;
+  const firstPrice = firstToken
+    ? priceMap[firstToken.poolAddress.toLowerCase()]
+    : undefined;
 
   return (
     <dialog
@@ -352,7 +383,7 @@ function BuyModal({
         </div>
         <div className="buy-breakdown">
           {crate.tokens.map((token) => {
-            const price = priceMap[token.poolAddress];
+            const price = priceMap[token.poolAddress.toLowerCase()];
             const ethAmt = (amountNum * token.weight) / 100;
             const usdAmt = ethPriceUsd == null ? null : ethAmt * ethPriceUsd;
             return (
@@ -378,10 +409,7 @@ function BuyModal({
                         fontSize: 10,
                       }}
                     >
-                      $
-                      {price.priceUsd < 0.001
-                        ? price.priceUsd.toExponential(2)
-                        : price.priceUsd.toFixed(price.priceUsd < 1 ? 4 : 2)}
+                      {formatTokenPrice(price.priceUsd)}
                     </small>
                   )}
                 </span>
@@ -454,7 +482,8 @@ export default function CrateApp() {
   const priceMap = useMemo<PriceMap>(() => {
     const map: PriceMap = {};
     for (const p of priceData?.prices ?? []) {
-      map[p.address] = {
+      // lowercase key so lookup always matches regardless of casing
+      map[p.address.toLowerCase()] = {
         priceUsd: p.priceUsd,
         change24h: p.change24h,
         imageUrl: p.imageUrl,
