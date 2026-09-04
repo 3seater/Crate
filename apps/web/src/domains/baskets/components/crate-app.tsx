@@ -190,7 +190,6 @@ export function CrateCard({
       <div className="crate-card-heading">
         <div>
           <h3>{crate.name}</h3>
-          <p className="ticker">${crate.ticker}</p>
         </div>
         <TokenOrb
           className="crate-orb"

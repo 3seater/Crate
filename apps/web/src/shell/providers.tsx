@@ -25,13 +25,47 @@ const wagmiConfig = getDefaultConfig({
   ssr: true,
 });
 
-const rainbowTheme = darkTheme({
-  accentColor: "#f0a56a",
-  accentColorForeground: "#0d0b09",
-  borderRadius: "small",
-  fontStack: "system",
-  overlayBlur: "small",
-});
+const rainbowTheme = {
+  ...darkTheme({
+    accentColor: "#f0a56a",
+    accentColorForeground: "#0d0b09",
+    borderRadius: "small",
+    fontStack: "system",
+    overlayBlur: "none",
+  }),
+  colors: {
+    ...darkTheme().colors,
+    // Modals + popovers
+    modalBackground: "#15100d",
+    modalBorder: "#302721",
+    modalText: "#fff5eb",
+    modalTextDim: "#a79c92",
+    modalTextSecondary: "#a79c92",
+    // Connected account button
+    connectButtonBackground: "#15100d",
+    connectButtonBackgroundError: "#15100d",
+    connectButtonInnerBackground: "#0d0b09",
+    connectButtonText: "#fff5eb",
+    connectButtonTextError: "#f0a56a",
+    // Action buttons inside modal
+    actionButtonBorder: "#302721",
+    actionButtonBorderMobile: "#302721",
+    actionButtonSecondaryBackground: "#1a120f",
+    // General
+    accentColor: "#f0a56a",
+    accentColorForeground: "#0d0b09",
+    menuItemBackground: "#1a120f",
+    profileAction: "#1a120f",
+    profileActionHover: "#251a16",
+    profileForeground: "#15100d",
+    selectedOptionBorder: "#f0a56a",
+    closeButton: "#a79c92",
+    closeButtonBackground: "#1a120f",
+    error: "#f0a56a",
+    generalBorder: "#302721",
+    generalBorderDim: "#251a16",
+  },
+};
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
