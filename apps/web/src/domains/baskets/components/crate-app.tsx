@@ -348,9 +348,7 @@ export function BuyModal({
         </button>
         <div className="buy-heading">
           <div>
-            <p className="section-index">Selected crate</p>
             <h2>{crate.name}</h2>
-            <p className="ticker">${crate.ticker}</p>
           </div>
           <TokenOrb
             className="large"
@@ -393,10 +391,10 @@ export function BuyModal({
                   <TokenOrb
                     color={token.color}
                     imageUrl={price?.imageUrl}
-                    size={18}
+                    size={26}
                     symbol={token.symbol}
                     style={{
-                      marginRight: 6,
+                      marginRight: 8,
                       verticalAlign: "middle",
                       display: "inline-block",
                     }}
@@ -581,7 +579,7 @@ export default function CrateApp() {
           <div>
             <h2>Browse the crates.</h2>
           </div>
-          <Link className="text-button" href="/crates">
+          <Link className="ghost-button" href="/crates">
             View all crates
           </Link>
         </div>

@@ -614,7 +614,7 @@ h2 em {
 }
 
 .text-button {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--foreground);
   background: transparent;
   border: 0;
@@ -812,8 +812,8 @@ footer:not(.site-footer) .brand {
 .buy-breakdown div {
   display: flex;
   justify-content: space-between;
-  padding: 12px 0;
-  font-size: 12px;
+  padding: 14px 0;
+  font-size: 14px;
   color: var(--foreground);
   border-bottom: 1px solid var(--line);
 }
@@ -829,17 +829,9 @@ footer:not(.site-footer) .brand {
   color: var(--muted);
 }
 /* confirm button inside buy modal — override light primary-button */
+/* confirm button inside buy modal — keep primary-button style, just center the label */
 .buy-modal .primary-button {
-  color: var(--foreground);
-  background: transparent;
-  border: 1px solid var(--line);
-  box-shadow: none;
   justify-content: center;
-}
-.buy-modal .primary-button:hover {
-  border-color: var(--foreground);
-  box-shadow: none;
-  transform: none;
 }
 .full {
   width: 100%;
