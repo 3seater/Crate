@@ -1,10 +1,13 @@
 [build]
+  # base is apps/web; build command steps up to repo root to run turbo
   base    = "apps/web"
-  command = "cd ../.. && corepack enable && corepack prepare pnpm@10.33.0 --activate && pnpm install --frozen-lockfile && pnpm exec turbo build --filter=web"
+  command = "cd ../.. && pnpm install --frozen-lockfile && pnpm turbo build --filter=web"
+  # publish is relative to base (apps/web), so ".next" = apps/web/.next
   publish = ".next"
 
 [build.environment]
   NODE_VERSION = "22"
+  PNPM_VERSION = "10"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

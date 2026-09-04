@@ -57,7 +57,7 @@ const TOKEN_COLOURS = [
 const ORB_COLOURS = ["#f0a56a", "#f6bd86", "#d8a878"];
 const CATEGORIES = ["Core", "AI & Infra", "Cats"];
 
-const crates = BASKETS.map((basket, bi) => ({
+export const crates = BASKETS.map((basket, bi) => ({
   id: basket.id,
   name: basket.name,
   ticker: basket.id.replace(/-/g, "").toUpperCase().slice(0, 8),
@@ -75,9 +75,9 @@ const crates = BASKETS.map((basket, bi) => ({
   })),
 }));
 
-type CrateData = (typeof crates)[number];
+export type CrateData = (typeof crates)[number];
 
-type PriceMap = Record<
+export type PriceMap = Record<
   string,
   {
     priceUsd: number;
