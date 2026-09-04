@@ -1,0 +1,16 @@
+packages:
+  - apps/*
+  - packages/*
+
+catalog:
+  '@trpc/client': ^11.17.0
+  '@trpc/server': ^11.17.0
+  '@trpc/tanstack-react-query': ^11.17.0
+  dotenv: ^17.3.1
+  hono: ^4.12.23
+  typescript: ^5.9.3
+  zod: ^4.4.3
+
+ignoredBuiltDependencies:
+  - sharp
+  - unrs-resolver

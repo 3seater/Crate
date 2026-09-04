@@ -1,0 +1,50 @@
+---
+title: Deposit & Withdraw
+description: Move funds in and out of your Polygon trading wallet.
+---
+
+import { Callout } from '@/components/docs/callout';
+
+## Overview
+
+Doji uses **pUSD** (Polymarket USD) on **Polygon** for trading. Your balance shows in the header after you [set up your wallet](/sign-in-and-wallet-setup). A built-in bridge moves funds between other chains and your Polygon wallet. The bridge converts deposits into pUSD automatically.
+
+## Quick Access
+
+- **Header buttons** — Click **Deposit** or **Withdraw** in the app header to open the bridge modal.
+- **Onboarding** — The "Fund your wallet" step opens the deposit flow automatically.
+
+## Deposits
+
+1. Click **Deposit** in the header (or during onboarding).
+2. Choose a **source chain** and **asset**.
+3. Copy the **deposit address** shown and send supported assets to it.
+4. Wait for the bridge to process — most deposits complete within minutes.
+
+Your header balance updates when funds arrive.
+
+<Callout type="info">
+Some chains enforce a **minimum deposit** in USD. The bridge UI shows minimums when they apply.
+</Callout>
+
+## Withdrawals
+
+1. Click **Withdraw** in the header.
+2. Choose a **destination chain** and **token**.
+3. Enter a **recipient address** and **amount**.
+4. Review the **quote** (fees and estimated output).
+5. Follow the on-screen steps to confirm.
+
+Fees and settlement time vary by network. The UI shows a breakdown before you confirm.
+
+## Troubleshooting
+
+| Problem | What to Do |
+|---------|------------|
+| **Deposit not arriving** | Leave the tab open — most deposits complete within minutes. Check that you sent a supported asset to the correct deposit address. |
+| **Withdrawal failed** | Try a smaller amount — bridge liquidity pools can be temporarily exhausted. Wait a few minutes and retry. |
+| **Below minimum deposit** | Check the minimum shown in the bridge UI (typically $2–$9 depending on chain). |
+
+<Callout type="info">
+Large withdrawals (over $50,000) may benefit from splitting into smaller amounts. If issues persist, see [Common Issues](/common-issues).
+</Callout>

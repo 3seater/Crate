@@ -1,0 +1,12 @@
+{
+  "diff": false,
+  "ignore": {
+    "rules": [
+      "knip/exports",
+      "knip/types",
+      "deslop/unused-export",
+      "react-doctor/prefer-dynamic-import"
+    ],
+    "files": ["src/ui/**"]
+  }
+}

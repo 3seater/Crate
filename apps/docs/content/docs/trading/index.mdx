@@ -1,0 +1,58 @@
+---
+title: Trading Terminal
+description: The Doji trading workspace.
+---
+
+import { Card, Cards } from 'fumadocs-ui/components/card';
+import { MousePointer2, BarChart3, PieChart } from 'lucide-react';
+import { Callout } from '@/components/docs/callout';
+import { Shortcut } from '@/components/docs/shortcut';
+
+The trading terminal is where you analyze markets and place orders. Click any market from the Explore page to open it.
+
+## Navigation
+
+- **Search** — Press <Shortcut>Ctrl+K</Shortcut> to search for markets, events, or categories.
+- **Header** — Shows the current probability, market status, and key dates.
+- **Bottom Bar** — Open the **Address Tracker**, **Watchlist**, **Calendar**, **Activity**, and **Settings** from the bar at the bottom of the screen.
+
+## Guides
+
+<Cards>
+  <Card
+    title="Placing Orders"
+    description="Order types: GTC, GTD, FOK, FAK, and post-only."
+    href="/trading/placing-orders"
+    icon={<MousePointer2 className="text-primary" />}
+  />
+  <Card
+    title="Reading the Charts"
+    description="Timeframes, chart types, and drawing tools."
+    href="/trading/charts"
+    icon={<BarChart3 className="text-primary" />}
+  />
+  <Card
+    title="Portfolio"
+    description="Positions, orders, P&L, and redemptions."
+    href="/portfolio"
+    icon={<PieChart className="text-primary" />}
+  />
+</Cards>
+
+## Settings
+
+Open Settings from the bottom bar to configure trading behavior and notifications.
+
+### Trading
+
+- **Market Order Type** — Choose between **FAK** (Fill and Kill) and **FOK** (Fill or Kill) for market-style orders. FAK fills as much as possible then cancels the rest; FOK requires a complete fill or cancels entirely.
+- **Orderbook Flash Effects** — Toggle the visual flash animation on the orderbook when new orders arrive.
+
+### Notifications
+
+- **Display Toasts** — Toggle toast notifications on or off, and choose their screen position (six positions available).
+- **Notification Sounds** — Enable or disable audio alerts, pick a sound from the built-in library, and adjust the volume.
+
+<Callout type="info">
+> Settings are stored locally in your browser and persist across sessions.
+</Callout>

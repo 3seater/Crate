@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "git": {
+    "deploymentEnabled": {
+      "main": false
+    }
+  },
+  "github": {
+    "silent": true
+  },
+  "regions": ["dub1"],
+  "framework": "hono",
+  "installCommand": "cd ../.. && corepack enable && corepack prepare pnpm@10.33.0 --activate && pnpm install --frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm exec turbo build --filter=server",
+  "outputDirectory": "dist",
+  "ignoreCommand": "[[ \"$VERCEL_GIT_COMMIT_REF\" =~ ^(dependabot|renovate)/ || \"$VERCEL_GIT_COMMIT_AUTHOR_LOGIN\" =~ ^(dependabot|renovate) ]] && exit 0; npx turbo-ignore server --fallback=HEAD^1"
+}

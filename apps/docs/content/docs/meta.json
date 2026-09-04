@@ -1,0 +1,25 @@
+{
+  "title": "Doji",
+  "pages": [
+    "index",
+    "---Get Started---",
+    "sign-in-and-wallet-setup",
+    "deposit-and-withdraw",
+    "---Trade---",
+    "explore-and-search",
+    "trading/index",
+    "trading/placing-orders",
+    "trading/charts",
+    "---Monitor---",
+    "portfolio",
+    "watchlist",
+    "tracker",
+    "calendar",
+    "activity-feed",
+    "leaderboard",
+    "---Support---",
+    "reference/fees",
+    "common-issues",
+    "support"
+  ]
+}

@@ -1,0 +1,36 @@
+name: Setup Node.js and pnpm
+description: Install pnpm, Node.js, and project dependencies with caching
+
+inputs:
+  node-version:
+    description: Node.js version to use
+    required: false
+    default: "22"
+  install:
+    description: Whether to run pnpm install
+    required: false
+    default: "true"
+
+runs:
+  using: composite
+  steps:
+    - name: Setup pnpm
+      uses: pnpm/action-setup@71c92474e7e4f5bca283fb17ef80fba9cdb2b4b1 # v6
+      with:
+        # Pin to package.json#packageManager — v6 bootstrap can otherwise run pnpm 11-rc
+        # and mis-parse lockfile v9 ("expected a single document … but found more").
+        version: 10.33.0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: pnpm
+
+    - name: Cache Turborepo
+      uses: rharkor/caching-for-turbo@a1c4079258ae08389be75b57d4d7a70f23c1c66d # v1.8
+
+    - name: Install dependencies
+      if: ${{ inputs.install == 'true' }}
+      shell: bash
+      run: pnpm install --frozen-lockfile

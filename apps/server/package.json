@@ -1,0 +1,48 @@
+{
+  "name": "server",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsdown",
+    "start": "node dist/index.mjs",
+    "check-types": "tsc --noEmit",
+    "compile": "bun build --compile --minify --sourcemap --bytecode ./src/index.ts --outfile server",
+    "vercel:deploy": "vercel",
+    "vercel:deploy:prod": "vercel --prod",
+    "vercel:env:pull": "vercel env pull .env.local"
+  },
+  "dependencies": {
+    "@doji/api": "workspace:*",
+    "@doji/db": "workspace:*",
+    "@doji/env": "workspace:*",
+    "@doji/logger": "workspace:*",
+    "@doji/types": "workspace:*",
+    "@hono/node-server": "^1.14.4",
+    "@hono/trpc-server": "^0.4.0",
+    "@sentry/node": "^10.55.0",
+    "@sentry/profiling-node": "^10.55.0",
+    "@trpc/server": "catalog:",
+    "dotenv": "catalog:",
+    "hono": "catalog:",
+    "lru-cache": "^11.5.1",
+    "viem": "2.50.4",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@doji/config": "workspace:*",
+    "@scalar/hono-api-reference": "^0.10.19",
+    "@types/node": "^25.9.1",
+    "tsdown": "^0.22.1",
+    "tsx": "^4.22.3",
+    "typescript": "catalog:"
+  }
+}

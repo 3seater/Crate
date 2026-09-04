@@ -1,0 +1,58 @@
+---
+title: Explore & Search
+description: Browse, filter, and search prediction markets.
+---
+
+import { Card, Cards } from 'fumadocs-ui/components/card';
+import { Shortcut } from '@/components/docs/shortcut';
+
+The **Explore** page lists all active prediction markets.
+
+## Tabs
+
+- **Trending** — Sorted by volume (default).
+- **New** — Recently created, sorted by date.
+- **All** — Every active market, sorted by volume.
+
+## Categories
+
+| Category | Examples |
+|----------|----------|
+| Sports | Games, match outcomes, player props |
+| Politics | Elections, policy |
+| World | Geopolitics, international events |
+| Culture | Pop culture, entertainment |
+| Crypto | Token prices, DeFi, blockchain |
+| Tech | Companies, product launches |
+| Business | Economy, corporate events |
+| Science | Research, space, climate |
+
+Crypto markets have time-based sub-tabs for recurring price markets.
+
+## Filters
+
+Click the filter icons in the table header to narrow results:
+
+- **Volume** — Filter by 24h volume range.
+- **Yes / No Price** — Filter by current price range.
+- **Expires** — Filter by expiration date.
+
+## Views
+
+Switch between **grid** (cards) and **list** (table) using the toolbar icons. The table view has sortable columns and configurable column visibility.
+
+## Global Search
+
+Press <Shortcut>Ctrl+K</Shortcut> (or <Shortcut>Cmd+K</Shortcut> on macOS) from anywhere in the terminal to open the search dialog. Search for markets, events, or categories and jump directly to them.
+
+The search shortcut works regardless of where your focus is in the terminal.
+
+## Next
+
+<Cards>
+  <Card
+    title="Trading Terminal"
+    description="Click any market to start trading."
+    href="/trading"
+  />
+</Cards>

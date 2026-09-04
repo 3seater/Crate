@@ -1,0 +1,660 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Rewrite design tokens in `apps/web/src/index.css`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467673698
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467679847
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467788976
+      }
+    ],
+    "2.1 Update `apps/web/src/shell/header-control-styles.ts`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467673737
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467793183
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467886073
+      }
+    ],
+    "2.2 Update `apps/web/src/shell/header-nav.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467673764
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467793827
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467886674
+      }
+    ],
+    "2.3 Update `apps/web/src/shell/site-header.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467673794
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467794464
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467887304
+      }
+    ],
+    "2.4 Update `apps/web/src/shell/header-actions.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467673818
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467795116
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467887971
+      }
+    ],
+    "2.5 Update `apps/web/src/shell/bottom-bar.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467673841
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467795754
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467888647
+      }
+    ],
+    "2.6 Update `apps/web/src/shell/app-shell-router.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467673864
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467796441
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467889338
+      }
+    ],
+    "3.1 Create the `crates` route group and move existing pages": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467673891
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467797118
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467890320
+      }
+    ],
+    "3.2 Create 301 redirect stubs in the old `baskets` routes": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467673922
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467894930
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468137164
+      }
+    ],
+    "4.1 Update `apps/web/src/app/page.tsx` (Home page)": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467673943
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467895621
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468137826
+      }
+    ],
+    "4.2 Redesign `apps/web/src/app/(app)/crates/page.tsx` (Crates directory)": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467673969
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467896298
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468138637
+      }
+    ],
+    "4.3 Redesign `apps/web/src/app/(app)/crates/[crateId]/page.tsx` (Crate terminal)": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467673996
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467897084
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468139461
+      }
+    ],
+    "5.1 Rewrite `apps/web/src/domains/baskets/components/home-hero.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674023
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468144872
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468234037
+      }
+    ],
+    "5.2 Restyle `apps/web/src/domains/baskets/components/basket-card.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674048
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468145582
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468236241
+      }
+    ],
+    "5.3 Restyle `apps/web/src/domains/baskets/components/basket-card-skeleton.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674070
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468146305
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468236359
+      }
+    ],
+    "5.4 Update `apps/web/src/domains/baskets/components/basket-catalog-grid.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674095
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468147051
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468236512
+      }
+    ],
+    "5.5 Restyle `apps/web/src/domains/baskets/components/order-panel.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674125
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468147816
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468236862
+      }
+    ],
+    "5.6 Update `apps/web/src/domains/baskets/components/buy-panel.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674145
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468237519
+      }
+    ],
+    "5.7 Update `apps/web/src/domains/baskets/components/exit-panel.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674165
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468238346
+      }
+    ],
+    "6.1 Update `apps/web/src/domains/baskets/components/tx-status-badge.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674187
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468244016
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468328515
+      }
+    ],
+    "6.2 Update `apps/web/src/domains/baskets/components/wrong-network-banner.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674212
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468244698
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468328795
+      }
+    ],
+    "7.1 Update `apps/web/src/domains/baskets/components/composite-index-chart.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674240
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468245414
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468327469
+      }
+    ],
+    "7.2 Update `apps/web/src/domains/baskets/components/allocation-preview.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674267
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468246073
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468327962
+      }
+    ],
+    "7.3 Update `apps/web/src/domains/baskets/components/constituent-list-item.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674295
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468246869
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468328285
+      }
+    ],
+    "8.1 Update `apps/web/src/domains/baskets/components/timeframe-selector.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674316
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468333737
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468419027
+      }
+    ],
+    "8.2 Update `apps/web/src/domains/baskets/components/token-toggle-chips.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674336
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468335162
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468420423
+      }
+    ],
+    "8.3 Update `apps/web/src/domains/baskets/components/currency-toggle.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674356
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468334421
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468417537
+      }
+    ],
+    "8.4 Update `apps/web/src/domains/baskets/components/quick-buy-presets.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674402
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468336642
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468421927
+      }
+    ],
+    "8.5 Update `apps/web/src/domains/baskets/components/basket-selector.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674424
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468335897
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468421193
+      }
+    ],
+    "9.1 Scan and update `apps/web/src/domains/baskets/components/basket-chart.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674451
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468337369
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468419774
+      }
+    ],
+    "9.2 Scan and update `apps/web/src/domains/baskets/components/token-candlestick-chart.tsx`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674476
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468338193
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468418347
+      }
+    ],
+    "10.1 Create `tests/unit/crate-overhaul.test.ts` with Property 2 test": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674501
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468427509
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468802450
+      }
+    ],
+    "10.2 Add Property 4 test to `tests/unit/crate-overhaul.test.ts`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674527
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468428185
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468803207
+      }
+    ],
+    "11.1 Create `tests/integration/crate-redirect.test.ts`": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674556
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468428906
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468803907
+      }
+    ],
+    "12. Final verification checkpoint": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467674581
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468808865
+      },
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788469104689
+      }
+    ],
+    "2. Update shell constants and navigation": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788467889372
+      }
+    ],
+    "3. Route migration — move pages and create redirect stubs": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468137206
+      }
+    ],
+    "4. Redesign pages — Home, Crates directory, Crate terminal": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468139487
+      }
+    ],
+    "5. Restyle domain components — hero, cards, grid, panels": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468238388
+      }
+    ],
+    "7. Restyle chart and data visualization components": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468328312
+      }
+    ],
+    "6. Restyle status and feedback components": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468328820
+      }
+    ],
+    "9. Verify remaining components for stale references": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468419802
+      }
+    ],
+    "8. Restyle interactive controls": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468421954
+      }
+    ],
+    "10. Write static analysis tests (Properties 2 and 4)": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468803234
+      }
+    ],
+    "11. Write integration redirect test (Property 3)": [
+      {
+        "executionId": "5eb0be29-5ca2-4649-8ea2-89ad78a23160",
+        "chatSessionId": "sess_c83fc8d9-a7c6-47e2-a117-f5b5e0635e74",
+        "timestamp": 1788468803944
+      }
+    ]
+  }
+}

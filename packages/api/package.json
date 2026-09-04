@@ -1,0 +1,39 @@
+{
+  "name": "@doji/api",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./context": {
+      "default": "./src/context.ts"
+    },
+    "./lib/clob": {
+      "default": "./src/lib/clob/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@doji/db": "workspace:*",
+    "@doji/env": "workspace:*",
+    "@doji/logger": "workspace:*",
+    "@doji/types": "workspace:*",
+    "@sentry/node": "^10.55.0",
+    "@trpc/client": "catalog:",
+    "@trpc/server": "catalog:",
+    "dotenv": "catalog:",
+    "jose": "^6.2.3",
+    "viem": "2.50.4",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@doji/config": "workspace:*",
+    "hono": "catalog:",
+    "typescript": "catalog:"
+  }
+}

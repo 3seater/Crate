@@ -1,0 +1,228 @@
+# Implementation Plan: Endpoint Type Schema Audit
+
+## Overview
+
+Comprehensive type audit and implementation for all Polymarket APIs: CLOB, Gamma, Data, WebSocket (CLOB, Sports, RTDS). Bottom-up approach: define shared types first, then API-specific types, then client implementations, then validation tests.
+
+## Tasks
+
+- [ ] 1. Create shared type foundations in `packages/types/src/`
+  - [ ] 1.1 Create `packages/types/src/primitives.ts`
+    - Export `Address` type (0x-prefixed 40 hex chars)
+    - Export `Hash64` type (0x-prefixed 64 hex chars)
+    - Export `TokenId` type (large integer as string)
+    - Export `ConditionId` type (alias for Hash64)
+    - _Requirements: 42.46, 42.47_
+  - [ ] 1.2 Create `packages/types/src/common.ts`
+    - Export `ErrorResponse` type with `error` field
+    - Export `HealthResponse` type with `data` field
+    - Export `Pagination` type with `hasMore`, `totalResults`
+    - _Requirements: 41.15, 42.2, 42.48_
+  - [ ] 1.3 Update `packages/types/src/index.ts` to re-export primitives and common types
+
+- [ ] 2. Implement CLOB API types
+  - [ ] 2.1 Create `packages/types/src/clob/orders.ts`
+    - Export `OrderType` enum (GTC, GTD, FOK, FAK)
+    - Export `SignatureType` enum (EOA, POLY_PROXY, POLY_GNOSIS_SAFE)
+    - Export `OrderStatus` union type (13 specific statuses)
+    - Export `SignedOrder` interface (all fields from Req 13)
+    - Export `OrderResponse` interface with success/error/orderID/status
+    - Export `OpenOrder` interface (14 fields from Req 14)
+    - _Requirements: 13, 14, 15_
+  - [ ] 2.2 Create `packages/types/src/clob/trades.ts`
+    - Export `TradeStatus` union type (MATCHED, MINED, CONFIRMED, RETRYING, FAILED)
+    - Export `MakerOrder` interface (13 fields from Req 16)
+    - Export `Trade` interface (17 fields from Req 16)
+    - _Requirements: 16_
+  - [ ] 2.3 Create `packages/types/src/clob/orderbook.ts`
+    - Export `OrderBookSummary` interface (9 fields from Req 17)
+    - Export `SimplifiedBalanceAllowance` interface (4 fields from Req 18)
+    - Export `DropNotificationParams` interface (3 fields from Req 19)
+    - _Requirements: 17, 18, 19_
+  - [ ] 2.4 Create `packages/types/src/clob/builder.ts`
+    - Export `BuilderAuthHeaders` interface (POLY-ADDRESS, POLY-SIGNATURE, POLY-TIMESTAMP, POLY-NONCE, POLY-API-KEY)
+    - Export `BuilderOrderCreation` interface (5 fields from Req 21)
+    - _Requirements: 20, 21_
+  - [ ] 2.5 Create `packages/types/src/clob/negative-risk.ts`
+    - Export `NegativeRiskMarketType` enum (BINARY, MULTI)
+    - Export `NegativeRiskAugmentedMarketType` enum (BINARY_AUGMENTED, MULTI_AUGMENTED)
+    - Export `NegativeRiskMarket` interface with negRisk, enableNegRisk, negRiskAugmented flags
+    - _Requirements: 11_
+  - [ ] 2.6 Update `packages/types/src/index.ts` to re-export all CLOB types
+
+- [ ] 3. Implement WebSocket message types
+  - [ ] 3.1 Create `packages/types/src/websocket/clob.ts`
+    - Export `ClobChannel` type ("market" | "user")
+    - Export `ClobSubscription` interface with assets_ids, market, type
+    - Export `ClobBookMessage` interface (Req 26)
+    - Export `ClobPriceChangeMessage` interface (Req 27)
+    - Export `ClobTradeMessage` interface (Req 28)
+    - Export `ClobOrderMessage` interface (Req 29)
+    - Export discriminated union `ClobMessage` type
+    - _Requirements: 25, 26, 27, 28, 29_
+  - [ ] 3.2 Create `packages/types/src/websocket/sports.ts`
+    - Export `SportsSubscription` interface with event_id
+    - Export `SportsResultMessage` interface (Req 31)
+    - _Requirements: 30, 31_
+  - [ ] 3.3 Create `packages/types/src/websocket/rtds.ts`
+    - Export `RTDSMessage` base interface (Req 34)
+    - Export `RTDSSubscription` and `RTDSGammaAuth` interfaces (Req 34)
+    - Export `RTDSCryptoPriceBinanceMessage` interface (Req 35)
+    - Export `RTDSCryptoPriceChainlinkMessage` interface (Req 35)
+    - Export `RTDSCommentMessage` interface (Req 36)
+    - Export `RTDSCommentProfile` and `RTDSCommentPayload` interfaces (Req 36)
+    - Export discriminated union `RTDSMessage` type
+    - _Requirements: 34, 35, 36_
+  - [ ] 3.4 Update `packages/types/src/index.ts` to re-export all WebSocket types
+
+- [ ] 4. Implement Gamma API types
+  - [ ] 4.1 Create `packages/types/src/gamma/market.ts`
+    - Export `Market` interface with all 150+ fields organized by category (Req 38)
+    - Include: core, outcomes, CLOB, volume, liquidity, fees, dates, UMA, status, timestamps, price changes, orderbook, sports, images, relationships, metadata, grouping, display, colors, negative risk, rewards, deployment, legacy fields
+    - _Requirements: 38_
+  - [ ] 4.2 Create `packages/types/src/gamma/event.ts`
+    - Export `Event` interface with all 100+ fields (Req 39)
+    - Include: core, dates, status, metrics, negative risk, sports, relationships, images, metadata, template, count fields
+    - _Requirements: 39_
+  - [ ] 4.3 Create `packages/types/src/gamma/nested.ts`
+    - Export `ImageOptimization` interface (10 fields)
+    - Export `Category` interface (9 fields)
+    - Export `Tag` interface (11 fields)
+    - Export `Series` interface (30+ fields)
+    - Export `Collection` interface (25+ fields)
+    - Export `EventCreator` interface (7 fields)
+    - Export `Chat` interface (7 fields)
+    - Export `Template` interface (11 fields)
+    - _Requirements: 39_
+  - [ ] 4.4 Create `packages/types/src/gamma/comments.ts`
+    - Export `Comment` interface (9 fields from Req 40)
+    - Export `CommentProfile` interface (11 fields from Req 40)
+    - Export `Reaction` interface (6 fields from Req 40)
+    - Export `CommentPosition` interface (2 fields from Req 40)
+    - Export `PublicProfileResponse` interface (9 fields from Req 40)
+    - Export `PublicProfileUser` interface (3 fields from Req 40)
+    - Export `PublicProfileError` interface (2 fields from Req 40)
+    - _Requirements: 40_
+  - [ ] 4.5 Create `packages/types/src/gamma/search.ts`
+    - Export `Search` interface (4 fields from Req 41)
+    - Export `SearchTag` interface (4 fields from Req 41)
+    - Export `Profile` interface (20+ fields from Req 41)
+    - _Requirements: 41_
+  - [ ] 4.6 Update `packages/types/src/index.ts` to re-export all Gamma types
+
+- [ ] 5. Implement Data API types
+  - [ ] 5.1 Create `packages/types/src/data/positions.ts`
+    - Export `Position` interface (23 fields from Req 42)
+    - Export `ClosedPosition` interface (17 fields from Req 42)
+    - Export `Value` interface (2 fields from Req 42)
+    - _Requirements: 42.25-42.29_
+  - [ ] 5.2 Create `packages/types/src/data/trades.ts`
+    - Export `Trade` interface (17 fields from Req 42)
+    - Export `Activity` interface (22 fields from Req 42)
+    - Export `ActivityType` enum (7 types from Req 42)
+    - _Requirements: 42.31-42.35_
+  - [ ] 5.3 Create `packages/types/src/data/holders.ts`
+    - Export `Holder` interface (10 fields from Req 42)
+    - Export `MetaHolder` interface (2 fields from Req 42)
+    - _Requirements: 42.36-42.37_
+  - [ ] 5.4 Create `packages/types/src/data/leaderboard.ts`
+    - Export `TraderLeaderboardEntry` interface (7 fields from Req 42)
+    - Export `LeaderboardEntry` interface (6 fields from Req 42)
+    - Export `BuilderVolumeEntry` interface (7 fields from Req 42)
+    - Export `LeaderboardCategory` enum (10 categories from Req 42)
+    - Export `TimePeriod` enum (DAY, WEEK, MONTH, ALL)
+    - _Requirements: 42.39-42.41, 42.53, 42.54_
+  - [ ] 5.5 Create `packages/types/src/data/misc.ts`
+    - Export `OpenInterest` interface (2 fields from Req 42)
+    - Export `LiveVolume` interface (2 fields from Req 42)
+    - Export `MarketVolume` interface (2 fields from Req 42)
+    - Export `Traded` interface (2 fields from Req 42)
+    - _Requirements: 42.42-42.45_
+  - [ ] 5.6 Update `packages/types/src/index.ts` to re-export all Data API types
+
+- [ ] 6. Checkpoint - Verify all types compile
+  - [ ] 6.1 Run `pnpm check-types` to ensure all new types compile correctly
+  - [ ] 6.2 Fix any circular dependency issues between Event/Market/Series types
+  - [ ] 6.3 Ensure all nullable fields are properly marked with `| null`
+  - [ ] 6.4 Verify all enum values match OpenAPI specifications exactly
+
+- [ ] 7. Update CLOB client implementation
+  - [ ] 7.1 Update `packages/clob/src/client.ts` to use new CLOB types
+    - Replace inline types with imports from `@poly/types`
+    - Update method signatures to match OpenAPI specs
+    - Add missing methods: `getSimplifiedBalanceAllowance`, `postDropNotifications`
+    - _Requirements: 17, 18, 19_
+  - [ ] 7.2 Add builder authentication methods to CLOB client
+    - Implement `createBuilderAuthHeaders` method
+    - Add builder-specific order creation methods
+    - _Requirements: 20, 21_
+  - [ ] 7.3 Update CLOB client WebSocket handling
+    - Use new WebSocket message types from `@poly/types`
+    - Implement proper message type discrimination
+    - _Requirements: 25-29_
+
+- [ ] 8. Create API client wrappers
+  - [ ] 8.1 Create `packages/api-clients/src/gamma.ts`
+    - Implement type-safe Gamma API client
+    - Add methods for all endpoints from Req 37
+    - Use new Gamma types from `@poly/types`
+    - _Requirements: 37_
+  - [ ] 8.2 Create `packages/api-clients/src/data.ts`
+    - Implement type-safe Data API client
+    - Add methods for all endpoints from Req 42
+    - Use new Data API types from `@poly/types`
+    - _Requirements: 42_
+  - [ ] 8.3 Create `packages/api-clients/package.json` and configuration
+    - Set up as new workspace package
+    - Add dependencies: `@poly/types`, `@poly/env`
+
+- [ ] 9. Write validation tests
+  - [ ] 9.1 Create `packages/types/src/__tests__/clob.test.ts`
+    - Test OrderStatus state machine transitions
+    - Test TradeStatus state machine transitions
+    - Validate order type enums match OpenAPI
+    - _Requirements: 13, 14, 15, 16_
+  - [ ] 9.2 Create `packages/types/src/__tests__/websocket.test.ts`
+    - Test WebSocket message type discrimination
+    - Validate CLOB, Sports, RTDS message structures
+    - Test subscription message formats
+    - _Requirements: 25-36_
+  - [ ] 9.3 Create `packages/types/src/__tests__/gamma.test.ts`
+    - Test Market/Event circular reference handling
+    - Validate JSON string fields (outcomes, outcomePrices, clobTokenIds)
+    - Test image optimization structure
+    - _Requirements: 37-41_
+  - [ ] 9.4 Create `packages/types/src/__tests__/data.test.ts`
+    - Test Position PnL calculations
+    - Validate activity type enums
+    - Test leaderboard category enums
+    - _Requirements: 42_
+
+- [ ] 10. Update existing code to use new types
+  - [ ] 10.1 Update `apps/server/src/lib/polymarket/gamma.ts`
+    - Replace inline types with imports from `@poly/types`
+    - Update method return types to match new schemas
+  - [ ] 10.2 Update `apps/web/` components using Polymarket data
+    - Replace any inline types with imports from `@poly/types`
+    - Update props and state to use new type definitions
+  - [ ] 10.3 Update tRPC routers in `packages/api/`
+    - Use new types for input/output validation
+    - Update Zod schemas to match new type structures
+
+- [ ] 11. Documentation and final validation
+  - [ ] 11.1 Create `packages/types/README.md` documenting all type categories
+    - Document CLOB types and their usage
+    - Document Gamma API types and relationships
+    - Document Data API types and filtering
+    - Document WebSocket message types
+  - [ ] 11.2 Create `packages/api-clients/README.md` with usage examples
+    - Show how to use Gamma API client
+    - Show how to use Data API client
+    - Document error handling patterns
+  - [ ] 11.3 Run full test suite
+    - `pnpm test` - all unit tests pass
+    - `pnpm check-types` - no TypeScript errors
+    - `pnpm check` - linting passes
+  - [ ] 11.4 Update CLOB client audit checklist
+    - Mark completed items in `.kiro/specs/endpoint-type-schema-audit/clob-client-audit.md`
+    - Document any deviations from OpenAPI specs

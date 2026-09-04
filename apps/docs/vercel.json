@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "git": {
+    "deploymentEnabled": {
+      "main": false
+    }
+  },
+  "github": {
+    "silent": true
+  },
+  "installCommand": "cd ../.. && corepack enable && corepack prepare pnpm@10.33.0 --activate && pnpm install --frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm exec turbo build --filter=docs",
+  "ignoreCommand": "[[ \"$VERCEL_GIT_COMMIT_REF\" =~ ^(dependabot|renovate)/ || \"$VERCEL_GIT_COMMIT_AUTHOR_LOGIN\" =~ ^(dependabot|renovate) ]] && exit 0; npx turbo-ignore docs --fallback=HEAD^1",
+  "framework": "nextjs"
+}

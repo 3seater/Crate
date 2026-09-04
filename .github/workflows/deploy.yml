@@ -1,0 +1,90 @@
+# Production on main: git.deploymentEnabled.main=false silences Git-on-main deploys; this workflow
+# deploys with the Vercel account owner's token so any GitHub collaborator can push without a Pro seat.
+# See https://vercel.com/docs/deployments/troubleshoot-project-collaboration
+#
+# CLI runs from repo root; VERCEL_PROJECT_ID selects the project. Dashboard Root Directory must match
+# app-directory (do not cd into app-directory in CI — that doubles the path for all three projects).
+# Deploy uses vercel pull → build (on GHA) → deploy --prebuilt so install uses pnpm 10.33, not Vercel's remote default.
+#
+# | Job  | Vercel project | Root Directory | turbo filter | Project ID                         |
+# |------|----------------|----------------|--------------|------------------------------------|
+# | Web  | doji-web       | apps/web       | web          | prj_7wGCWP56yVK4I3KuEmmprKv5aGGQ   |
+# | API  | doji-server    | apps/server    | server       | prj_cmQWaU9Ws3UhcLzZoIEKzRKbRvR4   |
+# | Docs | doji-docs      | apps/docs      | docs         | prj_xto0CRi74sDBJWijH8suSIjyPnE7   |
+name: Deploy (Vercel CLI)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  VERCEL_ORG_ID: team_uFjyxuuasdE7p77Rg5jl6uYh
+
+jobs:
+  web:
+    name: Web
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 2
+      - uses: ./.github/actions/setup-node-pnpm
+      - uses: ./.github/actions/vercel-cli-deploy
+        with:
+          app-directory: apps/web
+          turbo-filter: web
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ env.VERCEL_ORG_ID }}
+          vercel-project-id: prj_7wGCWP56yVK4I3KuEmmprKv5aGGQ
+
+  api:
+    name: API (server)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 2
+      - uses: ./.github/actions/setup-node-pnpm
+      - uses: ./.github/actions/vercel-cli-deploy
+        with:
+          app-directory: apps/server
+          turbo-filter: server
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ env.VERCEL_ORG_ID }}
+          vercel-project-id: prj_cmQWaU9Ws3UhcLzZoIEKzRKbRvR4
+
+  docs:
+    name: Docs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 2
+      - uses: ./.github/actions/setup-node-pnpm
+      - uses: ./.github/actions/vercel-cli-deploy
+        with:
+          app-directory: apps/docs
+          turbo-filter: docs
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ env.VERCEL_ORG_ID }}
+          vercel-project-id: prj_xto0CRi74sDBJWijH8suSIjyPnE7

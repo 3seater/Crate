@@ -1,0 +1,38 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "git": {
+    "deploymentEnabled": {
+      "main": false
+    }
+  },
+  "github": {
+    "silent": true
+  },
+  "regions": ["lhr1"],
+  "installCommand": "cd ../.. && corepack enable && corepack prepare pnpm@10.33.0 --activate && pnpm install --frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm exec turbo build --filter=web",
+  "ignoreCommand": "[[ \"$VERCEL_GIT_COMMIT_REF\" =~ ^(dependabot|renovate)/ || \"$VERCEL_GIT_COMMIT_AUTHOR_LOGIN\" =~ ^(dependabot|renovate) ]] && exit 0; npx turbo-ignore web --fallback=HEAD^1",
+  "framework": "nextjs",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/_next/image",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}

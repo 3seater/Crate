@@ -1,0 +1,1050 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Purge Polymarket web domains and routes": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423738966
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423744655
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423866233
+      }
+    ],
+    "2. Purge Polymarket server domains": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739008
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423746922
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423868620
+      }
+    ],
+    "3. Remove Polymarket and Magic/Safe package dependencies": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739053
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423748979
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423872665
+      }
+    ],
+    "4.1 Add `ENSO_API_KEY` field to `packages/env/src/server.ts` using T3 Env (required string)": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739080
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423875491
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424051765
+      }
+    ],
+    "4.2 Write unit test verifying the env schema rejects a missing `ENSO_API_KEY`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739111
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424063893
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424366195
+      }
+    ],
+    "4.3 Add `ENSO_API_KEY=your_enso_api_key_here` placeholder to `apps/server/.env.example`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739138
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423877830
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424054357
+      }
+    ],
+    "5.1 Create `apps/web/src/config/chains.ts` with `robinhoodChain` (viem `defineChain`), `SUPPORTED_CHAINS`, and `ROBINHOOD_CHAIN_ID = 4663`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739165
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423881630
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424057209
+      }
+    ],
+    "5.2 Create `packages/types/src/basket.ts` (or `apps/web/src/types/basket.ts`) with `BasketConstituent`, `BasketConfig`, `OhlcvCandle`, `TokenPrice`, `CompositeIndexPoint`, `Timeframe`, `OhlcvResponse` interfaces": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739192
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423884582
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424060375
+      }
+    ],
+    "5.3 Create `apps/web/src/config/baskets.ts` with `WEIGHT_TOLERANCE`, `validateBaskets()`, `BASKETS` array (3 sample baskets), and `getBasketById()` helper": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739219
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424067227
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424369497
+      }
+    ],
+    "5.4 Write unit tests for `validateBaskets()`: valid basket passes, invalid weight sum throws with basket id in message, tolerance boundary cases": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739243
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424376006
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424698382
+      }
+    ],
+    "6.1 Create `apps/server/src/domains/baskets/schemas.ts` with all Zod schemas: `BasketConstituentSchema`, `GetBundleInputSchema`, `GetLivePricesInputSchema`, `GetOhlcvInputSchema`, `TxBundleSchema`, `GetBundleOutputSchema`, `TokenPriceSchema`, `OhlcvCandleSchema`, `OhlcvResponseSchema`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739270
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424070444
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424373045
+      }
+    ],
+    "6.2 Create `apps/server/src/domains/baskets/enso-client.ts` with `buildBuyBundle()` and `buildExitBundle()` functions and the internal `callEnsoBundle()` helper": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739301
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424378651
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424701190
+      }
+    ],
+    "6.3 Create `apps/server/src/domains/baskets/price-service.ts` with `getLivePrices()` and `getOhlcv()` using LRU caches (30s live, 5m historical), GeckoTerminal primary, DexScreener fallback": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739328
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424381206
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424704177
+      }
+    ],
+    "6.4 Create `apps/server/src/domains/baskets/router.ts` with `basketsRouter` containing `getBundle` (mutation), `getLivePrices` (query), `getOhlcv` (query) procedures": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739353
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424707398
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788425797652
+      }
+    ],
+    "6.5 Register `basketsRouter` in `apps/server/src/routers/index.ts` replacing the temporary stub": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739379
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788425812343
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426041891
+      }
+    ],
+    "7. Checkpoint — server domain compiles cleanly": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739408
+      }
+    ],
+    "8.1 Create `apps/web/src/domains/baskets/lib/composite-index.ts` with `computeCompositeIndex(tokens: TokenCandles[]): CompositeIndexPoint[]`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739450
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424710008
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788425800451
+      }
+    ],
+    "8.2 Write property test for `computeCompositeIndex` (Property 1): first returned point always equals 100.0 for any non-empty valid input": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739484
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788425814654
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426046851
+      }
+    ],
+    "8.3 Create `apps/web/src/domains/baskets/lib/allocation.ts` with `computeAllocation(constituents, amountEth, priceMap)` returning `AllocationLine[]`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739512
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424712592
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788425803021
+      }
+    ],
+    "8.4 Write property test for `computeAllocation` (Property 3): sum of all `ethAmount` values equals input `amountEth` within floating-point tolerance": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739540
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788425816990
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426049649
+      }
+    ],
+    "8.5 Create `apps/web/src/domains/baskets/lib/format-tx.ts` with `formatTxHash(hash)` (truncated `0x1234…5678` format) and `blockExplorerTxUrl(hash)` returning the Robinhood Chain block explorer URL": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739571
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424715391
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788425806308
+      }
+    ],
+    "9. Build Zustand basket terminal store": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739596
+      },
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424717749
+      }
+    ],
+    "10.1 Update `apps/web/src/stores/wallet.ts` to remove `sessionToken`, `signatureType`, and Magic/Safe-specific fields; keep only `address`, `chainId`, `isConnected` plus `setConnected`, `setDisconnected`, `setChainId` actions": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739620
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788425819791
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426054224
+      }
+    ],
+    "10.2 Update `apps/web/src/shell/providers.tsx` to replace Magic SDK, Gnosis Safe providers, and Polymarket modals with `WagmiProvider` using `createConfig` (injected connector, Robinhood Chain transport)": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739647
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788425822382
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426180102
+      }
+    ],
+    "10.3 Create a `WalletSyncProvider` client component that syncs Wagmi's `useAccount()` state into the wallet Zustand store on connect/disconnect/chainId change": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739675
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426189290
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426418238
+      }
+    ],
+    "11.1 Create `apps/web/src/domains/baskets/hooks/use-basket-prices.ts` using `useQuery(trpc.baskets.getLivePrices.queryOptions(...))` with `refetchInterval: 30_000` and `staleTime: STALE_REALTIME`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739703
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426057274
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426183147
+      }
+    ],
+    "11.2 Create `apps/web/src/domains/baskets/hooks/use-ohlcv.ts` using `useQuery(trpc.baskets.getOhlcv.queryOptions(...))` with `refetchInterval: 30_000` for 24H timeframe, no interval for 7D/30D": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739729
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426059797
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426186113
+      }
+    ],
+    "11.3 Create `apps/web/src/domains/baskets/hooks/use-allocation-preview.ts` using `useDebounce` (500ms) on the input amount and `useMemo` to compute `AllocationLine[]` from basket constituents and live price data": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739757
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426191841
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426422731
+      }
+    ],
+    "11.4 Create `apps/web/src/domains/baskets/hooks/use-basket-buy.ts` with the `BuyState` state machine (`idle → building → confirming → pending → confirmed → error`) using `useState`, `useSendTransaction`, `useWaitForTransactionReceipt` from wagmi, and `trpcClient.baskets.getBundle.mutate`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739792
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426194508
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426426313
+      }
+    ],
+    "11.5 Create `apps/web/src/domains/baskets/hooks/use-basket-exit.ts` mirroring the buy hook's state machine for the exit flow, calling `trpcClient.baskets.getBundle.mutate` with `isExit: true` and the user's token balances": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739821
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426197349
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426430026
+      }
+    ],
+    "12.1 Replace `apps/web/src/shell/header-nav.tsx` with the basket-terminal nav: links to `/` (Home) and `/baskets` (Baskets), active state detection using `usePathname()`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739850
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426570879
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426827621
+      }
+    ],
+    "12.2 Update `apps/web/src/shell/site-header.tsx`: change logo `<Link href>` from `/explore` to `/`, remove `<HeaderSearch />`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739878
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426573413
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426830511
+      }
+    ],
+    "12.3 Update `apps/web/src/shell/header-actions.tsx`: replace auth/Magic session state with wagmi `useAccount()` for wallet display (truncated address + ETH balance when connected, \"Connect Wallet\" button when not)": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739911
+      }
+    ],
+    "12.4 Simplify `apps/web/src/shell/bottom-bar.tsx`: remove all Polymarket-specific dock controls, widgets, and watchlist bar; keep only `BugReportWidget` and `BottomBarStatusLink`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739940
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426579361
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426834543
+      }
+    ],
+    "13.1 Create `apps/web/src/domains/baskets/components/basket-card.tsx` displaying basket name, constituent token icons, constituent weight percentages, and 24h performance percentage; and `basket-card-skeleton.tsx` as its loading state": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739966
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426582166
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426838198
+      }
+    ],
+    "13.2 Create `apps/web/src/domains/baskets/components/basket-catalog-grid.tsx` as a responsive grid wrapper (1 col mobile, 2 col tablet, 3+ col desktop) rendering `BasketCard` for each basket": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423739994
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426584910
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426841405
+      }
+    ],
+    "13.3 Create `apps/web/src/domains/baskets/components/basket-selector.tsx` listing all baskets by name for switching between basket terminals without leaving the page": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740020
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426588413
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426844361
+      }
+    ],
+    "13.4 Create `apps/web/src/domains/baskets/components/constituent-list.tsx` and `constituent-list-item.tsx` showing each token's name, symbol, current price, 24h change, and basket weight": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740054
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426591211
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426847641
+      }
+    ],
+    "13.5 Create `apps/web/src/domains/baskets/components/wrong-network-banner.tsx` using `useChainId()` and `useSwitchChain()` from wagmi; hidden when `chainId === ROBINHOOD_CHAIN_ID`, visible on wrong chain with a \"Switch Network\" button": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740083
+      }
+    ],
+    "13.6 Create `apps/web/src/domains/baskets/components/tx-status-badge.tsx` displaying the current `BuyState` / exit state with a transaction hash link to `https://robinhoodchain.blockscout.com/tx/{hash}` when available": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740115
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426594085
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426853182
+      }
+    ],
+    "14.1 Create `apps/web/src/domains/baskets/components/currency-toggle.tsx` for ETH / USDG selection": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740154
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426989933
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427195734
+      }
+    ],
+    "14.2 Create `apps/web/src/domains/baskets/components/quick-buy-presets.tsx` with preset buttons for 0.05, 0.1, 0.5, 1 ETH; minimum 44×44px touch target on mobile": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740194
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426993427
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427199376
+      }
+    ],
+    "14.3 Create `apps/web/src/domains/baskets/components/allocation-preview.tsx` rendering the `AllocationLine[]` as a table showing symbol, weight %, ETH amount, and USD amount (dashes for unavailable prices)": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740229
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426997012
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427202780
+      }
+    ],
+    "14.4 Create `apps/web/src/domains/baskets/components/buy-panel.tsx` composing `CurrencyToggle`, `QuickBuyPresets`, an `Input` for amount, `AllocationPreview`, and the execute `Button`; wires to `useBasketBuy`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740266
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427222660
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427373136
+      }
+    ],
+    "14.5 Create `apps/web/src/domains/baskets/components/exit-panel.tsx` composing an exit preview (estimated ETH received) and an \"Exit Basket to ETH\" `Button`; wires to `useBasketExit`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740301
+      }
+    ],
+    "14.6 Create `apps/web/src/domains/baskets/components/order-panel.tsx` as the root panel with Buy / Exit tabs, composing `BuyPanel` and `ExitPanel`; shows `TxStatusBadge` while transaction is in-flight": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740338
+      }
+    ],
+    "15.1 Create `apps/web/src/domains/baskets/components/timeframe-selector.tsx` rendering 24H / 7D / 30D chip row, reading `timeframe` from and dispatching `setTimeframe` to `useBasketTerminalStore`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740390
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427000166
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427206119
+      }
+    ],
+    "15.2 Create `apps/web/src/domains/baskets/components/token-toggle-chips.tsx` rendering per-token toggle chips for each basket constituent, reading `activeTokens` from and dispatching `toggleToken` to `useBasketTerminalStore`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740429
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427003286
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427210960
+      }
+    ],
+    "15.3 Create `apps/web/src/domains/baskets/components/composite-index-chart.tsx` using Recharts `<AreaChart>` to render the normalized composite index series; Y-axis anchored at 100; gradient fill uses `--doji-green`; shows loading skeleton when `isLoading`; shows warning label for `failedSymbols`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740465
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427006302
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427215174
+      }
+    ],
+    "15.4 Create `apps/web/src/domains/baskets/components/token-candlestick-chart.tsx` wrapping KLineChart v10 using `useEffect` + DOM ref for imperative initialization; ingests `OhlcvCandle[]` directly (fields already match KLineChart format)": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740520
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427009304
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427218884
+      }
+    ],
+    "15.5 Create `apps/web/src/domains/baskets/components/basket-chart.tsx` as the `\"use client\"` orchestrator: reads store state, calls `useOhlcv`, runs `computeCompositeIndex`, renders `TimeframeSelector`, `TokenToggleChips`, `CompositeIndexChart`, and per-token `TokenCandlestickChart` inside `<Activity mode=\"visible\"|\"hidden\">` wrappers": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740581
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427376459
+      }
+    ],
+    "16.1 Create `apps/web/src/app/page.tsx` as the Home page Server Component: `await connection()`, prefetch live prices for first 4 baskets via `serverTrpc`, render `HomeHero` + `<Suspense>`-wrapped `BasketCatalogGrid`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740614
+      }
+    ],
+    "16.2 Create `apps/web/src/domains/baskets/components/home-hero.tsx` Server Component with headline, subheadline, and CTA `Button` (variant `default`) that navigates to `/baskets`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740641
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427401737
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427594746
+      }
+    ],
+    "16.3 Create `apps/web/src/app/(app)/baskets/page.tsx` as the Baskets Directory Server Component: `await connection()`, prefetch all pool addresses, render `<ContentWidth>/<ContentSpacing>` + `<Suspense>`-wrapped `BasketCatalogGrid`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740670
+      }
+    ],
+    "16.4 Create `apps/web/src/app/(app)/baskets/[basketId]/page.tsx` as the Basket Terminal Server Component with `generateStaticParams`, `generateMetadata`, `notFound()` guard, `await connection()`, live price prefetch, and the two-column responsive layout (chart + constituent list on left, `WrongNetworkBanner` + `OrderPanel` on right)": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740699
+      }
+    ],
+    "17. Checkpoint — full build passes": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740729
+      }
+    ],
+    "18.1 Write property test for Property 1 (composite index at t₀ = 100.0) in `tests/unit/composite-index.test.ts`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740756
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427906030
+      }
+    ],
+    "18.2 Write property test for Property 2 (basket weight sum validation) in `tests/unit/basket-config.test.ts`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740789
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427909049
+      }
+    ],
+    "18.3 Write property test for Property 3 (allocation splits sum to input) in `tests/unit/allocation.test.ts`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740817
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427912487
+      }
+    ],
+    "18.4 Write property test for Property 4 (DexScreener fallback always attempted) in `tests/unit/price-service.test.ts`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740844
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427915616
+      }
+    ],
+    "18.5 Write property test for Property 5 (partial results on partial source failure) in `tests/unit/price-service-partial.test.ts`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740871
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427919172
+      }
+    ],
+    "18.6 Write integration tests for tRPC baskets router in `tests/integration/baskets-router.test.ts`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740899
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427922334
+      }
+    ],
+    "19.1 Update `apps/web/AGENTS.md`: replace routes table (remove Polymarket routes, add `/`, `/baskets`, `/baskets/[basketId]`), add `domains/baskets/` to domain list, update key files table to reflect removed WebSocket/session infrastructure": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740933
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427926630
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788431624625
+      }
+    ],
+    "19.2 Update `apps/server/AGENTS.md` (or create if missing): add `domains/baskets/` to domain list with description of `router.ts`, `enso-client.ts`, `price-service.ts`, `schemas.ts`": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423740978
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427930447
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788431628299
+      }
+    ],
+    "20. Final checkpoint — lint, types, tests all pass": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788423741048
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788431700437
+      },
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788432855612
+      }
+    ],
+    "4. Add `ENSO_API_KEY` to server environment schema": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424366234
+      }
+    ],
+    "5. Create Robinhood Chain and basket config": [
+      {
+        "executionId": "801b9095-4973-4f48-9061-b585abbe448b",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788424698431
+      }
+    ],
+    "6. Build server-side baskets domain": [
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426041950
+      }
+    ],
+    "8. Build core client libraries": [
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426049756
+      }
+    ],
+    "10. Slim down wallet store and add WagmiProvider config": [
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426418286
+      }
+    ],
+    "11. Build data-fetching hooks": [
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426430080
+      }
+    ],
+    "13. Build shared basket UI components (non-chart, non-order)": [
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788426853217
+      }
+    ],
+    "15. Build chart components": [
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427376504
+      }
+    ],
+    "18. Write property-based and unit tests": [
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788427922376
+      }
+    ],
+    "19. Update documentation": [
+      {
+        "executionId": "3b8b0dd3-8e49-4a14-adeb-46c526824691",
+        "chatSessionId": "sess_8217fbed-9f03-4257-a7c0-522e11c0dd86",
+        "timestamp": 1788431628340
+      }
+    ]
+  }
+}

@@ -1,0 +1,101 @@
+# Implementation Plan
+
+- [x] 1. Write bug condition exploration test
+  - **Property 1: Bug Condition** — Orderbook Scroll Pinning Drift
+  - **CRITICAL**: This test MUST FAIL on unfixed code — failure confirms the bugs exist
+  - **DO NOT attempt to fix the test or the code when it fails**
+  - **NOTE**: This test encodes the expected behavior — it will validate the fix when it passes after implementation
+  - **GOAL**: Surface counterexamples that demonstrate the three scroll pinning bugs
+  - **Scoped PBT Approach**: Scope the property to the concrete failing cases:
+    - Bug 1 (Tab Return): No `visibilitychange` listener exists. Simulate `document.visibilityState` becoming `"visible"` with orderbook data present and `userHasScrolledAsks=false`. Assert asks `scrollTop` is set to `scrollHeight - clientHeight`. On unfixed code, no re-pin occurs because the `useLayoutEffect` only fires on empty→populated.
+    - Bug 2 (Short-Circuit): Call `applySpreadScrollSync` with `skipAsks=true, skipBids=false` and mock scroll elements. Assert bids `scrollTop` is set to `0`. On unfixed code, the `if (skipAsks || skipBids) { return; }` aborts both sides. Also test inverse: `skipAsks=false, skipBids=true` — assert asks `scrollTop` is set to `scrollHeight - clientHeight`.
+    - Bug 3 (Incremental Drift): Simulate `visibleAsks.length` growing from 15 to 18 with `userHasScrolledAsks=false` and `prevAsksLen > 0`. Assert asks `scrollTop` is adjusted to `scrollHeight - clientHeight`. On unfixed code, `wasEmpty` is false so the `useLayoutEffect` returns early.
+  - Test file: `tests/unit/orderbook-scroll-pinning.test.ts`
+  - Test `applySpreadScrollSync` directly with mock DOM elements (`scrollHeight`, `clientHeight`, `scrollTop`)
+  - Test the `useLayoutEffect` scroll logic by simulating state transitions (incremental ask growth)
+  - Run test on UNFIXED code — expect FAILURE (this confirms the bugs exist)
+  - Document counterexamples found (e.g., "`applySpreadScrollSync({skipAsks: true, skipBids: false})` returns without scrolling bids", "asks `scrollTop` unchanged after incremental update")
+  - _Requirements: 1.1, 1.2, 1.3_
+
+- [x] 2. Write preservation property tests (BEFORE implementing fix)
+  - **Property 2: Preservation** — Non-Buggy Scroll Behavior Unchanged
+  - **IMPORTANT**: Follow observation-first methodology
+  - **Observe on UNFIXED code**:
+    - `applySpreadScrollSync({skipAsks: false, skipBids: false})` scrolls asks to `scrollHeight - clientHeight` and bids to `0`
+    - `applySpreadScrollSync({skipAsks: true, skipBids: true})` does not modify either side's `scrollTop`
+    - `handleAsksScroll` with `isProgrammaticScrollRef=true` does not change `userHasScrolledAsks`
+    - `handleBidsScroll` with `isProgrammaticScrollRef=true` does not change `userHasScrolledBids`
+    - `handleAsksScroll` when asks are at spread (within 2px of bottom) resets `userHasScrolledAsks` to `false`
+    - `handleAsksScroll` when asks are NOT at spread sets `userHasScrolledAsks` to `true`
+    - Market switch (tokenId change) resets both `userHasScrolled` flags to `false`
+    - Initial load (empty→populated, `wasEmpty=true`) triggers `applySpreadScrollSync` via `useLayoutEffect` + `requestAnimationFrame`
+  - Write property-based tests capturing observed behavior patterns:
+    - For all calls with `skipAsks=false, skipBids=false`: both sides are scrolled to spread position (asks to bottom, bids to top)
+    - For all calls with `skipAsks=true, skipBids=true`: neither side's `scrollTop` is modified
+    - For all scroll events during `isProgrammaticScrollRef=true`: `userHasScrolled` flags remain unchanged
+    - For all `isAsksAtSpread()` checks: returns `true` when `scrollHeight - clientHeight - scrollTop < 2`
+    - For all `isBidsAtSpread()` checks: returns `true` when `scrollTop < 2`
+    - For all tokenId changes: both `userHasScrolled` refs reset to `false`
+  - Test file: `tests/unit/orderbook-scroll-pinning-preservation.test.ts`
+  - Run tests on UNFIXED code
+  - **EXPECTED OUTCOME**: Tests PASS (this confirms baseline behavior to preserve)
+  - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6_
+
+- [x] 3. Fix orderbook scroll pinning bugs
+
+  - [x] 3.1 Fix `applySpreadScrollSync` short-circuit (Bug 2)
+    - Remove the early return `if (skipAsks || skipBids) { return; }` from `applySpreadScrollSync`
+    - Wrap asks scroll logic in `if (!skipAsks && visibleAsksLen > 0)` guard
+    - Wrap bids scroll logic in `if (!skipBids && visibleBidsLen > 0)` guard
+    - Keep `isProgrammaticScrollRef.current = true/false` wrapping both blocks
+    - This is the simplest change and unblocks the other two fixes which call `applySpreadScrollSync`
+    - _Bug_Condition: isBugCondition(input) where input.skipAsks != input.skipBids_
+    - _Expected_Behavior: Non-skipped side scrolled to spread position; skipped side unchanged_
+    - _Preservation: Both-skip and neither-skip cases produce identical behavior to original_
+    - _Requirements: 1.2, 2.2_
+
+  - [x] 3.2 Extend `useLayoutEffect` for incremental ask updates (Bug 3)
+    - Capture `prevAsksLenRef.current` into a local variable BEFORE updating it
+    - After the existing `wasEmpty` initial-load path (which returns early), add:
+    - If `visibleAsks.length > prevAsksLen` AND `prevAsksLen > 0` AND `!userHasScrolledAsksRef.current`:
+      - Set `isProgrammaticScrollRef.current = true`
+      - Set `askEl.scrollTop = scrollHeight - clientHeight` (re-pin best ask to bottom)
+      - Set `isProgrammaticScrollRef.current = false`
+    - This keeps the existing initial-load behavior intact and only adds incremental adjustment
+    - _Bug_Condition: isBugCondition(input) where input.asksLengthIncreased AND NOT input.userHasScrolledAsks AND input.prevAsksLen > 0_
+    - _Expected_Behavior: asks scrollTop adjusted to scrollHeight - clientHeight after incremental growth_
+    - _Preservation: Initial load (wasEmpty) path unchanged; no adjustment when user has scrolled away_
+    - _Requirements: 1.3, 2.3_
+
+  - [x] 3.3 Add `visibilitychange` listener for tab return re-pin (Bug 1)
+    - Add a new `useEffect` in the `Orderbook` component (after the existing `useLayoutEffect`)
+    - Listen for `document.visibilitychange` event
+    - When `document.visibilityState === "visible"` AND `isDataForToken` is true:
+      - Call `applySpreadScrollSync` with `skipAsks: userHasScrolledAsksRef.current` and `skipBids: userHasScrolledBidsRef.current`
+    - Dependencies: `[isDataForToken, visibleAsks.length, visibleBids.length]`
+    - Clean up listener on unmount
+    - React Compiler note: refs are read inside the effect body (not in deps), which is correct
+    - _Bug_Condition: isBugCondition(input) where input.visibilityChanged AND input.documentVisible AND input.hasOrderbookData_
+    - _Expected_Behavior: Each non-scrolled side re-pinned to spread on tab return_
+    - _Preservation: Sides where user has scrolled away remain at user's position_
+    - _Requirements: 1.1, 2.1_
+
+  - [x] 3.4 Verify bug condition exploration test now passes
+    - **Property 1: Expected Behavior** — Orderbook Scroll Pinning Drift
+    - **IMPORTANT**: Re-run the SAME test from task 1 — do NOT write a new test
+    - The test from task 1 encodes the expected behavior
+    - When this test passes, it confirms the expected behavior is satisfied
+    - Run bug condition exploration test from step 1
+    - **EXPECTED OUTCOME**: Test PASSES (confirms bugs are fixed)
+    - _Requirements: 2.1, 2.2, 2.3_
+
+  - [x] 3.5 Verify preservation tests still pass
+    - **Property 2: Preservation** — Non-Buggy Scroll Behavior Unchanged
+    - **IMPORTANT**: Re-run the SAME tests from task 2 — do NOT write new tests
+    - Run preservation property tests from step 2
+    - **EXPECTED OUTCOME**: Tests PASS (confirms no regressions)
+    - Confirm all tests still pass after fix (no regressions)
+
+- [x] 4. Checkpoint - Ensure all tests pass
+  - Run full test suite: `pnpm test:unit`
+  - Ensure all tests pass, ask the user if questions arise.

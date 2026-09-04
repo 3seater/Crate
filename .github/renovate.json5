@@ -1,0 +1,367 @@
+{
+    // Doji — Turborepo + pnpm workspaces (apps/*, packages/*), catalog in pnpm-workspace.yaml.
+    // Install: https://github.com/apps/renovate
+    // The npm manager also discovers pnpm-workspace.yaml and pnpm.catalog* deps (Renovate docs: modules/manager/npm).
+    $schema: "https://docs.renovatebot.com/renovate-schema.json",
+    extends: [
+        "config:best-practices",
+        ":semanticCommits",
+        ":separateMultipleMajorReleases",
+        ":prNotPending",
+        ":dependencyDashboard",
+        // Throttle PR churn (was :prConcurrentLimitNone + :prHourlyLimitNone — too many parallel CI runs)
+        "schedule:earlyMondays",
+        "security:openssf-scorecard",
+    ],
+    /** Cap concurrent open Renovate PRs and creation rate to reduce GitHub Actions usage. */
+    prConcurrentLimit: 2,
+    prHourlyLimit: 2,
+    timezone: "America/New_York",
+    dependencyDashboardOSVVulnerabilitySummary: "unresolved",
+    dependencyDashboardAutoclose: false,
+    // Only managers we use (no Python/mise/Dockerfile in repo)
+    enabledManagers: [
+        "npm",
+        "github-actions",
+    ],
+    ignorePaths: [
+        "**/.agents/skills/**", // template package.json files under skills
+    ],
+    platformAutomerge: true,
+    rebaseWhen: "conflicted",
+    internalChecksFilter: "strict",
+    osvVulnerabilityAlerts: true,
+    semanticCommitScope: "deps",
+    fetchChangeLogs: "pr",
+    commitBodyTable: true,
+    prNotPendingHours: 2,
+    vulnerabilityAlerts: {
+        enabled: true,
+        labels: [
+            "deps: security"
+        ],
+        automerge: false,
+    },
+    suppressNotifications: [
+        "prIgnoreNotification"
+    ],
+    separateMajorMinor: true,
+    separateMinorPatch: false,
+    lockFileMaintenance: {
+        enabled: true,
+        automerge: true,
+        // Was weekly; monthly cuts lockfile-only CI noise.
+        schedule: ["before 4am on the first day of the month"],
+    },
+    packageRules: [
+        {
+            description: "ethers v5 — @polymarket/clob-client not on v6 yet (see former dependabot ignore)",
+            matchPackageNames: [
+                "ethers",
+                "@ethersproject/providers",
+                "@ethersproject/wallet",
+            ],
+            enabled: false,
+        },
+        {
+            matchUpdateTypes: [
+                "major"
+            ],
+            groupName: "major",
+            automerge: false,
+            dependencyDashboardApproval: true,
+            addLabels: [
+                "breaking",
+                "deps: major",
+                "deps: needs-review",
+            ],
+        },
+        {
+            description: "Core stack — review window + careful minors (keep in sync with duplicate rule below)",
+            matchPackageNames: [
+                "next",
+                "react",
+                "react-dom",
+                "/^@trpc\\//",
+                "hono",
+                "/^@hono\\//",
+                "drizzle-orm",
+                "drizzle-kit",
+                "zod",
+                "viem",
+                "dotenv",
+                "jose",
+                "pg",
+                "@neondatabase/serverless",
+                "pino",
+                "/^@polymarket\\//",
+                "/^@magic/",
+                "/^@magic-ext/",
+                "magic-sdk",
+                "/^@t3-oss\\//",
+                "/^fumadocs/",
+                "@tanstack/react-query",
+                "@tanstack/react-table",
+                "@tanstack/react-form",
+                "zustand",
+                "@datadog/browser-logs",
+                "@datadog/browser-rum",
+                "recharts",
+                "klinecharts",
+            ],
+            groupName: "critical",
+            addLabels: [
+                "deps: critical"
+            ],
+            minimumReleaseAge: "14 days",
+            prPriority: 10,
+        },
+        {
+            matchPackageNames: [
+                "next",
+                "react",
+                "react-dom",
+                "/^@trpc\\//",
+                "hono",
+                "/^@hono\\//",
+                "drizzle-orm",
+                "drizzle-kit",
+                "zod",
+                "viem",
+                "dotenv",
+                "jose",
+                "pg",
+                "@neondatabase/serverless",
+                "pino",
+                "/^@polymarket\\//",
+                "/^@magic/",
+                "/^@magic-ext/",
+                "magic-sdk",
+                "/^@t3-oss\\//",
+                "/^fumadocs/",
+                "@tanstack/react-query",
+                "@tanstack/react-table",
+                "@tanstack/react-form",
+                "zustand",
+                "@datadog/browser-logs",
+                "@datadog/browser-rum",
+                "recharts",
+                "klinecharts",
+            ],
+            matchUpdateTypes: [
+                "minor"
+            ],
+            automerge: false,
+            addLabels: [
+                "deps: needs-review"
+            ],
+        },
+        {
+            matchUpdateTypes: [
+                "patch"
+            ],
+            matchCurrentVersion: "!/^0/",
+            groupName: "patch",
+            automerge: true,
+            automergeType: "branch",
+            minimumReleaseAge: "14 days",
+            addLabels: [
+                "deps: patch"
+            ],
+        },
+        {
+            matchUpdateTypes: [
+                "minor"
+            ],
+            matchCurrentVersion: "!/^0/",
+            groupName: "minor",
+            automerge: true,
+            automergeType: "branch",
+            minimumReleaseAge: "14 days",
+            addLabels: [
+                "deps: minor"
+            ],
+        },
+        {
+            description: "UI primitives — shadcn / Radix / Base UI (after patch/minor so groupName wins)",
+            matchPackageNames: [
+                "@base-ui/react",
+                "/^@radix-ui\\//",
+                "class-variance-authority",
+                "clsx",
+                "tailwind-merge",
+                "lucide-react",
+            ],
+            groupName: "ui",
+            automerge: true,
+            automergeType: "branch",
+            minimumReleaseAge: "14 days",
+            addLabels: [
+                "deps: ui"
+            ],
+        },
+        {
+            matchDepTypes: [
+                "devDependencies"
+            ],
+            automerge: true,
+            automergeType: "branch",
+            groupName: "dev-deps",
+            minimumReleaseAge: "14 days",
+            addLabels: [
+                "deps: dev"
+            ],
+            prPriority: -1,
+        },
+        {
+            matchPackageNames: [
+                "typescript",
+                "turbo",
+                "vitest",
+                "@vitest/coverage-v8",
+                "@vitejs/plugin-react",
+                "@testing-library/react",
+                "@testing-library/dom",
+                "jsdom",
+                "fast-check",
+                "knip",
+                "jscpd",
+                "yaml",
+                "tsx",
+                "@biomejs/biome",
+                "ultracite",
+                "tsdown",
+                "babel-plugin-react-compiler",
+                "@scalar/hono-api-reference",
+                "shadcn",
+                "@tanstack/react-query-devtools",
+                "@datadog/datadog-ci",
+                "tailwindcss",
+                "@tailwindcss/postcss",
+                "postcss",
+                "pino-pretty",
+            ],
+            groupName: "dev",
+            automerge: true,
+            automergeType: "branch",
+            minimumReleaseAge: "14 days",
+            addLabels: [
+                "deps: dev"
+            ],
+            prPriority: -1,
+        },
+        {
+            matchPackageNames: [
+                "/^@types\\//",
+                "/-types$/"
+            ],
+            groupName: "types",
+            automerge: true,
+            automergeType: "branch",
+            minimumReleaseAge: "14 days",
+            addLabels: [
+                "deps: types"
+            ],
+            schedule: [
+                "* 0-3 1 * *"
+            ],
+            prPriority: -2,
+        },
+        {
+            matchManagers: [
+                "github-actions"
+            ],
+            groupName: "actions",
+            automerge: true,
+            automergeType: "branch",
+            minimumReleaseAge: "7 days",
+            addLabels: [
+                "deps: actions"
+            ],
+            commitMessageTopic: "{{depName}}",
+        },
+        {
+            matchManagers: [
+                "npm"
+            ],
+            matchPackageNames: [
+                "pnpm"
+            ],
+            matchDepTypes: [
+                "packageManager"
+            ],
+            groupName: "pnpm",
+            addLabels: [
+                "deps: pnpm"
+            ],
+            prPriority: 10,
+        },
+        {
+            matchManagers: [
+                "npm"
+            ],
+            matchPackageNames: [
+                "pnpm"
+            ],
+            matchDepTypes: [
+                "packageManager"
+            ],
+            matchUpdateTypes: [
+                "patch"
+            ],
+            automerge: true,
+            automergeType: "branch",
+            minimumReleaseAge: "3 days",
+        },
+        {
+            matchManagers: [
+                "npm"
+            ],
+            matchPackageNames: [
+                "pnpm"
+            ],
+            matchDepTypes: [
+                "packageManager"
+            ],
+            matchUpdateTypes: [
+                "minor"
+            ],
+            automerge: true,
+            automergeType: "branch",
+            minimumReleaseAge: "7 days",
+        },
+        {
+            matchManagers: [
+                "npm"
+            ],
+            matchPackageNames: [
+                "pnpm"
+            ],
+            matchDepTypes: [
+                "packageManager"
+            ],
+            matchUpdateTypes: [
+                "major"
+            ],
+            automerge: false,
+            addLabels: [
+                "deps: needs-review"
+            ],
+        },
+        {
+            matchManagers: [
+                "npm"
+            ],
+            rangeStrategy: "update-lockfile",
+        },
+    ],
+    prBodyColumns: [
+        "Package",
+        "Update",
+        "Type",
+        "Change",
+        "Age",
+        "Confidence",
+        "References",
+    ],
+}

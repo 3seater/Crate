@@ -1,0 +1,111 @@
+---
+title: Common Issues
+description: Troubleshooting and frequently asked questions.
+---
+
+import { Callout } from '@/components/docs/callout';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+If something goes wrong on Doji, here's how to diagnose and fix the most common issues.
+
+## Order Errors
+
+| Error | What It Means | What to Do |
+|-------|---------------|------------|
+| **Insufficient balance** | Not enough pUSD for a buy, or not enough shares for a sell. | Deposit more funds via [Deposit & Withdraw](/deposit-and-withdraw), or reduce your order size. |
+| **Price doesn't match tick size** | Your price isn't aligned with the market's minimum increment (usually $0.01 or $0.001). | Adjust your price to a valid tick. |
+| **Order size below minimum** | The order is smaller than the minimum (5 shares for limit orders, $1 for market buys). | Increase your order size. |
+| **Order couldn't be fully filled** | A FOK (Fill-or-Kill) order didn't find enough liquidity to fill entirely. | Try a smaller size, adjust your price, or switch to FAK for partial fills. |
+| **No matching orders available** | A FAK order found zero matches at your price. | Adjust your price closer to the current market or wait for more liquidity. |
+| **Limit order would fill immediately** | A post-only order would cross the spread instead of resting on the book. | Move your price further from the current best bid/ask. |
+| **Market no longer accepting orders** | The market has been resolved or closed. | Check the market status — you may need to [redeem](/portfolio) winning tokens instead. |
+| **Duplicate order** | An identical order already exists. | Change the price or size slightly. |
+| **Order delayed** | Sports markets have a 3-second matching delay. | Wait — your order may still execute shortly. |
+| **Price changed while placing** | The market moved between when you submitted and when it was matched. | Try again or adjust your price. |
+
+## Account & Login Errors
+
+| Error | What It Means | What to Do |
+|-------|---------------|------------|
+| **Invite code required** | The referral gate is active and you need a valid code to sign up. | Get an invite link from an existing Doji user. |
+| **Invite code at usage limit** | The referral code has been used the maximum number of times. | Ask the referrer for a new code, or get one from another user. |
+| **Login timed out** | The OAuth callback took too long. | Refresh the page and try signing in again. |
+| **Session expired** | Your login session is no longer valid. | Sign in again from the login page. |
+
+## Wallet & Onboarding Errors
+
+| Error | What It Means | What to Do |
+|-------|---------------|------------|
+| **Wallet setup failed** | Safe deployment didn't complete. | Refresh the page — Doji saves your progress and will resume where it left off. |
+| **Deposit not arriving** | Funds sent but not yet credited. | Leave the tab open — most deposits complete within minutes. Check that you sent a supported asset to the correct deposit address. |
+| **Withdrawal failed** | The bridge couldn't process your withdrawal. | Try a smaller amount — bridge liquidity pools can be temporarily exhausted. Wait a few minutes and retry. |
+| **Below minimum deposit** | Amount sent is under the chain's minimum. | Check the minimum shown in the bridge UI (typically $2–$9 depending on chain). |
+
+## Trading Restrictions
+
+| Error | What It Means | What to Do |
+|-------|---------------|------------|
+| **Address restricted** | Your address has been banned from trading on Polymarket. | Contact support. |
+| **Close-only mode** | Your address can only close existing positions, not open new ones. | You can sell existing shares but cannot buy new ones. |
+| **Regional restriction** | Trading is not available in your region due to Polymarket's compliance requirements. | Polymarket restricts access from certain countries (including the US, UK, Australia, France, Germany, and others) and specific regions (e.g., Ontario, Canada). Some restricted countries are "close-only" (Poland, Singapore, Taiwan, Thailand) — you can sell existing positions but not open new ones. See [Polymarket's geographic restrictions](https://docs.polymarket.com/trading/geoblock) for the full list. |
+
+## Platform Status
+
+| Error | What It Means | What to Do |
+|-------|---------------|------------|
+| **Trading temporarily disabled** | Polymarket's exchange is paused for maintenance. | Wait and try again. Check [Polymarket's status](https://polymarket.com) for updates. |
+| **Cancel-only mode** | The exchange is accepting cancellations but not new orders. | You can cancel open orders but must wait to place new ones. |
+| **Matching engine restarting** | Weekly maintenance (Tuesdays ~7 AM ET, ~90 seconds). | Wait a moment and retry. |
+| **Could not reach the server** | Doji's API server is unreachable. | Check your internet connection. If the problem persists, the server may be temporarily down. |
+
+<Callout type="info">
+> Most transient errors resolve by waiting a moment and retrying. If an issue persists, try refreshing the page or signing out and back in.
+</Callout>
+
+## FAQ
+
+<Accordions>
+<Accordion title="Is Doji non-custodial?">
+Yes. Doji uses **Magic Link** (for email/Google users) or **SIWE** (for MetaMask/Phantom users) for authentication, and **Gnosis Safe** for funds. Your assets are held in a smart contract wallet that Doji cannot access without your cryptographic signature. Orders are signed in your browser and sent directly to Polymarket's orderbook — Doji's server never touches your orders.
+</Accordion>
+
+<Accordion title="What network does Doji use?">
+Doji operates on the **Polygon** network. All trades are settled in **pUSD** (Polymarket USD) on Polygon.
+</Accordion>
+
+<Accordion title="Do I need MATIC for gas?">
+Generally, no. Doji utilizes a gasless relayer flow for wallet deployment and many trading actions, meaning you don't need to hold MATIC to get started.
+</Accordion>
+
+<Accordion title="How are markets resolved?">
+Markets are resolved via the **UMA Optimistic Oracle**. A proposer submits the outcome, then a 2-hour challenge period follows. If undisputed, the market resolves in about 2 hours. If disputed, UMA token holders vote — which takes 4–6 days total. Always read a market's **resolution rules** before trading, as they define exactly how edge cases are handled.
+</Accordion>
+
+<Accordion title="How do I redeem my winnings?">
+After a market resolves, go to the **Redeem** tab in your [Portfolio](/portfolio). Winning tokens are exchangeable for $1.00 pUSD each. Losing tokens are worth $0.00.
+</Accordion>
+
+<Accordion title="Can I sell my position before a market closes?">
+Yes! You can buy or sell your outcome tokens at any time while the market is still open and has active liquidity on the orderbook.
+</Accordion>
+
+<Accordion title="Does Doji charge trading fees?">
+Doji does not charge its own fees. Polymarket charges a small **taker fee** on most markets when your order fills immediately. If your limit order rests on the book and is later matched, you pay zero fees (maker). Geopolitical and world events markets are fee-free. See [Fees](/reference/fees) for details.
+</Accordion>
+
+<Accordion title="How do I deposit or withdraw funds?">
+Click **Deposit** or **Withdraw** in the header to open the bridge modal. For deposits, choose a source chain and asset, then send to the deposit address provided. For withdrawals, choose a destination chain and token, enter a recipient address and amount, then follow the on-screen steps. See [Deposit & Withdraw](/deposit-and-withdraw) for full details.
+</Accordion>
+
+<Accordion title="What happens if I lose access to my Google account?">
+If you signed in with Google, your Doji account is tied to that Google account through Magic. If you lose access, you won't be able to sign in. To protect yourself, use the **Export Private Key** option in the user menu to back up your embedded wallet's private key while you still have access. Store it securely offline — it's the only way to recover your wallet funds independently. This doesn't apply to MetaMask/Phantom users since you already control your wallet.
+</Accordion>
+
+<Accordion title="Why can't I place orders sometimes?">
+Polymarket's matching engine restarts **weekly on Tuesdays at 7:00 AM ET** for maintenance. During this window (typically about 90 seconds), order placement is temporarily unavailable. Unscheduled restarts may also occur for critical updates. If you experience a brief inability to trade, wait a moment and try again.
+</Accordion>
+
+<Accordion title="Is Doji available in my country?">
+Doji uses Polymarket for trading, which restricts access from certain countries and regions due to regulatory requirements. Blocked countries include the US, UK, Australia, France, Germany, and others. Some countries (Poland, Singapore, Taiwan, Thailand) are "close-only" — you can sell existing positions but not open new ones. If you're in a restricted region, the trading interface will be disabled. See [Polymarket's geographic restrictions](https://docs.polymarket.com/trading/geoblock) for the full list.
+</Accordion>
+</Accordions>

@@ -1,0 +1,79 @@
+---
+title: Sign In & Wallet Setup
+description: Create your account and set up your trading wallet.
+---
+
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+import { Callout } from '@/components/docs/callout';
+
+Doji uses passwordless sign-in. No password needed.
+
+## Sign-In Methods
+
+Go to the login page. You have two options:
+
+- **Google** — Click "Continue with Google" to sign in with your Google account via OAuth.
+- **MetaMask or Phantom** — Click the wallet icon to connect. Doji switches your wallet to Polygon and authenticates via SIWE (Sign-In with Ethereum).
+
+Once signed in, Doji starts setting up your trading wallet.
+
+<Callout type="info">
+Your account is tied to the sign-in method you use. Use the same one each time you log in.
+</Callout>
+
+## Embedded Wallet
+
+If you sign in with Google, Doji creates a non-custodial embedded wallet for your account via Magic. You may see this address in the user menu. Only you can access it.
+
+## Wallet Setup (Gnosis Safe)
+
+After signing in, Doji sets up a **Gnosis Safe** wallet on Polygon for trading. This is a one-time process.
+
+- **MetaMask / Phantom users:** Doji **imports your existing Polymarket Safe** automatically. If you've traded on Polymarket before, your positions and balances carry over.
+- **Google / email users:** Doji **deploys a new Safe** for you. No gas fees required — the Builder Program covers deployment.
+
+<Steps>
+<Step>
+
+### Wallet Setup
+
+Doji imports or creates a smart contract wallet on Polygon. Your funds stay under your control.
+
+</Step>
+<Step>
+
+### Wallet Linked
+
+Your wallet is linked to your sign-in, so balances and orders stay synced across sessions.
+
+</Step>
+<Step>
+
+### Ready to Trade
+
+Once the wallet is set up, you'll see the main trading interface. Fund it with pUSD on Polygon to start — see [Deposit & Withdraw](/deposit-and-withdraw).
+
+</Step>
+</Steps>
+
+Your Safe wallet is:
+
+- **Gasless** — No gas fees for wallet setup or most operations.
+- **Non-custodial** — Doji doesn't hold your funds. You control them through your sign-in.
+- **Polymarket-compatible** — Works the same as Polymarket's own wallet system.
+
+<Callout type="info">
+If something goes wrong during setup, refresh the page. Doji saves your progress and picks up where it left off.
+</Callout>
+
+## Sessions
+
+After sign-in, Doji keeps you logged in across pages. Use **Logout** in the user menu to end your session.
+
+## Export Private Key
+
+If you signed in with Google, use **Export Private Key** in the user menu to back up your embedded wallet's private key. This option is not shown for MetaMask/Phantom users since you already control your wallet key.
+
+<Callout type="warn">
+Anyone with the private key can control that wallet. Store it offline and never share it.
+</Callout>

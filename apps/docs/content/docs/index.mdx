@@ -1,0 +1,75 @@
+---
+title: Doji
+description: Documentation for the Doji prediction market terminal.
+---
+
+import { Card, Cards } from 'fumadocs-ui/components/card';
+import { Zap, ArrowLeftRight, Search, BarChart3, PieChart, Trophy, AlertTriangle, LifeBuoy } from 'lucide-react';
+
+## Get Started
+
+<Cards>
+  <Card
+    title="Sign In & Wallet Setup"
+    description="Create your account, connect a wallet, and configure your trading session."
+    href="/sign-in-and-wallet-setup"
+    icon={<Zap className="text-primary" />}
+  />
+  <Card
+    title="Deposit & Withdraw"
+    description="Fund your account and withdraw USDC."
+    href="/deposit-and-withdraw"
+    icon={<ArrowLeftRight className="text-primary" />}
+  />
+</Cards>
+
+## Trade
+
+<Cards>
+  <Card
+    title="Explore & Search"
+    description="Browse markets, filter by category, and use global search."
+    href="/explore-and-search"
+    icon={<Search className="text-primary" />}
+  />
+  <Card
+    title="Trading Terminal"
+    description="The orderbook, charts, order types, and settings."
+    href="/trading"
+    icon={<BarChart3 className="text-primary" />}
+  />
+</Cards>
+
+## Monitor
+
+<Cards>
+  <Card
+    title="Portfolio"
+    description="Positions, orders, P&L, and redemptions."
+    href="/portfolio"
+    icon={<PieChart className="text-primary" />}
+  />
+  <Card
+    title="Leaderboard"
+    description="See the top traders on Polymarket."
+    href="/leaderboard"
+    icon={<Trophy className="text-primary" />}
+  />
+</Cards>
+
+## Support
+
+<Cards>
+  <Card
+    title="Common Issues"
+    description="Troubleshooting and frequently asked questions."
+    href="/common-issues"
+    icon={<AlertTriangle className="text-primary" />}
+  />
+  <Card
+    title="Support"
+    description="Discord, X/Twitter, and bug reporting."
+    href="/support"
+    icon={<LifeBuoy className="text-primary" />}
+  />
+</Cards>

@@ -1,0 +1,14 @@
+!.env
+!.env.local
+!.env.example
+!.env.test
+!.env.development
+!.env.production
+!.env.test.local
+!.env.development.local
+!.env.production.local
+!.env.test.local.example
+!.env.development.local.example
+!.env.production.local.example
+!references
+!shannon

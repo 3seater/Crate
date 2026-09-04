@@ -1,0 +1,9 @@
+{
+  "extends": "@doji/config/tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "lib": ["ESNext", "DOM"],
+    "jsx": "react-jsx"
+  },
+  "include": ["src"]
+}

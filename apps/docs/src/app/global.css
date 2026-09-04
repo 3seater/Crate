@@ -1,0 +1,404 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/shadcn.css";
+@import "fumadocs-ui/css/preset.css";
+
+/* ─── Token mappings ────────────────────────────────────────────────────────── */
+
+/*
+ * @theme inline: generates utilities that INLINE the variable reference so
+ * Tailwind utilities correctly re-resolve at the cascade point of each element
+ * (required for dark-mode cascade to work through fd-* → our tokens).
+ */
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+
+  /* Doji brand */
+  --color-doji-green: var(--doji-green);
+
+  /* Surfaces */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-surface-4: var(--surface-4);
+
+  /* Text hierarchy */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  /*
+   * Fumadocs fd-* overrides — these drive all Fumadocs component colors.
+   * shadcn.css already bridges its own shadcn → fd-* mapping; we override
+   * here to point at our Doji palette instead.
+   */
+  --color-fd-background: var(--background);
+  --color-fd-foreground: var(--foreground);
+  --color-fd-muted: var(--surface-2);
+  --color-fd-muted-foreground: var(--text-secondary);
+  --color-fd-popover: var(--card);
+  --color-fd-popover-foreground: var(--foreground);
+  --color-fd-card: var(--card);
+  --color-fd-card-foreground: var(--foreground);
+  --color-fd-border: var(--border);
+  --color-fd-primary: var(--text-primary);
+  --color-fd-primary-foreground: var(--background);
+  --color-fd-secondary: var(--surface-2);
+  --color-fd-secondary-foreground: var(--text-primary);
+  --color-fd-accent: var(--surface-3);
+  --color-fd-accent-foreground: var(--doji-green);
+  --color-fd-ring: var(--doji-green);
+
+  /* Typography scale — 6 sizes only */
+  --text-3xl: 1.875rem; /* 30px — display, hero numbers */
+  --text-2xl: 1.5rem; /* 24px — titles, modal headers */
+  --text-lg: 1.125rem; /* 18px — headings, card titles */
+  --text-sm: 0.875rem; /* 14px — body, tables, forms */
+  --text-xs: 0.75rem; /* 12px — captions, labels */
+}
+
+/* ─── Color palette ─────────────────────────────────────────────────────────── */
+
+:root {
+  --fd-layout-width: 1400px;
+
+  --doji-green: #6ee46e;
+  --background: #f5f5f5;
+  --foreground: oklch(0.2138 0.0019 286.23);
+  --card: #f5f5f5;
+  --surface-2: oklch(0.96 0 0);
+  --surface-3: oklch(0.94 0 0);
+  --surface-4: oklch(0.92 0 0);
+  --text-primary: var(--foreground);
+  --text-secondary: oklch(0.5555 0 0);
+  --text-muted: oklch(0.5555 0 0);
+  --border: oklch(0.9219 0 0);
+  --ring: oklch(0.709 0 0);
+  --radius: 0.375rem;
+}
+
+.dark {
+  --doji-green: #bff85a;
+  --background: oklch(0.17 0.01 255);
+  --card: oklch(0.18 0.01 255);
+  --foreground: oklch(0.94 0.004 255);
+  --surface-2: oklch(0.195 0.01 255);
+  --surface-3: oklch(0.215 0.01 255);
+  --surface-4: oklch(0.235 0.01 255);
+  --text-primary: oklch(0.94 0.004 255);
+  --text-secondary: oklch(0.67 0.003 255);
+  --text-muted: oklch(0.67 0.003 255);
+  --border: oklch(0.27 0.01 255);
+  --border-subtle: oklch(0.94 0.004 255 / 0.045);
+  --border-strong: oklch(0.94 0.004 255 / 0.11);
+  --ring: var(--doji-green);
+}
+
+/* ─── Animated grid (hero sections) ───────────────────────────────────────── */
+
+@keyframes doji-grid-drift {
+  to {
+    transform: translate(40px, 40px);
+  }
+}
+
+.doji-landing-grid-shell {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: radial-gradient(circle at center, #000 18%, transparent 72%);
+}
+
+.doji-landing-grid-motion {
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in oklch, var(--border) 45%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklch, var(--border) 45%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 40px 40px;
+  opacity: 0.22;
+  animation: doji-grid-drift 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doji-landing-grid-motion {
+    animation: none;
+  }
+}
+
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+
+::selection {
+  color: var(--foreground);
+  background-color: color-mix(in oklch, var(--doji-green) 35%, transparent);
+}
+
+@layer base {
+  html {
+    background-color: var(--background);
+  }
+
+  body {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    @apply bg-background font-sans text-text-primary antialiased;
+  }
+
+  .text-micro {
+    font-size: 0.625rem;
+    line-height: 1rem;
+  }
+}
+
+/* ─── Prose ────────────────────────────────────────────────────────────────── */
+
+/*
+ * The Fumadocs typography plugin wraps every rule in :where() — zero specificity.
+ * Any unlayered selector beats it without !important. We use two approaches:
+ *
+ *   1. --tw-prose-* variable overrides  → change semantics (color, bold, etc.)
+ *   2. Direct element selectors          → change metrics (size, weight, spacing)
+ *
+ * Both are unlayered and win over the plugin's @layer utilities output.
+ */
+
+/* Prose variable overrides */
+.prose {
+  --tw-prose-links: var(--doji-green);
+}
+
+.dark .prose {
+  --tw-prose-headings: var(--text-primary);
+}
+
+/*
+ * Heading metrics — scale: 12 / 14 / 18 / 24 / 30px (~Perfect Fourth from 18)
+ * Line-heights tighten as size increases (standard typographic principle).
+ * Fumadocs sets heavy weights (800/600/600) — we override to 500 throughout.
+ * All rules are unlayered and beat the plugin's :where() zero-specificity output.
+ */
+.prose h1 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.875rem; /* 30px */
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.prose h2 {
+  margin-top: 3rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem; /* 24px */
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.prose h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+}
+
+.prose h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.375rem;
+  font-size: 0.9375rem; /* 15px — step between body and h3 */
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+/* Body text */
+.prose p,
+.prose li {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* Inline text links — exclude card links and heading anchor icons */
+.prose a:not([data-card]):not([aria-hidden="true"]) {
+  font-weight: 500;
+  color: var(--doji-green);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color 0.15s,
+    opacity 0.15s;
+}
+
+.prose a:not([data-card]):not([aria-hidden="true"]):hover {
+  border-bottom-color: var(--doji-green);
+  opacity: 0.85;
+}
+
+/* Heading anchor icon (#) — subdued; green on hover */
+.prose :is(h1, h2, h3, h4) a[aria-hidden="true"],
+.nd-docs-heading-anchor {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.25;
+  transition:
+    opacity 0.15s,
+    color 0.15s;
+}
+
+.prose :is(h1, h2, h3, h4) a[aria-hidden="true"]:hover,
+.nd-docs-heading-anchor:hover {
+  color: var(--doji-green);
+  opacity: 1;
+}
+
+/* Tables */
+.prose table {
+  width: 100%;
+  font-size: 0.875rem;
+}
+
+.prose table th {
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: left;
+  background-color: var(--surface-3);
+  border-bottom: 2px solid var(--border);
+}
+
+.prose table td {
+  padding: 0.75rem 1rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.prose table tr:nth-child(even) td {
+  background-color: var(--surface-2);
+}
+
+/* ─── Fumadocs components ──────────────────────────────────────────────────── */
+
+/* Sidebar */
+.fd-sidebar {
+  background-color: var(--background);
+  border-right: 1px solid var(--border);
+}
+
+.fd-sidebar-item[data-active="true"] {
+  border-left: 2px solid var(--doji-green);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* fd-card — used by docs list / home layout cards (not MDX <Card> components) */
+.fd-card {
+  cursor: pointer;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  transition:
+    border-color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.fd-card:hover {
+  border-color: var(--doji-green);
+  box-shadow: 0 8px 30px -10px
+    color-mix(in oklch, var(--doji-green) 15%, transparent);
+  transform: translateY(-2px);
+}
+
+/*
+ * Active nav items (TOC scroll tracking, sidebar).
+ * Unlayered rules beat @layer utilities without !important — no !important needed.
+ * Sidebar active item is overridden below to keep text-primary + green border accent.
+ */
+[data-active="true"] {
+  color: var(--doji-green);
+}
+
+.fd-sidebar-item[data-active="true"] {
+  color: var(--text-primary);
+}
+
+/* Steps */
+.fd-steps > h3::before {
+  color: var(--doji-green);
+  background-color: var(--background);
+  border: 1px solid var(--doji-green);
+}
+
+/* Search toggle */
+[data-search-full] {
+  background-color: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
+}
+
+[data-search-full]:hover {
+  background-color: var(--surface-3);
+  border-color: var(--doji-green);
+}
+
+/* Search results */
+.fd-search-item[data-active="true"] {
+  color: var(--doji-green);
+  background-color: var(--surface-3);
+}
+
+/* ─── Scrollbar ────────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-4);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--doji-green);
+}
+
+/* ─── Layout ────────────────────────────────────────────────────────────────── */
+
+#nd-docs-layout .fd-content {
+  max-width: 50rem;
+  padding-bottom: 6rem;
+  margin-inline: auto;
+}
+
+/* Remove gradient mask Fumadocs applies to scroll areas */
+[data-radix-scroll-area-viewport],
+/* biome-ignore lint/style/noDescendingSpecificity: intentional !important override of higher-specificity Fumadocs rules */
+.fd-content,
+.nd-page {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}

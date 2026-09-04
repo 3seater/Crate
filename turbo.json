@@ -1,0 +1,117 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "stream",
+  "globalEnv": ["NODE_ENV", "CI", "VERCEL", "VERCEL_ENV", "VERCEL_URL"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
+      "env": [
+        "GAMMA_API_URL",
+        "DATA_API_URL",
+        "BRIDGE_API_URL",
+        "CLOB_API_URL",
+        "CHAIN_ID",
+        "MAGIC_SECRET_KEY",
+        "CREDENTIAL_ENCRYPTION_KEY",
+        "JWT_SESSION_SECRET",
+        "DATABASE_URL",
+        "PORT",
+        "CORS_ORIGIN",
+        "POLYMARKET_BUILDER_ID",
+        "POLYMARKET_BUILDER_SIGNING_KEY",
+        "POLYMARKET_SIGN_TOKENS",
+        "POLYMARKET_SIGN_TOKEN",
+        "POLYMARKET_BUILDER_PASSPHRASE",
+        "SERVER_URL",
+        "NODEJS_HELPERS",
+        "POSTGRES_URL",
+        "POSTGRES_URL_NON_POOLING",
+        "POSTGRES_URL_NO_SSL",
+        "POSTGRES_HOST",
+        "POSTGRES_USER",
+        "POSTGRES_PASSWORD",
+        "POSTGRES_DATABASE",
+        "PGHOST",
+        "PGHOST_UNPOOLED",
+        "PGUSER",
+        "PGPASSWORD",
+        "PGDATABASE",
+        "NEON_PROJECT_ID",
+        "NEXT_PUBLIC_CLOB_API_URL",
+        "NEXT_PUBLIC_WS_MARKET_URL",
+        "NEXT_PUBLIC_WS_USER_URL",
+        "NEXT_PUBLIC_RTDS_URL",
+        "NEXT_PUBLIC_CHAIN_ID",
+        "NEXT_PUBLIC_SERVER_URL",
+        "NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY",
+        "NEXT_PUBLIC_POLYGON_RPC_URL",
+        "NEXT_PUBLIC_WS_SPORTS_URL",
+        "SENTRY_DSN",
+        "SENTRY_CSP_REPORT_URI",
+        "SENTRY_ORG_ID",
+        "SENTRY_ENVIRONMENT",
+        "SENTRY_RELEASE",
+        "SENTRY_DEBUG",
+        "SENTRY_STRICT_TRACE_CONTINUATION",
+        "SENTRY_ERROR_SAMPLE_RATE",
+        "SENTRY_TRACES_SAMPLE_RATE",
+        "SENTRY_PROFILES_SAMPLE_RATE",
+        "POLYGON_RPC_URL",
+        "ETHERSCAN_API_KEY",
+        "POLYMARKET_SUBGRAPH_OI_URL",
+        "POLYMARKET_SUBGRAPH_ORDERS_URL",
+        "POLYMARKET_SUBGRAPH_ACTIVITY_URL",
+        "POLYMARKET_SUBGRAPH_PNL_URL",
+        "POLYMARKET_SUBGRAPH_POSITIONS_URL",
+        "REFERRAL_GATE_ENABLED",
+        "SUBGRAPH_ENABLE_TRADE_COUNTS",
+        "BRIDGE_DISABLED_CHAINS",
+        "BRIDGE_DISABLED_TOKENS",
+        "DATABASE_URL_DIRECT",
+        "DISCORD_OPS_WEBHOOK_URL",
+        "LOG_LEVEL",
+        "DISCORD_BUG_REPORT_WEBHOOK_URL",
+        "SENTRY_AUTH_TOKEN",
+        "NEXT_PUBLIC_SENTRY_CSP_REPORT_URI",
+        "NEXT_PUBLIC_SENTRY_DSN",
+        "NEXT_PUBLIC_APP_URL",
+        "NEXT_PUBLIC_FEATURE_REFERRALS",
+        "NEXT_PUBLIC_FEATURE_FUNNELS",
+        "NEXT_PUBLIC_DISABLE_GEOBLOCK",
+        "NEXT_PUBLIC_SIMULATE_GEOBLOCKED",
+        "NEXT_PUBLIC_SENTRY_DEBUG"
+      ]
+    },
+    "check-types": {},
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^build"]
+    },
+    "db:push": {
+      "cache": false
+    },
+    "db:seed-referral": {
+      "cache": false
+    },
+    "db:generate": {
+      "outputs": ["drizzle/**"],
+      "env": ["DATABASE_URL"]
+    },
+    "db:migrate": {
+      "cache": false
+    },
+    "db:baseline": {
+      "cache": false
+    },
+    "db:studio": {
+      "cache": false,
+      "persistent": true
+    },
+    "test": {
+      "dependsOn": ["^build"]
+    }
+  }
+}

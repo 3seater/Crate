@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1770779954077,
+      "tag": "0000_fluffy_slapstick",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1773112554860,
+      "tag": "0001_curved_sabretooth",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1743292800000,
+      "tag": "0002_referral_schema",
+      "breakpoints": true
+    }
+  ]
+}

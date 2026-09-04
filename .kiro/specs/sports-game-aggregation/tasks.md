@@ -1,0 +1,109 @@
+# Implementation Plan
+
+- [x] 1. Write bug condition exploration test
+  - **Property 1: Bug Condition** - Game Aggregation & Three-Way Moneyline
+  - **CRITICAL**: This test MUST FAIL on unfixed code - failure confirms the bug exists
+  - **DO NOT attempt to fix the test or the code when it fails**
+  - **NOTE**: This test encodes the expected behavior - it will validate the fix when it passes after implementation
+  - **GOAL**: Surface counterexamples that demonstrate both bug scenarios
+  - **Scoped PBT Approach**: Scope the property to concrete failing cases:
+    - Scenario A: A soccer market with `gameId: "soccer-game-123"` in a single-event with 3 moneyline markets. `gameMarkets` returns 10+ markets (spreads, totals from sibling events). Verify `showDropdown` evaluates to `true` using merged market count. On unfixed code, `showDropdown` uses `selectorItems.length` from pre-merge single-event markets, so it may be `true` (3 moneyline > 1) but the dropdown won't include game-wide markets. For a single-market event (1 moneyline), `showDropdown` will be `false`.
+    - Scenario B: `ThreeWayMoneylineRow` with 3 moneyline markets (Team A, Draw, Team B). Verify each outcome renders as a full-width row (like `OptionRow`), not as inline pills. On unfixed code, the component renders `flex gap-1.5` inline pills.
+  - Test `MarketSchema` validation: create market with `gameId: "abc123"`, validate through `MarketSchema`, assert `gameId` is present in typed output (will fail - `.loose()` passes it but not in `ValidatedMarket` type)
+  - Test `showDropdown` logic: mock single-market soccer event with `game_id` linking to 10 game-wide markets. Assert `showDropdown` is `true` after merge (will fail on unfixed code if single event has only 1 market)
+  - Test `ThreeWayMoneylineRow` rendering: render with 3 soccer outcomes, assert each outcome gets its own full-width row element (will fail - current code renders inline pills with `flex gap-1.5`)
+  - Run test on UNFIXED code
+  - **EXPECTED OUTCOME**: Test FAILS (this is correct - it proves the bug exists)
+  - Document counterexamples found:
+    - `MarketSchema.parse({ ..., gameId: "abc" })` output lacks `gameId` in typed result
+    - `showDropdown` is `false` for single-market event with valid `game_id` and 10 game-wide markets
+    - `ThreeWayMoneylineRow` renders `<div class="flex gap-1.5">` pills instead of full-width rows
+  - Mark task complete when test is written, run, and failure is documented
+  - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.6_
+
+- [x] 2. Write preservation property tests (BEFORE implementing fix)
+  - **Property 2: Preservation** - Non-Sports, 2-Way Sports, and Esports Behavior
+  - **IMPORTANT**: Follow observation-first methodology
+  - Observe behavior on UNFIXED code for non-buggy inputs (cases where `isBugCondition` returns false):
+    - Observe: Non-sports multi-market event (political event with 5 markets) → `showDropdown` is `true`, renders standard `OptionListItem` list (no sports tabs)
+    - Observe: 2-way sports event (NBA Warriors vs Hawks, 2 moneyline tokens) → `MoneylineRow` renders single "Moneyline" row with price, NOT individual team rows
+    - Observe: Esports event (LoL match with `child_moneyline`, `map_handicap` types) → `EsportsTabContent` renders with "Series Lines" / "Game 1" / "Game 2" tabs
+    - Observe: Single-market event without `game_id` → `showDropdown` is `false`, no dropdown rendered
+    - Observe: `listByGameId` with empty `game_id` → returns empty array, no errors
+    - Observe: `groupSportsMarkets` with 2 moneyline markets → `moneylineMarkets.length <= 2`, uses `MoneylineRow` path
+    - Observe: `groupSportsMarketSections` with non-sports markets → `isSports` is `false`, no tab UI
+  - Write property-based tests capturing observed behavior patterns:
+    - For all non-sports market arrays: `groupSportsMarkets(markets).isSports === false` and no sports tab UI triggered
+    - For all 2-way moneyline configurations: `moneylineMarkets.length <= 2` → `MoneylineRow` used (not `ThreeWayMoneylineRow`)
+    - For all esports market arrays with esports-specific types: `detectEsportsEvent` returns `true` and tabs include "Series Lines"
+    - For all single-market events without `game_id`: `showDropdown` remains `false`
+  - Verify tests PASS on UNFIXED code
+  - **EXPECTED OUTCOME**: Tests PASS (this confirms baseline behavior to preserve)
+  - Mark task complete when tests are written, run, and passing on unfixed code
+  - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6_
+
+- [x] 3. Fix for sports game aggregation and three-way moneyline rendering
+
+  - [x] 3.1 Add `gameId` and `game_id` to MarketSchema
+    - File: `apps/server/src/lib/polymarket/schemas/gamma.ts`
+    - Add `gameId: z.string().optional()` to `MarketSchema`
+    - Add `game_id: z.string().optional()` to `MarketSchema`
+    - This ensures the field survives Zod validation and appears in `ValidatedMarket` type
+    - Eliminates need for unsafe type casts `(market as { gameId?: string }).gameId` in TradingSelectorCard
+    - _Bug_Condition: isBugCondition(input) where market.gameId passes through .loose() without explicit validation_
+    - _Expected_Behavior: gameId/game_id present in ValidatedMarket typed output after schema validation_
+    - _Preservation: All existing MarketSchema fields and .loose() behavior unchanged_
+    - _Requirements: 1.2, 2.2_
+
+  - [x] 3.2 Fix `showDropdown` gating in TradingSelectorCard
+    - File: `apps/web/src/components/trading/trading-selector-card.tsx`
+    - Change `showDropdown` from `hasEvent && selectorItems.length > 1` to account for merged game-wide markets
+    - New logic: `hasEvent && (selectorItems.length > 1 || eventMarkets.length > 1)` — this ensures dropdown appears when game-wide markets are merged even if single-event had only 1 market
+    - Remove unsafe type casts for `gameId` once it's in the schema (replace `(market as { gameId?: string }).gameId` with direct access)
+    - _Bug_Condition: isBugCondition(input) where singleEventCount <= 1 but gameMarkets.length > eventMarkets.length_
+    - _Expected_Behavior: showDropdown is true whenever merged eventMarkets.length > 1_
+    - _Preservation: Non-sports markets, single-market events without game_id continue using existing selectorItems logic_
+    - _Requirements: 1.3, 1.4, 2.1, 2.3, 2.4, 3.1, 3.2_
+
+  - [x] 3.3 Replace ThreeWayMoneylineRow inline pills with full-width rows
+    - File: `apps/web/src/components/trading/sports-selector-card.tsx`
+    - Refactor `ThreeWayMoneylineRow` to render each outcome as a full-width button row (similar to `OptionRow`)
+    - Each row shows full outcome label (no truncation) and Yes price
+    - Remove "Moneyline" header since each row is self-explanatory
+    - Keep the `SportsTabContent` conditional: `groups.moneylineMarkets.length > 2 ? <ThreeWayMoneylineRow> : <MoneylineRow>`
+    - 2-way sports continue using `MoneylineRow` (single "Moneyline" row) — unchanged
+    - _Bug_Condition: isBugCondition(input) where moneylineMarkets.length > 2 renders cramped inline pills_
+    - _Expected_Behavior: each 3-way outcome rendered as full-width row with complete label and price_
+    - _Preservation: 2-way moneyline (NBA, NFL) continues using MoneylineRow single-row display_
+    - _Requirements: 1.6, 2.5, 3.6_
+
+  - [x] 3.4 Verify bug condition exploration test now passes
+    - **Property 1: Expected Behavior** - Game Aggregation & Three-Way Moneyline
+    - **IMPORTANT**: Re-run the SAME test from task 1 - do NOT write a new test
+    - The test from task 1 encodes the expected behavior
+    - When this test passes, it confirms the expected behavior is satisfied:
+      - `MarketSchema` output includes `gameId` in typed result
+      - `showDropdown` is `true` for single-market events with valid `game_id` and game-wide markets
+      - `ThreeWayMoneylineRow` renders full-width rows for each outcome
+    - Run bug condition exploration test from step 1
+    - **EXPECTED OUTCOME**: Test PASSES (confirms bug is fixed)
+    - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
+
+  - [x] 3.5 Verify preservation tests still pass
+    - **Property 2: Preservation** - Non-Sports, 2-Way Sports, and Esports Behavior
+    - **IMPORTANT**: Re-run the SAME tests from task 2 - do NOT write new tests
+    - Run preservation property tests from step 2
+    - **EXPECTED OUTCOME**: Tests PASS (confirms no regressions)
+    - Confirm all tests still pass after fix:
+      - Non-sports dropdowns unchanged
+      - 2-way moneyline single-row rendering unchanged
+      - Esports tab layout unchanged
+      - Single-market no-dropdown behavior unchanged
+      - `listByGameId` error handling unchanged
+
+- [x] 4. Checkpoint - Ensure all tests pass
+  - Run full test suite: `pnpm test`
+  - Ensure all bug condition exploration tests pass (Property 1)
+  - Ensure all preservation property tests pass (Property 2)
+  - Ensure no regressions in existing tests
+  - Ask the user if questions arise

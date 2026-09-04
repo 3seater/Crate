@@ -1,0 +1,103 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignoreExportsUsedInFile": {
+    "interface": true,
+    "type": true
+  },
+  "ignoreBinaries": ["vercel"],
+  "ignoreDependencies": ["postcss"],
+  "workspaces": {
+    ".": {
+      "entry": ["tests/**/*.test.{ts,tsx}"],
+      "project": ["tests/**/*.{ts,tsx}"],
+      "ignoreFiles": ["tests/setup.ts"],
+      "ignore": [
+        ".agent/**",
+        ".agents/**",
+        ".claude/**",
+        ".cursor/**",
+        ".kiro/**",
+        "references/**"
+      ]
+    },
+    "apps/web": {
+      "project": ["src/**/*.{ts,tsx}"],
+      "ignoreFiles": [
+        "src/features/trading/components/charts/create-mock-datafeed.ts",
+        "src/features/trading/components/market/crypto-prices-utils.ts",
+        "src/features/trading/components/trading-terminal-skeleton.tsx",
+        "src/shared/components/ui/accordion.tsx",
+        "src/shared/components/ui/alert.tsx",
+        "src/shared/components/ui/aspect-ratio.tsx",
+        "src/shared/components/ui/avatar.tsx",
+        "src/shared/components/ui/breadcrumb.tsx",
+        "src/shared/components/ui/button-group.tsx",
+        "src/shared/components/ui/calendar.tsx",
+        "src/shared/components/ui/card.tsx",
+        "src/shared/components/ui/carousel.tsx",
+        "src/shared/components/ui/chart.tsx",
+        "src/shared/components/ui/combobox.tsx",
+        "src/shared/components/ui/command.tsx",
+        "src/shared/components/ui/context-menu.tsx",
+        "src/shared/components/ui/data-table-column-header.tsx",
+        "src/shared/components/ui/data-table-pagination.tsx",
+        "src/shared/components/ui/data-table-view-options.tsx",
+        "src/shared/components/ui/data-table.tsx",
+        "src/shared/components/ui/direction.tsx",
+        "src/shared/components/ui/drawer.tsx",
+        "src/shared/components/ui/field.tsx",
+        "src/shared/components/ui/input-otp.tsx",
+        "src/shared/components/ui/item.tsx",
+        "src/shared/components/ui/kbd.tsx",
+        "src/shared/components/ui/menubar.tsx",
+        "src/shared/components/ui/native-select.tsx",
+        "src/shared/components/ui/navigation-menu.tsx",
+        "src/shared/components/ui/pagination.tsx",
+        "src/shared/components/ui/popover.tsx",
+        "src/shared/components/ui/progress.tsx",
+        "src/shared/components/ui/resizable.tsx",
+        "src/shared/components/ui/scroll-area.tsx",
+        "src/shared/components/ui/separator.tsx",
+        "src/shared/components/ui/sidebar.tsx",
+        "src/shared/components/ui/switch.tsx",
+        "src/shared/components/ui/toggle-group.tsx",
+        "src/shared/components/ui/toggle.tsx",
+        "src/shared/hooks/use-crypto-prices.ts",
+        "src/shared/lib/api-queue.ts",
+        "src/features/trading/lib/markets/market-utils.ts",
+        "src/features/portfolio/lib/activity-volume-metrics.ts",
+        "src/features/portfolio/lib/download-snapshot.ts",
+        "src/features/trading/lib/order-utils.ts",
+        "src/features/trading/lib/rate-limiter.ts",
+        "src/shared/lib/trpc/subgraph-consumer-map.ts",
+        "src/shared/lib/websocket/sports-channel.ts",
+        "src/utils/type-guards.ts"
+      ]
+    },
+    "apps/server": {
+      "project": ["src/**/*.ts"]
+    },
+    "apps/docs": {
+      "entry": ["source.config.ts"],
+      "project": ["src/**/*.{ts,tsx}"]
+    },
+    "packages/api": {
+      "project": ["src/**/*.ts"]
+    },
+    "packages/db": {
+      "project": ["src/**/*.ts"]
+    },
+    "packages/env": {
+      "project": ["src/**/*.ts"]
+    },
+    "packages/hooks": {
+      "project": ["src/**/*.ts"]
+    },
+    "packages/logger": {
+      "project": ["src/**/*.ts"]
+    },
+    "packages/types": {
+      "project": ["src/**/*.ts"]
+    }
+  }
+}

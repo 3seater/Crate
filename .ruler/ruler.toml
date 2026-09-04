@@ -1,0 +1,44 @@
+# Ruler Configuration — Doji
+# https://github.com/intellectronica/ruler
+
+# Only target agents we actually use
+default_agents = [
+    "agentsmd",
+    "kiro",
+    "cursor",
+    "claude",
+    "antigravity",
+    "copilot",
+]
+
+[gitignore]
+enabled = true
+
+# --- MCP Server Configuration ---
+[mcp]
+enabled = true
+
+[mcp_servers.next-devtools]
+command = "npx"
+args = ["-y", "next-devtools-mcp@latest"]
+
+[mcp_servers.shadcn]
+command = "npx"
+args = ["shadcn@latest", "mcp"]
+
+[mcp_servers.ultracite]
+command = "npx"
+args = ["-y", "mcp-remote", "https://docs.ultracite.ai/mcp"]
+
+# --- Agent Configuration ---
+[agents.agentsmd]
+enabled = true
+
+[agents.kiro]
+enabled = true
+
+[agents.cursor]
+enabled = true
+
+[agents.claude]
+enabled = true

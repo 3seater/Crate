@@ -1,0 +1,38 @@
+{
+  "name": "@doji/db",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {
+    "db:push": "tsx node_modules/drizzle-kit/bin.cjs push",
+    "db:generate": "tsx node_modules/drizzle-kit/bin.cjs generate",
+    "db:migrate": "tsx node_modules/drizzle-kit/bin.cjs migrate",
+    "db:migrate:run": "tsx src/migrate.ts",
+    "db:baseline": "tsx src/baseline.ts",
+    "db:seed-referral": "tsx src/seed-referral.ts",
+    "db:studio": "tsx node_modules/drizzle-kit/bin.cjs studio",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@doji/env": "workspace:*",
+    "@neondatabase/serverless": "^1.1.0",
+    "@trpc/server": "catalog:",
+    "dotenv": "catalog:",
+    "drizzle-orm": "^0.45.2",
+    "pg": "^8.21.0",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@doji/config": "workspace:*",
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^0.31.8",
+    "tsx": "^4.22.3",
+    "typescript": "catalog:"
+  }
+}

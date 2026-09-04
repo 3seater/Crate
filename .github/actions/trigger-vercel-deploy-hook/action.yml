@@ -1,0 +1,74 @@
+name: Trigger Vercel deploy hook
+description: Legacy — POST a Vercel Deploy Hook URL. Production uses ./vercel-cli-deploy instead (owner token; bypasses Hobby commit-author checks).
+
+inputs:
+  hook:
+    description: Full deploy hook URL from Vercel (Project → Settings → Git → Deploy Hooks)
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Trigger deploy hook
+      shell: bash
+      env:
+        HOOK_RAW: ${{ inputs.hook }}
+      run: |
+        set -euo pipefail
+        HOOK=$(printf '%s' "$HOOK_RAW" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+        if [ -z "$HOOK" ]; then
+          echo "::error::Deploy hook URL is empty after trimming. Re-save the GitHub secret with only the hook URL (no label text, no quotes)."
+          exit 1
+        fi
+
+        if [[ "$HOOK" != https://api.vercel.com/* ]]; then
+          echo "::error::Deploy hook URL must start with https://api.vercel.com/ — copy from Vercel → Project → Settings → Git → Deploy Hooks (not the dashboard URL). See https://vercel.com/docs/deploy-hooks"
+          exit 1
+        fi
+
+        if [[ "$HOOK" != *'/v1/integrations/deploy/prj_'* ]]; then
+          echo "::error::Deploy hook path must include /v1/integrations/deploy/prj_<id>/<token> (exact format Vercel shows after creating the hook). See https://vercel.com/docs/deploy-hooks"
+          exit 1
+        fi
+
+        if [ "${#HOOK}" -lt 75 ]; then
+          echo "::notice::Hook URL is only ${#HOOK} characters; working hooks are often longer. If this fails, confirm the GitHub secret was not truncated when pasted."
+        fi
+
+        body_file="${RUNNER_TEMP:-/tmp}/vercel_hook_body.json"
+
+        run_curl() {
+          local method=$1
+          curl -sS --connect-timeout 30 --max-time 120 \
+            -o "$body_file" \
+            -w "%{http_code}" \
+            -X "$method" \
+            "$HOOK"
+        }
+
+        set +e
+        code=$(run_curl POST)
+        post_exit=$?
+        set -e
+
+        if [ "$code" = "404" ] && [ "$post_exit" = "0" ]; then
+          echo "POST returned HTTP 404; retrying with GET (Vercel deploy hooks support both)."
+          set +e
+          code=$(run_curl GET)
+          set -e
+        fi
+
+        case "$code" in
+          200|201)
+            echo "Deploy hook accepted (HTTP $code)."
+            ;;
+          *)
+            echo "##[group]Vercel response body (truncated, for debugging)"
+            head -c 1200 "$body_file" 2>/dev/null || echo "(empty or unreadable)"
+            echo
+            echo "##[endgroup]"
+            echo "::error::Deploy hook returned HTTP ${code:-unknown} (see response body in the log group above). Fix: in the Vercel project for this job, open Settings → Git — confirm repository is ${GITHUB_REPOSITORY:-connected}, create a new Deploy Hook for branch main, copy the full URL into the matching GitHub secret (one secret per Vercel project: web / server / docs). Do not use github.enabled:false (disables hooks). Use git.deploymentEnabled.main:false in that app’s vercel.json to skip Git-on-main deploys and avoid double deploys with this workflow. https://vercel.com/docs/deploy-hooks"
+            exit 1
+            ;;
+        esac

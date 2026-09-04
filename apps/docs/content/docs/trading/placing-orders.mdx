@@ -1,0 +1,80 @@
+---
+title: Placing Orders
+description: How to place trades on Doji.
+---
+
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+import { Callout } from '@/components/docs/callout';
+
+## How to Place an Order
+
+<Steps>
+<Step>
+
+### Pick a Side
+Select **Yes** (green) or **No** (red).
+
+</Step>
+<Step>
+
+### Choose Order Type
+Use the dropdown to select **Market**, **Limit**, **Split**, or **Merge**.
+
+</Step>
+<Step>
+
+### Set Price and Amount
+For limit orders, enter the price you're willing to pay per share (prices range from $0.01 to $0.99). Enter how many shares you want or how much USDC to spend — Doji calculates the other value for you.
+
+</Step>
+<Step>
+
+### Submit
+Click **Trade** to submit your order.
+
+</Step>
+</Steps>
+
+## Order Types
+
+The order form has four modes:
+
+- **Market** — Executes immediately at the best available price. Uses either FOK or FAK depending on your [Settings](/trading#settings).
+- **Limit** — Rests on the orderbook at your chosen price until filled or cancelled.
+- **Split** — Convert pUSD into a matched pair of Yes and No tokens.
+- **Merge** — Convert equal Yes and No tokens back into pUSD.
+
+### Market Order Execution
+
+Market orders use one of two execution modes (configurable in Settings):
+
+- **FAK (Fill-And-Kill)** — Fills as much as possible right away, then cancels the rest. Good when you want partial fills.
+- **FOK (Fill-Or-Kill)** — Must fill completely and immediately, or the entire order is cancelled. No partial fills.
+
+### Limit Order Expiration
+
+Limit orders default to **GTC (Good-Til-Cancelled)** — they stay on the orderbook until filled or cancelled. You can set an expiration using the presets:
+
+- **GTC** — No expiration (default).
+- **5m** — Expires in 5 minutes.
+- **1h** — Expires in 1 hour.
+- **Custom** — Pick a specific date and time.
+
+Setting an expiration effectively makes it a **GTD (Good-Til-Date)** order.
+
+### Post-Only
+
+Limit orders can be marked **post-only**. A post-only order only rests on the book — if it would fill immediately, it's rejected. This guarantees you're always the maker (zero fees).
+
+<Callout type="info">
+> Market orders on Polymarket are limit orders priced to fill immediately. The Market/Limit distinction in the order form controls whether Doji sets the price for you (market) or you set it yourself (limit).
+</Callout>
+
+## Displayed Price
+
+The price shown on a market is the **midpoint** between the best bid and best ask. If the spread is wider than $0.10, the last traded price is shown instead. You won't necessarily trade at the displayed price — you pay the ask when buying or receive the bid when selling.
+
+## Limits
+
+- **Tick size** — Minimum price increment, usually $0.01 or $0.001.
+- **Minimum order** — 5 shares for limit orders, $1 for market buy orders.

@@ -1,0 +1,27 @@
+{
+  "pattern": "**/*.{ts,tsx}",
+  "ignore": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.next/**",
+    "**/build/**",
+    "**/.turbo/**",
+    "**/coverage/**",
+    "**/__snapshots__/**",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "tests/**",
+    "apps/web/src/shared/components/ui/**",
+    "apps/web/public/static/charting_library/**",
+    "apps/web/public/static/datafeeds/**",
+    "apps/web/src/features/trading/lib/charting_library/**"
+  ],
+  "minLines": 5,
+  "minTokens": 50,
+  "reporters": ["console"],
+  "gitignore": true,
+  "absolute": true,
+  "output": "./jscpd-report"
+}

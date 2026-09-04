@@ -1,0 +1,45 @@
+---
+title: Fees
+description: Trading fees on Polymarket.
+---
+
+import { Callout } from '@/components/docs/callout';
+
+Doji does not charge trading fees. **Polymarket** charges a taker fee on most markets when your order fills immediately.
+
+## Maker vs. Taker
+
+- **Takers** pay a fee — your order fills immediately against existing orders.
+- **Makers** pay nothing — your order rests on the book and is filled later.
+
+A **GTC limit order** at a price that doesn't fill immediately makes you a maker. **FAK** or aggressive pricing makes you a taker.
+
+<Callout type="info">
+> Post-only orders guarantee you're always the maker — zero fees.
+</Callout>
+
+## Fee Rates
+
+Fees vary by market category. Geopolitical and world events markets are **free**.
+
+| Category | Taker Fee Rate |
+|----------|---------------|
+| Crypto | 0.072 |
+| Sports | 0.03 |
+| Finance / Politics / Tech | 0.04 |
+| Economics / Culture / Weather / Other | 0.05 |
+| Geopolitics | Free |
+
+Fees are based on the number of shares, the price, and the fee rate. They're highest at 50% probability and decrease near the extremes ($0.01 or $0.99). Example: buying 100 shares of a sports market at $0.50 costs about $0.75 in fees.
+
+<Callout type="info">
+Fee rates are set by Polymarket and may change. The order form always shows the current fee estimate before you confirm.
+</Callout>
+
+## Deposits & Withdrawals
+
+Polymarket doesn't charge deposit or withdrawal fees. The bridge provider may charge its own fees — the Doji bridge UI shows a breakdown before you confirm.
+
+## Maker Rebates
+
+A portion of taker fees is paid out daily to market makers as USDC rebates.

@@ -1,0 +1,6 @@
+.next
+.source
+node_modules
+.turbo
+next-env.d.ts
+.vercel

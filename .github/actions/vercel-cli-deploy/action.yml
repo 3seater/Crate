@@ -1,0 +1,53 @@
+name: Deploy to Vercel (CLI)
+description: Production deploy using the team owner's VERCEL_TOKEN (bypasses Git commit-author checks on Hobby/private repos)
+
+inputs:
+  app-directory:
+    description: >-
+      Vercel project Root Directory relative to repo root (apps/web, apps/server, or apps/docs).
+      Must match each project's dashboard setting — CLI runs from repo root, not this folder.
+    required: true
+  turbo-filter:
+    description: turbo-ignore package filter (web, server, or docs)
+    required: true
+  vercel-token:
+    description: Vercel API token for the project owner
+    required: true
+  vercel-org-id:
+    description: Vercel team or user ID (VERCEL_ORG_ID)
+    required: true
+  vercel-project-id:
+    description: Vercel project ID for this app (prj_…)
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Deploy production (skip if unchanged)
+      shell: bash
+      env:
+        VERCEL_TOKEN: ${{ inputs.vercel-token }}
+        VERCEL_ORG_ID: ${{ inputs.vercel-org-id }}
+        VERCEL_PROJECT_ID: ${{ inputs.vercel-project-id }}
+        APP_DIRECTORY: ${{ inputs.app-directory }}
+      run: |
+        set -euo pipefail
+        if [ -z "${VERCEL_PROJECT_ID}" ]; then
+          echo "::error::vercel-project-id is empty. Pass the prj_… id from Vercel (see deploy.yml)."
+          exit 1
+        fi
+        if [ ! -f "${GITHUB_WORKSPACE}/${APP_DIRECTORY}/vercel.json" ]; then
+          echo "::error::Missing ${APP_DIRECTORY}/vercel.json. Vercel Root Directory for project ${VERCEL_PROJECT_ID} must be \"${APP_DIRECTORY}\" (see deploy.yml)."
+          exit 1
+        fi
+        cd "${GITHUB_WORKSPACE}"
+        if npx turbo-ignore "${{ inputs.turbo-filter }}" --fallback=HEAD^1; then
+          echo "::notice::No changes for ${{ inputs.turbo-filter }}; skipping Vercel deploy."
+          exit 0
+        fi
+        echo "Deploying ${{ inputs.turbo-filter }} (${APP_DIRECTORY}) → production via ${VERCEL_PROJECT_ID}"
+        # Build on the runner (pnpm 10.33 from setup-node-pnpm). Remote `vercel deploy` alone lets
+        # Vercel's builders parse/install with a different pnpm and break on pnpm-lock.yaml v9.
+        npx --yes vercel@latest pull --environment=production --yes --token="$VERCEL_TOKEN"
+        npx --yes vercel@latest build --prod --yes --token="$VERCEL_TOKEN"
+        npx --yes vercel@latest deploy --prebuilt --prod --yes --token="$VERCEL_TOKEN"

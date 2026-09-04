@@ -1,0 +1,5 @@
+# Local toolchain (matches CI Node 22 + package.json packageManager).
+# Usage: mise trust && mise install  (auto-activates in this directory)
+[tools]
+node = "22"
+pnpm = "10.33.0"
