@@ -9,7 +9,8 @@
  */
 import { AppError, publicProcedure, router } from "@doji/api";
 import type { OhlcvCandle, Timeframe, TokenPrice } from "@doji/types";
-import { TRPCError, fetchRequestHandler } from "@trpc/server/adapters/fetch";
+import { TRPCError } from "@trpc/server";
+import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { LRUCache } from "lru-cache";
 import { z } from "zod";
 import { BASKETS } from "@/config/baskets";
