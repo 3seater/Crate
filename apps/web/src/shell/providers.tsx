@@ -13,6 +13,7 @@ import { Suspense } from "react";
 import { WagmiProvider } from "wagmi";
 import { robinhoodChain } from "@/config/chains";
 import { WalletSyncProvider } from "@/domains/baskets/components/wallet-sync-provider";
+import { registerQueryClient } from "@/lib/session-manager";
 import { TopLoadingBar } from "@/shell/top-loading-bar";
 import { Toaster } from "@/ui/sonner";
 import { TooltipProvider } from "@/ui/tooltip";
@@ -20,6 +21,7 @@ import { TooltipProvider } from "@/ui/tooltip";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 30_000, retry: 1 } },
 });
+registerQueryClient(queryClient);
 
 const wagmiConfig = getDefaultConfig({
   appName: "Crate",

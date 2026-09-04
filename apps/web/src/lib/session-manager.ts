@@ -1,15 +1,22 @@
 import { addBreadcrumb, setUser } from "@sentry/nextjs";
+import type { QueryClient } from "@tanstack/react-query";
 import { useWalletStore } from "@/stores/wallet";
 
 /**
  * Robinhood Terminal uses wagmi-based wallet connections — no JWT session token.
- * This always returns null; the tRPC client sends no Authorization header.
+ * This always returns null.
  */
 export function getSessionToken(): string | null {
   return null;
 }
 
-/** Disconnect the wallet and clear Sentry user context. */
+// Module-level queryClient reference set by providers.tsx on mount
+let _queryClient: QueryClient | null = null;
+export function registerQueryClient(qc: QueryClient): void {
+  _queryClient = qc;
+}
+
+/** Disconnect the wallet and clear React Query cache. */
 export function clearAuthSession(): void {
   addBreadcrumb({
     category: "auth",
@@ -17,13 +24,6 @@ export function clearAuthSession(): void {
     message: "clear_auth_session",
   });
   setUser(null);
-
   useWalletStore.getState().setDisconnected();
-
-  // Clear all cached queries on sign-out.
-  import("@/lib/trpc")
-    .then(({ queryClient }) => {
-      queryClient.clear();
-    })
-    .catch(() => undefined);
+  _queryClient?.clear();
 }
