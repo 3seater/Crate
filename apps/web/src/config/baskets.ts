@@ -42,7 +42,7 @@ export const BASKETS: BasketConfig[] = validateBaskets([
         symbol: "CASHCAT",
         name: "Cash Cat",
         address: "0x020bfC650A365f8BB26819deAAbF3E21291018b4",
-        poolAddress: "0xA70fc67C9F5e4af0AA07a6c3F7Df00D6e83F3Ab8",
+        poolAddress: "0xa70fc67c9f69da90b63a0e4c05d229954574e313",
         weight: 0.3,
       },
       {

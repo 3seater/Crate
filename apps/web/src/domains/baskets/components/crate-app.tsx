@@ -134,10 +134,12 @@ function TokenOrb({
         onError={() => setErrored(true)}
         src={imageUrl}
         style={{
-          width: size,
-          height: size,
+          width: `${size}px`,
+          height: `${size}px`,
+          minWidth: `${size}px`,
           borderRadius: "50%",
           objectFit: "cover",
+          flexShrink: 0,
           ...style,
         }}
         unoptimized
