@@ -245,3 +245,45 @@ async function fetchOhlcvDexScreener(
     },
   ];
 }
+
+// ─── ETH/USD spot price ───────────────────────────────────────────────────────
+
+const ethPriceCache = new LRUCache<string, number>({ max: 1, ttl: 30_000 });
+
+/** Fetches ETH/USD spot price server-side (Binance → Coinbase fallback). */
+export async function getEthPriceUsd(): Promise<number> {
+  const cached = ethPriceCache.get("eth");
+  if (cached) {
+    return cached;
+  }
+
+  // Primary: Binance public ticker (no auth needed)
+  try {
+    const res = await fetch(
+      "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT"
+    );
+    if (res.ok) {
+      const json = (await res.json()) as { price?: string };
+      const price = Number(json.price);
+      if (price > 0) {
+        ethPriceCache.set("eth", price);
+        return price;
+      }
+    }
+  } catch {
+    /* fall through */
+  }
+
+  // Fallback: Coinbase
+  const res = await fetch("https://api.coinbase.com/v2/prices/ETH-USD/spot");
+  if (!res.ok) {
+    throw new Error("ETH price fetch failed");
+  }
+  const json = (await res.json()) as { data?: { amount?: string } };
+  const price = Number(json.data?.amount);
+  if (!price || price <= 0) {
+    throw new Error("Invalid ETH price response");
+  }
+  ethPriceCache.set("eth", price);
+  return price;
+}

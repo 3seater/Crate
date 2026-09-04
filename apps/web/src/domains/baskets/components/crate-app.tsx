@@ -358,7 +358,17 @@ function BuyModal({
             return (
               <div key={token.symbol}>
                 <span>
-                  <i style={{ background: token.color }} />
+                  <TokenOrb
+                    color={token.color}
+                    imageUrl={price?.imageUrl}
+                    size={18}
+                    symbol={token.symbol}
+                    style={{
+                      marginRight: 6,
+                      verticalAlign: "middle",
+                      display: "inline-block",
+                    }}
+                  />
                   {token.symbol}
                   {price && (
                     <small

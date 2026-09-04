@@ -3,7 +3,7 @@ import { env } from "@doji/env/server";
 import { TRPCError } from "@trpc/server";
 import { BASKETS } from "../../config/baskets";
 import { buildBuyBundle, buildExitBundle } from "./enso-client";
-import { getLivePrices, getOhlcv } from "./price-service";
+import { getEthPriceUsd, getLivePrices, getOhlcv } from "./price-service";
 import {
   GetBundleInputSchema,
   GetLivePricesInputSchema,
@@ -75,6 +75,15 @@ export const basketsRouter = router({
 
       return { tx };
     }),
+
+  /**
+   * Fetch ETH/USD spot price from Binance (server-side, no CORS).
+   * Falls back to Coinbase if Binance fails.
+   */
+  getEthPrice: publicProcedure.query(async () => {
+    const price = await getEthPriceUsd();
+    return { priceUsd: price };
+  }),
 
   /**
    * Fetch live prices for one or more pool addresses.
