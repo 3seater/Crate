@@ -4,6 +4,8 @@ export interface BasketConstituent {
   address: `0x${string}`;
   /** Optional CoinGecko coin ID for icon lookup */
   coingeckoId?: string;
+  /** Optional direct logo image URL — used as fallback when DexScreener has no image */
+  logoUrl?: string;
   /** Display name, e.g. "Wrapped Ether" */
   name: string;
   /** DEX pool address used for price feeds (GeckoTerminal / DexScreener) */

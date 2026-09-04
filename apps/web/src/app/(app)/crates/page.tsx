@@ -88,7 +88,7 @@ export default function CratesPage() {
             <p className="footer-col-heading">Resources</p>
             <Link href="/docs">Documentation</Link>
             <a
-              href="https://x.com/useCrate"
+              href="https://x.com/tryCrate"
               rel="noopener noreferrer"
               target="_blank"
             >

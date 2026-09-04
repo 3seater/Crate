@@ -69,6 +69,7 @@ export const crates = BASKETS.map((basket, bi) => ({
     symbol: c.symbol,
     address: c.address,
     poolAddress: c.poolAddress,
+    logoUrl: c.logoUrl,
     weight: Math.round(c.weight * 100),
     rawWeight: c.weight,
     color: TOKEN_COLOURS[ci % TOKEN_COLOURS.length] ?? "#d4b2ff",
@@ -194,7 +195,7 @@ export function CrateCard({
         <TokenOrb
           className="crate-orb"
           color={crate.color}
-          imageUrl={firstPrice?.imageUrl}
+          imageUrl={firstPrice?.imageUrl ?? firstToken?.logoUrl}
           size={68}
           symbol={firstToken?.symbol ?? ""}
         />
@@ -355,7 +356,7 @@ export function BuyModal({
           <TokenOrb
             className="large"
             color={crate.color}
-            imageUrl={firstPrice?.imageUrl}
+            imageUrl={firstPrice?.imageUrl ?? firstToken?.logoUrl}
             size={86}
             symbol={firstToken?.symbol ?? ""}
           />
@@ -392,7 +393,7 @@ export function BuyModal({
                 <span>
                   <TokenOrb
                     color={token.color}
-                    imageUrl={price?.imageUrl}
+                    imageUrl={price?.imageUrl ?? token.logoUrl}
                     size={26}
                     symbol={token.symbol}
                     style={{
@@ -451,13 +452,45 @@ export function BuyModal({
           </p>
         )}
 
+        {isBusy && (
+          <div className="buy-loading-state">
+            <div className="buy-loading-steps">
+              <div
+                className={`buy-loading-step ${buyState.status === "building" || buyState.status === "confirming" || buyState.status === "pending" ? "active" : ""} ${buyState.status === "confirming" || buyState.status === "pending" ? "done" : ""}`}
+              >
+                <span className="buy-loading-step-dot" />
+                <span>Building bundle</span>
+              </div>
+              <div className="buy-loading-step-line" />
+              <div
+                className={`buy-loading-step ${buyState.status === "confirming" || buyState.status === "pending" ? "active" : ""} ${buyState.status === "pending" ? "done" : ""}`}
+              >
+                <span className="buy-loading-step-dot" />
+                <span>Sign in wallet</span>
+              </div>
+              <div className="buy-loading-step-line" />
+              <div
+                className={`buy-loading-step ${buyState.status === "pending" ? "active" : ""}`}
+              >
+                <span className="buy-loading-step-dot" />
+                <span>Confirming</span>
+              </div>
+            </div>
+            <div className="buy-loading-bar">
+              <div
+                className={`buy-loading-bar-fill buy-loading-bar-${buyState.status}`}
+              />
+            </div>
+          </div>
+        )}
+
         <button
           className="primary-button full"
           disabled={isBusy || (isConnected && amountNum <= 0)}
           onClick={handleConfirm}
           type="button"
         >
-          {buttonLabel}
+          {isBusy ? <span className="buy-spinner" /> : buttonLabel}
         </button>
 
         {buyState.status === "confirmed" && buyState.txHash && (
@@ -637,7 +670,7 @@ export default function CrateApp() {
             <p className="footer-col-heading">Resources</p>
             <Link href="/docs">Documentation</Link>
             <a
-              href="https://x.com/useCrate"
+              href="https://x.com/tryCrate"
               rel="noopener noreferrer"
               target="_blank"
             >

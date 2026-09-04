@@ -36,7 +36,7 @@ const SECTIONS = [
   {
     id: "crates",
     heading: "The crates",
-    body: `Each crate has a fixed set of constituents and weights. Weights are rebalanced periodically by the Crate team. Current crates: Core (blue-chip exposure), Mid Cap (emerging protocols), and Degen (high-conviction speculative plays). More crates will be added as the ecosystem grows.`,
+    body: `Each crate has a fixed set of constituents and weights. Weights are rebalanced periodically by the Crate team. Current crates: Blue Chips (blue-chip exposure), Feline Index (cat coin sector), and RHC Ecosystem (Robinhood Chain native protocols). More crates will be added as the ecosystem grows.`,
   },
   {
     id: "robinhood-chain",
@@ -68,11 +68,11 @@ const SECTIONS = [
       },
       {
         q: "What happens if a token in a crate gets delisted?",
-        a: "The Crate team will update the constituent list and communicate via X (@useCrate) before any change takes effect.",
+        a: "The Crate team will update the constituent list and communicate via X (@tryCrate) before any change takes effect.",
       },
       {
         q: "Is there a token?",
-        a: "Not yet. Follow @useCrate for updates.",
+        a: "Not yet. Follow @tryCrate for updates.",
       },
     ],
   },
@@ -175,7 +175,7 @@ export default function DocsPage() {
             <p className="footer-col-heading">Resources</p>
             <Link href="/docs">Documentation</Link>
             <a
-              href="https://x.com/useCrate"
+              href="https://x.com/tryCrate"
               rel="noopener noreferrer"
               target="_blank"
             >

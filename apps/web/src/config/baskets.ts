@@ -27,7 +27,7 @@ export function validateBaskets(baskets: BasketConfig[]): BasketConfig[] {
 export const BASKETS: BasketConfig[] = validateBaskets([
   {
     id: "top-memes",
-    name: "Top Memes",
+    name: "Blue Chips",
     description:
       "The three biggest meme coins on Robinhood Chain by market cap",
     constituents: [
@@ -36,6 +36,8 @@ export const BASKETS: BasketConfig[] = validateBaskets([
         name: "Pons",
         address: "0x39dBED3a2bd333467115dE45665cC57F813C4571",
         poolAddress: "0x10CC6BD38112cAc182db90B6a71d8Bb5939526bA",
+        logoUrl:
+          "https://dd.dexscreener.com/ds-data/tokens/robinhood/0x39dbed3a2bd333467115de45665cc57f813c4571.png",
         weight: 0.5,
       },
       {
@@ -43,6 +45,8 @@ export const BASKETS: BasketConfig[] = validateBaskets([
         name: "Cash Cat",
         address: "0x020bfC650A365f8BB26819deAAbF3E21291018b4",
         poolAddress: "0xa70fc67c9f69da90b63a0e4c05d229954574e313",
+        logoUrl:
+          "https://dd.dexscreener.com/ds-data/tokens/robinhood/0x020bfc650a365f8bb26819deaabf3e21291018b4.png",
         weight: 0.3,
       },
       {
@@ -51,6 +55,8 @@ export const BASKETS: BasketConfig[] = validateBaskets([
         address: "0x2E8c31162b855A2ffa90F6F8634643Ad6F111e18",
         poolAddress:
           "0xcbdfea90430a30ee4469c9902e120a77e7c7e4711d5643671c1d1957f2f1ce27",
+        logoUrl:
+          "https://dd.dexscreener.com/ds-data/tokens/robinhood/0x2e8c31162b855a2ffa90f6f8634643ad6f111e18.png",
         weight: 0.2,
       },
     ],
@@ -67,6 +73,8 @@ export const BASKETS: BasketConfig[] = validateBaskets([
         address: "0x2E8c31162b855A2ffa90F6F8634643Ad6F111e18",
         poolAddress:
           "0xcbdfea90430a30ee4469c9902e120a77e7c7e4711d5643671c1d1957f2f1ce27",
+        logoUrl:
+          "https://dd.dexscreener.com/ds-data/tokens/robinhood/0x2e8c31162b855a2ffa90f6f8634643ad6f111e18.png",
         weight: 0.5,
       },
       {
@@ -74,6 +82,8 @@ export const BASKETS: BasketConfig[] = validateBaskets([
         name: "QuantumGrid",
         address: "0x7d4727A173aab10d158D6F164B671C92f99d6647",
         poolAddress: "0x2cfa7f54012aaa42c844d66a19c0d7cacd56d587",
+        logoUrl:
+          "https://dd.dexscreener.com/ds-data/tokens/robinhood/0x7d4727a173aab10d158d6f164b671c92f99d6647.png",
         weight: 0.3,
       },
       {
@@ -82,13 +92,15 @@ export const BASKETS: BasketConfig[] = validateBaskets([
         address: "0x3B542B9B72441e4BA0E70885f983075C51ea5c16",
         poolAddress:
           "0xfb972b12f372eab17aca6073f22a1279f907ef1db2618d99dc5a8d72d8ee1430",
+        logoUrl:
+          "https://dd.dexscreener.com/ds-data/tokens/robinhood/0x3b542b9b72441e4ba0e70885f983075c51ea5c16.png",
         weight: 0.2,
       },
     ],
   },
   {
     id: "onchain-cats",
-    name: "On-chain Cats",
+    name: "Feline Index",
     description: "The cat coins taking over Robinhood Chain",
     constituents: [
       {
@@ -96,6 +108,8 @@ export const BASKETS: BasketConfig[] = validateBaskets([
         name: "Cash Cat",
         address: "0x020bfC650A365f8BB26819deAAbF3E21291018b4",
         poolAddress: "0xa70fc67c9f69da90b63a0e4c05d229954574e313",
+        logoUrl:
+          "https://dd.dexscreener.com/ds-data/tokens/robinhood/0x020bfc650a365f8bb26819deaabf3e21291018b4.png",
         weight: 0.4,
       },
       {
@@ -103,6 +117,8 @@ export const BASKETS: BasketConfig[] = validateBaskets([
         name: "Thinking Cat",
         address: "0x7FE995a80075dF3Dc8Ae11A9b82c7FE4202CD87f",
         poolAddress: "0x2b0d0183d017c58b924401ca8ac362f6e01f0e9e",
+        logoUrl:
+          "https://dd.dexscreener.com/ds-data/tokens/robinhood/0x7fe995a80075df3dc8ae11a9b82c7fe4202cd87f.png",
         weight: 0.35,
       },
       {
@@ -111,7 +127,117 @@ export const BASKETS: BasketConfig[] = validateBaskets([
         address: "0xded852De9fe9bA9b6f27f39e8e81CF851A5C79cc",
         poolAddress:
           "0x05c53aa8db4ac905381ba999d92a40a13fc0bc93b5d0a287ca16dc107bd8d11b",
+        logoUrl:
+          "https://dd.dexscreener.com/ds-data/tokens/robinhood/0xded852de9fe9ba9b6f27f39e8e81cf851a5c79cc.png",
         weight: 0.25,
+      },
+    ],
+  },
+  {
+    id: "launchpad-pack",
+    name: "Launchpad Pack",
+    description: "The dominant token launch platforms on Robinhood Chain",
+    constituents: [
+      {
+        symbol: "PONS",
+        name: "Pons",
+        address: "0x39dBED3a2bd333467115dE45665cC57F813C4571",
+        poolAddress: "0x10CC6BD38112cAc182db90B6a71d8Bb5939526bA",
+        logoUrl:
+          "https://dd.dexscreener.com/ds-data/tokens/robinhood/0x39dbed3a2bd333467115de45665cc57f813c4571.png",
+        weight: 0.5,
+      },
+      {
+        symbol: "LONG",
+        name: "Long.xyz",
+        address: "0x8B3F4F39873dEA4c1bE3cCAFf06b8a8f6E4E00e1",
+        poolAddress: "0x3a1e4f8e9c2b7d5f0a6c9e2b4d7f1a3c5e8b0d2f",
+        logoUrl:
+          "https://dd.dexscreener.com/ds-data/tokens/robinhood/0x8b3f4f39873dea4c1be3ccaff06b8a8f6e4e00e1.png",
+        weight: 0.3,
+      },
+      {
+        symbol: "STONKBROKER",
+        name: "StonkBroker",
+        address: "0xe934e36A439C94017B64a3FecE66AF12099aBF50",
+        poolAddress:
+          "0xd33c8fd38b06e989cdbd4dffdefab71c4bdd415b24964c8d69e38ff35b068f92",
+        logoUrl:
+          "https://cdn.dexscreener.com/cms/images/_dQRN4wt4hctn71c?width=800&height=800&quality=95&format=auto",
+        weight: 0.2,
+      },
+    ],
+  },
+  {
+    id: "defi-core",
+    name: "DeFi Core",
+    description: "Native DeFi infrastructure powering Robinhood Chain",
+    constituents: [
+      {
+        symbol: "DELTA",
+        name: "Delta",
+        address: "0xe8ffd7e24187F72afB08d75B1bb13088A989a791",
+        poolAddress: "0xd64fbda67e1015df43fa5e49f02ca844729e5f94",
+        logoUrl:
+          "https://cdn.dexscreener.com/cms/images/R0D6i-QgKwRAa7sg?width=800&height=800&quality=95&format=auto",
+        weight: 0.4,
+      },
+      {
+        symbol: "UP",
+        name: "up",
+        address: "0x57C0E45cB534413D1C20A4240955d6bB250BB4F1",
+        poolAddress: "0x23d641feccd207e8794c593e8240444a0674c4ba",
+        logoUrl:
+          "https://cdn.dexscreener.com/cms/images/ZIigH50N_HPHeoaX?width=800&height=800&quality=95&format=auto",
+        weight: 0.35,
+      },
+      {
+        symbol: "ARROW",
+        name: "Arrow",
+        address: "0xf2915d1e3C1B0c769d0c756Ec43F1c1f6c99cD03",
+        poolAddress: "0xe40d98d88038e0b844f844dce6ae3c79ec01ec53",
+        logoUrl:
+          "https://cdn.dexscreener.com/cms/images/qVNDzbSwL8Gxq58J?width=800&height=800&quality=95&format=auto",
+        weight: 0.25,
+      },
+    ],
+  },
+  {
+    id: "mag-4",
+    name: "Mag 4",
+    description: "The four biggest tokenized equities on Robinhood Chain",
+    constituents: [
+      {
+        symbol: "NVDA",
+        name: "NVIDIA • Robinhood Token",
+        address: "0xd0601CE157Db5bdC3162BbaC2a2C8aF5320D9EEC",
+        poolAddress: "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3",
+        logoUrl: "/stocks/nvda.png",
+        weight: 0.3,
+      },
+      {
+        symbol: "AAPL",
+        name: "Apple • Robinhood Token",
+        address: "0xaF3D76f1834A1d425780943C99Ea8A608f8a93f9",
+        poolAddress: "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+        logoUrl: "/stocks/aapl.png",
+        weight: 0.3,
+      },
+      {
+        symbol: "TSLA",
+        name: "Tesla • Robinhood Token",
+        address: "0x322F0929c4625eD5bAd873c95208D54E1c003b2d",
+        poolAddress: "0xf4acdaeeb7022862a763c9b1b885e11191c889e3",
+        logoUrl: "/stocks/tsla.png",
+        weight: 0.2,
+      },
+      {
+        symbol: "SPY",
+        name: "SPDR S&P 500 ETF Trust • Robinhood Token",
+        address: "0x117cc2133c37B721F49dE2A7a74833232B3B4C0C",
+        poolAddress: "0xddcbba3666f578e3f09516f21ff85bfee859ab5e",
+        logoUrl: "/stocks/sp500.png",
+        weight: 0.2,
       },
     ],
   },

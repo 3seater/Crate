@@ -117,6 +117,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "upload.wikimedia.org",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.dexscreener.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.logo.dev",
+      },
     ],
   },
   logging: {
