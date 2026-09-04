@@ -241,7 +241,7 @@ export function CrateCard({
   );
 }
 
-function BuyModal({
+export function BuyModal({
   crate,
   priceMap = {},
   ethPriceUsd,

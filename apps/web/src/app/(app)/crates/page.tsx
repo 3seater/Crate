@@ -1,31 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BASKETS } from "@/config/baskets";
 import { createPageMetadata } from "@/lib/seo";
 import { ScrollProgress } from "@/domains/baskets/components/scroll-progress";
+import { CrateGrid } from "@/domains/baskets/components/crate-grid";
 
 export const metadata = createPageMetadata({
   title: { absolute: "All Crates — Crate" },
   description: "Curated token indexes for Robinhood Chain.",
 });
-
-const TOKEN_COLOURS = [
-  "#d4b2ff",
-  "#f0a56a",
-  "#8c7bb5",
-  "#b9a4c9",
-  "#f0b2c9",
-  "#caa5f5",
-  "#8d779e",
-  "#e3cfda",
-  "#d7c3f1",
-  "#e4b4c9",
-  "#927fa9",
-  "#b8a7c3",
-];
-const ORB_COLOURS = ["#f0a56a", "#f6bd86", "#d8a878"];
-const CATEGORY = ["Core", "Mid Cap", "Degen"];
-const CHANGE = ["+18.42%", "+24.06%", "+9.81%"];
 
 function Mark() {
   return (
@@ -79,70 +61,7 @@ export default function CratesPage() {
             Back to overview
           </Link>
         </div>
-        <div className="crate-grid">
-          {BASKETS.map((basket, bi) => {
-            const ticker = basket.id
-              .replace(/-/g, "")
-              .toUpperCase()
-              .slice(0, 8);
-            const tokens = basket.constituents.map((c, ci) => ({
-              symbol: c.symbol,
-              weight: Math.round(c.weight * 100),
-              color: TOKEN_COLOURS[ci % TOKEN_COLOURS.length],
-            }));
-            return (
-              <article className="crate-card" key={basket.id}>
-                <div className="crate-topline">
-                  <span className="eyebrow">{CATEGORY[bi]}</span>
-                  <span className="live-dot">Live</span>
-                </div>
-                <div className="crate-card-heading">
-                  <div>
-                    <h3>{basket.name}</h3>
-                    <p className="ticker">${ticker}</p>
-                  </div>
-                  <div
-                    className="crate-orb"
-                    style={
-                      {
-                        "--orb": ORB_COLOURS[bi % ORB_COLOURS.length],
-                      } as React.CSSProperties
-                    }
-                  >
-                    <span>{tokens[0]?.symbol.slice(0, 2)}</span>
-                  </div>
-                </div>
-                <p className="crate-desc">{basket.description}</p>
-                <div className="allocation-row">
-                  {tokens.map((token) => (
-                    <div
-                      key={token.symbol}
-                      style={{
-                        width: `${token.weight}%`,
-                        background: token.color,
-                      }}
-                    />
-                  ))}
-                </div>
-                <div className="token-list">
-                  {tokens.map((token) => (
-                    <span key={token.symbol}>
-                      {token.symbol} <b>{token.weight}%</b>
-                    </span>
-                  ))}
-                </div>
-                <div className="crate-footer">
-                  <span className="change">
-                    {CHANGE[bi]} <small>30d</small>
-                  </span>
-                  <Link className="text-button" href={`/crates/${basket.id}`}>
-                    Open crate
-                  </Link>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        <CrateGrid />
       </section>
 
       <footer className="site-footer">
