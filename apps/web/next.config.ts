@@ -92,7 +92,8 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: false,
   },
   reactCompiler: true,
-  output: "standalone",
+  // "standalone" is for Docker/self-hosting. Netlify uses its own runtime — don't set this.
+  // output: "standalone",
   transpilePackages: [
     "@doji/types",
     "@doji/api",

@@ -1,11 +1,10 @@
 [build]
-  base = "apps/web"
-  command = "cd ../.. && pnpm install --frozen-lockfile && pnpm turbo build --filter=web"
-  publish = "apps/web/.next"
+  base    = "apps/web"
+  command = "cd ../.. && corepack enable && corepack prepare pnpm@10.33.0 --activate && pnpm install --frozen-lockfile && pnpm exec turbo build --filter=web"
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "22"
-  PNPM_VERSION = "10"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
