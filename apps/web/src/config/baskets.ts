@@ -19,13 +19,10 @@ export function validateBaskets(baskets: BasketConfig[]): BasketConfig[] {
 }
 
 /**
- * Curated meme baskets for Robinhood Chain.
+ * Curated baskets for Robinhood Chain.
  *
  * Token addresses and pool addresses verified from DexScreener
  * (chain slug: "robinhood") — highest-liquidity pool per token.
- *
- * Pool addresses are Uniswap v4 bytes32 pool IDs used by DexScreener
- * for price feeds. Enso Finance handles routing internally.
  */
 export const BASKETS: BasketConfig[] = validateBaskets([
   {
@@ -59,31 +56,33 @@ export const BASKETS: BasketConfig[] = validateBaskets([
     ],
   },
   {
-    id: "mid-cap-memes",
-    name: "Mid Cap Memes",
-    description: "Higher risk, higher reward mid-cap memes on Robinhood Chain",
+    id: "ai-infra",
+    name: "AI & Infra",
+    description:
+      "AI and compute tokens building the next layer of Robinhood Chain",
     constituents: [
       {
-        symbol: "BONER",
-        name: "Boner Coin",
-        address: "0x98096d17e191B3dA1d5f99a6D7b3584351b11E18",
+        symbol: "AI",
+        name: "Artificial Inu",
+        address: "0x2E8c31162b855A2ffa90F6F8634643Ad6F111e18",
         poolAddress:
-          "0x9c89b04303dfa76f3f6fb02c2b77be0e8a00ab8fa00d507119acd54ab3e8640d",
-        weight: 0.35,
+          "0xcbdfea90430a30ee4469c9902e120a77e7c7e4711d5643671c1d1957f2f1ce27",
+        weight: 0.5,
       },
       {
-        symbol: "CHUMP",
-        name: "Chump Coin",
-        address: "0xEc0acde3cF4c5f98ce2C021e6Bd6eC475fEe278a",
-        poolAddress: "0x1Ca479C00Cf7E4efA6799E4bFaceb11eB2Fa4202",
-        weight: 0.35,
-      },
-      {
-        symbol: "TENDIES",
-        name: "TENDIES",
-        address: "0x45242320DBB855EeA8Fd36804C6487E10E97FCF9",
-        poolAddress: "0x237609918F330ADD285b8bC5f8f2922283D1C4C5",
+        symbol: "QGRID",
+        name: "QuantumGrid",
+        address: "0x7d4727A173aab10d158D6F164B671C92f99d6647",
+        poolAddress: "0x2cfa7f54012aaa42c844d66a19c0d7cacd56d587",
         weight: 0.3,
+      },
+      {
+        symbol: "MICRON",
+        name: "MICRON AI",
+        address: "0x3B542B9B72441e4BA0E70885f983075C51ea5c16",
+        poolAddress:
+          "0xfb972b12f372eab17aca6073f22a1279f907ef1db2618d99dc5a8d72d8ee1430",
+        weight: 0.2,
       },
     ],
   },

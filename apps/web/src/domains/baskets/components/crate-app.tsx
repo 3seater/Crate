@@ -8,6 +8,7 @@ import { useAccount } from "wagmi";
 import { BASKETS } from "@/config/baskets";
 import { useBasketBuy } from "@/domains/baskets/hooks/use-basket-buy";
 import { useBasketPrices } from "@/domains/baskets/hooks/use-basket-prices";
+import { useEthPrice } from "@/domains/baskets/hooks/use-eth-price";
 import { HeroArt } from "@/domains/baskets/components/hero-art";
 import { ScrollProgress } from "@/domains/baskets/components/scroll-progress";
 
@@ -27,7 +28,7 @@ const TOKEN_COLOURS = [
 ];
 
 const ORB_COLOURS = ["#f0a56a", "#f6bd86", "#d8a878"];
-const CATEGORIES = ["Core", "Mid Cap", "Cats"];
+const CATEGORIES = ["Core", "AI & Infra", "Cats"];
 
 const crates = BASKETS.map((basket, bi) => ({
   id: basket.id,
@@ -213,11 +214,13 @@ export function CrateCard({
 function BuyModal({
   crate,
   priceMap = {},
+  ethPriceUsd,
   isConnected,
   onClose,
 }: {
   crate: CrateData;
   priceMap?: PriceMap;
+  ethPriceUsd?: number;
   isConnected: boolean;
   onClose: () => void;
 }) {
@@ -337,6 +340,14 @@ function BuyModal({
               }
               value={amount}
             />
+            {ethPriceUsd != null && amountNum > 0 && (
+              <span className="buy-amount-usd">
+                ≈&nbsp;$
+                {(amountNum * ethPriceUsd).toLocaleString("en-US", {
+                  maximumFractionDigits: 2,
+                })}
+              </span>
+            )}
           </div>
         </div>
         <div className="buy-breakdown">
@@ -417,6 +428,7 @@ export default function CrateApp() {
   const [selected, setSelected] = useState<CrateData | null>(null);
 
   const { data: priceData } = useBasketPrices(ALL_POOL_ADDRESSES);
+  const ethPriceUsd = useEthPrice();
 
   const priceMap = useMemo<PriceMap>(() => {
     const map: PriceMap = {};
@@ -596,6 +608,7 @@ export default function CrateApp() {
       {selected !== null && (
         <BuyModal
           crate={selected}
+          ethPriceUsd={ethPriceUsd}
           isConnected={isConnected}
           onClose={() => setSelected(null)}
           priceMap={priceMap}
