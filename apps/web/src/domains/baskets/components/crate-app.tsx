@@ -3,7 +3,7 @@
 import { ConnectButton, useConnectModal } from "@rainbow-me/rainbowkit";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAccount } from "wagmi";
 import { BASKETS } from "@/config/baskets";
 import { useBasketBuy } from "@/domains/baskets/hooks/use-basket-buy";
@@ -254,7 +254,6 @@ export function BuyModal({
   isConnected: boolean;
   onClose: () => void;
 }) {
-  const ref = useRef<HTMLDialogElement>(null);
   const [amount, setAmount] = useState("0.1");
   const { openConnectModal } = useConnectModal();
 
@@ -264,17 +263,19 @@ export function BuyModal({
   });
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) {
-      return;
-    }
-    el.showModal();
-    const handleCancel = (e: Event) => {
-      e.preventDefault();
-      onClose();
+    // Close on Escape
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
     };
-    el.addEventListener("cancel", handleCancel);
-    return () => el.removeEventListener("cancel", handleCancel);
+    document.addEventListener("keydown", handleKey);
+    // Prevent body scroll while modal is open
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = "";
+    };
   }, [onClose]);
 
   // Auto-close 2s after confirmed
@@ -332,10 +333,11 @@ export function BuyModal({
     : undefined;
 
   return (
-    <dialog
+    <div
       aria-label={`Buy ${crate.name}`}
+      aria-modal="true"
       className="modal-backdrop"
-      ref={ref}
+      role="dialog"
     >
       <div className="buy-modal">
         <button
@@ -439,9 +441,13 @@ export function BuyModal({
               padding: "8px 10px",
               background: "rgba(240,165,106,.08)",
               border: "1px solid rgba(240,165,106,.2)",
+              wordBreak: "break-word",
             }}
           >
-            {buyState.error}
+            {/* Trim raw calldata / long hex strings from wallet error messages */}
+            {buyState.error
+              .replace(/0x[0-9a-fA-F]{40,}/g, (m) => `${m.slice(0, 10)}…`)
+              .slice(0, 120)}
           </p>
         )}
 
@@ -467,7 +473,7 @@ export function BuyModal({
           </p>
         )}
       </div>
-    </dialog>
+    </div>
   );
 }
 

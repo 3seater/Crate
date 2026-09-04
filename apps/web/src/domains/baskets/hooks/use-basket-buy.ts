@@ -12,6 +12,23 @@ import {
 const ETH_ADDRESS =
   "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" as const satisfies `0x${string}`;
 
+const REJECTED_RE = /user rejected|UserRejected|rejected the request/i;
+const HEX_RE = /0x[0-9a-fA-F]{40,}/g;
+
+function normalizeWalletError(err: unknown): string {
+  if (!(err instanceof Error)) {
+    return "Transaction failed";
+  }
+  const msg = err.message;
+  if (REJECTED_RE.test(msg)) {
+    return "Transaction cancelled";
+  }
+  return (
+    msg.replace(HEX_RE, "").replace(/\s+/g, " ").trim().slice(0, 120) ||
+    "Transaction failed"
+  );
+}
+
 export type BuyState =
   | { status: "idle" }
   | { status: "building" }
@@ -85,7 +102,7 @@ export function useBasketBuy({ basketId }: UseBasketBuyParams) {
       } catch (err) {
         setBuyState({
           status: "error",
-          error: err instanceof Error ? err.message : "Transaction failed",
+          error: normalizeWalletError(err),
         });
       }
     },
