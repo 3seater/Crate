@@ -28,10 +28,8 @@ function getBaseURL(): string {
   if (url) {
     return url;
   }
-  // Server: metadataBase / og:image must use the public domain. If we fall back to
-  // VERCEL_URL alone, og:image points at *.vercel.app — Discord/embeds fetch that host
-  // and often fail (wrong deployment, HTML instead of PNG).
   if (typeof window === "undefined") {
+    // Vercel
     const vercelEnv = process.env.VERCEL_ENV;
     const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
     if (vercelEnv === "production" && productionHost) {
@@ -43,6 +41,11 @@ function getBaseURL(): string {
     const vercel = process.env.VERCEL_URL?.trim();
     if (vercel) {
       return `https://${vercel}`;
+    }
+    // Netlify — URL is the deploy URL (production or preview)
+    const netlifyUrl = process.env.URL?.trim();
+    if (netlifyUrl) {
+      return withHttps(netlifyUrl);
     }
   }
   return process.env.NODE_ENV === "development"
