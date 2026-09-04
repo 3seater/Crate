@@ -27,7 +27,7 @@ const TOKEN_COLOURS = [
 ];
 
 const ORB_COLOURS = ["#f0a56a", "#f6bd86", "#d8a878"];
-const CATEGORIES = ["Core", "Mid Cap", "Degen"];
+const CATEGORIES = ["Core", "Mid Cap", "Cats"];
 
 const crates = BASKETS.map((basket, bi) => ({
   id: basket.id,

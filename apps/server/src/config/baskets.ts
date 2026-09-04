@@ -88,32 +88,30 @@ export const BASKETS: BasketConfig[] = validateBaskets([
     ],
   },
   {
-    id: "degen-basket",
-    name: "Degen Basket",
-    description: "Small cap Robinhood Chain memes for the degens",
+    id: "onchain-cats",
+    name: "On-chain Cats",
+    description: "The cat coins taking over Robinhood Chain",
     constituents: [
       {
-        symbol: "STONKBROKER",
-        name: "StonkBroker",
-        address: "0xe934e36A439C94017B64a3FecE66AF12099aBF50",
-        poolAddress:
-          "0xd33c8fd38b06e989cdbd4dffdefab71c4bdd415b24964c8d69e38ff35b068f92",
+        symbol: "CASHCAT",
+        name: "Cash Cat",
+        address: "0x020bfC650A365f8BB26819deAAbF3E21291018b4",
+        poolAddress: "0xa70fc67c9f69da90b63a0e4c05d229954574e313",
         weight: 0.4,
       },
       {
-        symbol: "MOO",
-        name: "Memory cow Moo",
-        address: "0xD9dB30BB0D2b8d2eae3826A1372117E058791e18",
-        poolAddress:
-          "0xc3cc877a8a7d28efdb5dbec9ae71724652431e6411aa1a9fc8928028da554aa1",
+        symbol: "HMM",
+        name: "Thinking Cat",
+        address: "0x7FE995a80075dF3Dc8Ae11A9b82c7FE4202CD87f",
+        poolAddress: "0x2b0d0183d017c58b924401ca8ac362f6e01f0e9e",
         weight: 0.35,
       },
       {
-        symbol: "HOOKR",
-        name: "Hookr.fun",
-        address: "0x18E674231A58c239Dc7DaeDcffE15Ec3A24cff5c",
+        symbol: "ROBINCAT",
+        name: "ROBINCAT",
+        address: "0xded852De9fe9bA9b6f27f39e8e81CF851A5C79cc",
         poolAddress:
-          "0x590dcb6a87828bf688b48089a62239b693378f1fb64d2286e6a399ed8c005fdf",
+          "0x05c53aa8db4ac905381ba999d92a40a13fc0bc93b5d0a287ca16dc107bd8d11b",
         weight: 0.25,
       },
     ],
