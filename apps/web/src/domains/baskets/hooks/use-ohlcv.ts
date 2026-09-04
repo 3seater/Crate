@@ -1,22 +1,33 @@
 "use client";
 
-import type { Timeframe } from "@doji/types";
+import type { OhlcvCandle, Timeframe } from "@doji/types";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { STALE_REALTIME, STALE_STABLE } from "@/config/query";
-import { trpc } from "@/lib/trpc";
+
+async function fetchOhlcv(
+  pools: string[],
+  timeframe: Timeframe
+): Promise<{ candles: Record<string, OhlcvCandle[]> }> {
+  const res = await fetch(
+    `/api/baskets/ohlcv?pools=${pools.join(",")}&timeframe=${timeframe}`
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch OHLCV");
+  }
+  return res.json() as Promise<{ candles: Record<string, OhlcvCandle[]> }>;
+}
 
 export function useOhlcv(
   poolAddresses: string[] | undefined,
   timeframe: Timeframe
 ) {
   const is24H = timeframe === "24H";
-
   return useQuery({
-    ...trpc.baskets.getOhlcv.queryOptions(
+    queryKey: ["ohlcv", poolAddresses, timeframe],
+    queryFn:
       poolAddresses && poolAddresses.length > 0
-        ? { poolAddresses, timeframe }
-        : skipToken
-    ),
+        ? () => fetchOhlcv(poolAddresses, timeframe)
+        : skipToken,
     staleTime: is24H ? STALE_REALTIME : STALE_STABLE,
     refetchInterval: is24H ? 30_000 : undefined,
   });

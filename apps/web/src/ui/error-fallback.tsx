@@ -3,7 +3,6 @@
 import { logger } from "@doji/logger/client";
 import { useCallback, useEffect } from "react";
 import { stripDevErrorQueryFromCurrentLocation } from "@/lib/dev/dev-error-boundary-test";
-import { getTrpcDisplayMessage } from "@/lib/trpc/errors";
 import { Button } from "@/ui/button";
 import { FullPageStatus } from "@/ui/full-page-status";
 import { cn } from "@/utils/cn";
@@ -32,7 +31,7 @@ export function ErrorFallback({
   messageOverride,
   className,
 }: ErrorFallbackProps) {
-  const message = messageOverride ?? getTrpcDisplayMessage(error);
+  const message = messageOverride ?? (error.message || "Something went wrong");
 
   useEffect(() => {
     logger.error(

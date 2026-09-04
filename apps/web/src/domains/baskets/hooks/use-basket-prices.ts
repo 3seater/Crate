@@ -2,19 +2,30 @@
 
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { STALE_REALTIME } from "@/config/query";
-import { trpc } from "@/lib/trpc";
 
-/**
- * Fetches live token prices for a set of pool addresses.
- * Refreshes every 30 seconds while the component is mounted.
- *
- * Requirements: 8.1, 8.2
- */
+interface TokenPrice {
+  address: string;
+  symbol: string;
+  priceUsd: number;
+  change24h: number | null;
+  imageUrl?: string | null;
+}
+
+async function fetchPrices(pools: string[]): Promise<{ prices: TokenPrice[] }> {
+  const res = await fetch(`/api/baskets/prices?pools=${pools.join(",")}`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch prices");
+  }
+  return res.json() as Promise<{ prices: TokenPrice[] }>;
+}
+
 export function useBasketPrices(poolAddresses: string[] | undefined) {
   return useQuery({
-    ...trpc.baskets.getLivePrices.queryOptions(
-      poolAddresses && poolAddresses.length > 0 ? { poolAddresses } : skipToken
-    ),
+    queryKey: ["basket-prices", poolAddresses],
+    queryFn:
+      poolAddresses && poolAddresses.length > 0
+        ? () => fetchPrices(poolAddresses)
+        : skipToken,
     staleTime: STALE_REALTIME,
     refetchInterval: 30_000,
   });

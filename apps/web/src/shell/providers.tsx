@@ -6,17 +6,20 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { domAnimation, LazyMotion } from "framer-motion";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Suspense } from "react";
 import { WagmiProvider } from "wagmi";
 import { robinhoodChain } from "@/config/chains";
 import { WalletSyncProvider } from "@/domains/baskets/components/wallet-sync-provider";
-import { queryClient } from "@/lib/trpc";
 import { TopLoadingBar } from "@/shell/top-loading-bar";
 import { Toaster } from "@/ui/sonner";
 import { TooltipProvider } from "@/ui/tooltip";
+
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { staleTime: 30_000, retry: 1 } },
+});
 
 const wagmiConfig = getDefaultConfig({
   appName: "Crate",
