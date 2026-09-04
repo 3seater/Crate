@@ -19,14 +19,6 @@ export interface EnsoSwapAction {
   protocol: "enso";
 }
 
-export interface EnsoBundleRequest {
-  actions: EnsoSwapAction[];
-  chainId: number;
-  fromAddress: `0x${string}`;
-  /** Routing strategy: "router" for multi-hop AMM routing */
-  routingStrategy: "router";
-}
-
 /**
  * Builds a buy-into-basket transaction bundle.
  * Splits inputAmountWei across constituent tokens proportionally by weight
@@ -107,26 +99,31 @@ export function buildExitBundle(params: {
 /**
  * POSTs a bundle of swap actions to the Enso Finance API and returns the
  * resulting transaction object ready to be sent on-chain.
+ *
+ * Enso's bundle endpoint takes chainId, fromAddress, and routingStrategy
+ * as URL query parameters, with only the actions array in the request body.
  */
 async function callEnsoBundle(params: {
   fromAddress: `0x${string}`;
   actions: EnsoSwapAction[];
   apiKey: string;
 }): Promise<TxBundle> {
-  const body: EnsoBundleRequest = {
-    chainId: ROBINHOOD_CHAIN_ID,
+  const searchParams = new URLSearchParams({
+    chainId: String(ROBINHOOD_CHAIN_ID),
     fromAddress: params.fromAddress,
     routingStrategy: "router",
-    actions: params.actions,
-  };
+    receiver: params.fromAddress,
+  });
 
-  const res = await fetch(`${ENSO_BASE_URL}/shortcuts/bundle`, {
+  const url = `${ENSO_BASE_URL}/shortcuts/bundle?${searchParams.toString()}`;
+
+  const res = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${params.apiKey}`,
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify(params.actions),
   });
 
   if (!res.ok) {

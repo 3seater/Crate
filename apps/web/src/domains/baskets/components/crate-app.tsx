@@ -353,6 +353,8 @@ function BuyModal({
         <div className="buy-breakdown">
           {crate.tokens.map((token) => {
             const price = priceMap[token.poolAddress];
+            const ethAmt = (amountNum * token.weight) / 100;
+            const usdAmt = ethPriceUsd == null ? null : ethAmt * ethPriceUsd;
             return (
               <div key={token.symbol}>
                 <span>
@@ -374,8 +376,17 @@ function BuyModal({
                   )}
                 </span>
                 <b>
-                  {token.weight}% · Ξ
-                  {((amountNum * token.weight) / 100).toFixed(4)}
+                  {token.weight}%
+                  {usdAmt == null ? (
+                    <> · Ξ{ethAmt.toFixed(4)}</>
+                  ) : (
+                    <>
+                      {" "}
+                      ·{" "}
+                      <span style={{ opacity: 0.5 }}>${usdAmt.toFixed(2)}</span>{" "}
+                      · Ξ{ethAmt.toFixed(4)}
+                    </>
+                  )}{" "}
                 </b>
               </div>
             );
