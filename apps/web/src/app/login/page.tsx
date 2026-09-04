@@ -26,7 +26,9 @@ export default function LoginPage() {
     setLoading(false);
 
     if (res.ok) {
-      const next = searchParams.get("next") ?? "/";
+      const next = (searchParams.get("next") ?? "/") as Parameters<
+        typeof router.push
+      >[0];
       router.push(next);
       router.refresh();
     } else {
