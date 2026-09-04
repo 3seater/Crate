@@ -1,12 +1,21 @@
 import "server-only";
 
 import type { AppRouter } from "@doji/contract";
-import { env } from "@doji/env/web";
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 
-const serverUrl = env.NEXT_PUBLIC_SERVER_URL;
+/**
+ * Absolute URL for server-side tRPC calls (SSR can't use relative paths).
+ * Priority: NEXT_PUBLIC_APP_URL → Netlify URL → Vercel URL → localhost.
+ */
+function getServerTrpcUrl(): string {
+  const base =
+    process.env.NEXT_PUBLIC_APP_URL?.trim() ||
+    process.env.URL?.trim() || // Netlify
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
+    "http://localhost:3000";
+  return `${base}/api/trpc`;
+}
 
-/** Timeout for server tRPC calls (prevents indefinite hangs if server is unreachable). */
 const SERVER_FETCH_TIMEOUT_MS = 30_000;
 
 function fetchWithTimeout(
@@ -18,49 +27,16 @@ function fetchWithTimeout(
     () => controller.abort(),
     SERVER_FETCH_TIMEOUT_MS
   );
-  return fetch(input, {
-    ...init,
-    signal: controller.signal,
-  }).finally(() => clearTimeout(timeoutId));
+  return fetch(input, { ...init, signal: controller.signal }).finally(() =>
+    clearTimeout(timeoutId)
+  );
 }
 
 export const serverTrpc = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: `${serverUrl}/trpc`,
+      url: getServerTrpcUrl(),
       fetch: fetchWithTimeout,
     }),
   ],
 });
-
-/**
- * Authenticated server-side tRPC caller.
- * Reads the session JWT from the HttpOnly cookie and forwards it
- * as Authorization header. Returns null if no cookie is present.
- *
- * Usage: `const caller = await getAuthenticatedServerTrpc();`
- * Always check for null before using — falls back gracefully.
- */
-export async function getAuthenticatedServerTrpc() {
-  const { cookies } = await import("next/headers");
-  const { SESSION_COOKIE_NAME, ADDRESS_COOKIE_NAME } = await import("@/config");
-  const jar = await cookies();
-  const token = jar.get(SESSION_COOKIE_NAME)?.value;
-  const address = jar.get(ADDRESS_COOKIE_NAME)?.value;
-
-  if (!(token && address)) {
-    return null;
-  }
-
-  const client = createTRPCClient<AppRouter>({
-    links: [
-      httpBatchLink({
-        url: `${serverUrl}/trpc`,
-        fetch: fetchWithTimeout,
-        headers: () => ({ Authorization: `Bearer ${token}` }),
-      }),
-    ],
-  });
-
-  return { client, address };
-}

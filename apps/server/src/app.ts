@@ -26,9 +26,6 @@ import { secureHeaders } from "hono/secure-headers";
 import { openapiApp } from "./health/openapi";
 import { healthApp } from "./health/router";
 import { appRouter } from "./routers/index";
-import { ApiError } from "./shared/errors/errors";
-import { POLYMARKET_MAPPED } from "./shared/errors/map-api-error";
-import { validateConfig } from "./shared/validate-config";
 
 const app = new Hono<{ Variables: AppVariables }>();
 let activeRequests = 0;
@@ -240,52 +237,23 @@ app.use("/trpc/*", async (c, next) => {
   await next();
   if (c.req.method === "GET" && c.res.status < 400) {
     const path = c.req.path;
-
-    const isPublicDiscovery =
-      path.includes("markets.list") ||
-      path.includes("markets.calendarList") ||
-      path.includes("markets.bySlug") ||
-      path.includes("events.list") ||
-      path.includes("events.bySlug") ||
-      path.includes("events.tags") ||
-      path.includes("events.search") ||
-      path.includes("leaderboard.rankings") ||
-      path.includes("leaderboard.holders") ||
-      path.includes("activity.tradeCounts");
-    const isPublicHistory = path.includes("markets.priceHistory");
-    const isPublicOrderbook = path.includes("markets.orderbooks");
-    const isUserSpecific =
-      path.includes("portfolio.positions") ||
-      path.includes("portfolio.ctfTokenBalances") ||
-      path.includes("activity.trades") ||
-      path.includes("portfolio.value") ||
-      path.includes("portfolio.closedPositions") ||
-      path.includes("portfolio.usdcBalance") ||
-      path.includes("activity.") ||
-      path.includes("orders.balanceAllowance") ||
-      path.includes("auth.");
-
-    if (isUserSpecific) {
-      c.header("Cache-Control", "private, no-store");
-    } else if (isPublicDiscovery) {
-      // Gamma server cache is 60s — CDN refreshing at 10s was hitting a stale
-      // upstream anyway. 30s CDN cache with 60s SWR lets the server breathe
-      // while keeping discovery data fresh enough for a trading context.
+    // Live prices: 10s CDN cache with 20s SWR
+    if (
+      path.includes("baskets.getLivePrices") ||
+      path.includes("baskets.getEthPrice")
+    ) {
       c.header(
         "Cache-Control",
-        "public, s-maxage=30, stale-while-revalidate=60"
+        "public, s-maxage=10, stale-while-revalidate=20"
       );
-    } else if (isPublicHistory) {
-      // Historical price candles are immutable once closed. Only the trailing
-      // edge of the most recent candle changes. 2-minute CDN cache with 5-minute
-      // SWR is safe and dramatically reduces upstream pressure.
+      // OHLCV candles: 60s CDN cache with 120s SWR
+    } else if (path.includes("baskets.getOhlcv")) {
       c.header(
         "Cache-Control",
-        "public, s-maxage=120, stale-while-revalidate=300"
+        "public, s-maxage=60, stale-while-revalidate=120"
       );
-    } else if (isPublicOrderbook) {
-      // Orderbook is public but changes frequently. Short CDN cache reduces
-      // upstream pressure; client refreshes via WebSocket anyway.
+      // Buy bundle quotes: very short cache
+    } else if (path.includes("baskets.getBundle")) {
       c.header(
         "Cache-Control",
         "public, s-maxage=5, stale-while-revalidate=10"
@@ -306,25 +274,11 @@ app.use(
       }) as unknown as Record<string, unknown>;
     },
     onError: ({ error, path }) => {
-      // Safety net: if an unwrapped ApiError escaped a procedure (forgot withPolymarketError).
-      // Skip errors already mapped by mapApiErrorToTRPC — those carry POLYMARKET_MAPPED.
-      const isMapped =
-        (error as unknown as Record<symbol, boolean>)[POLYMARKET_MAPPED] ===
-        true;
-      const cause = error.cause;
-      if (cause instanceof ApiError && !isMapped) {
-        logger.warn(
-          { path, code: cause.code },
-          "Unmapped ApiError in tRPC procedure — add withPolymarketError"
-        );
-      }
       const logPayload = {
         code: error.code,
         path: path ?? ("path" in error ? error.path : undefined),
         message: error.message,
       };
-      // Expected validation / auth outcomes (e.g. referral gate FORBIDDEN) are TRPCErrors with
-      // non-internal codes. Pino `error` level is wired to Sentry issues — avoid noise for those.
       const isTrpcClientFailure =
         error instanceof TRPCError && error.code !== "INTERNAL_SERVER_ERROR";
       if (isTrpcClientFailure) {
@@ -429,9 +383,7 @@ if (process.env.NODE_ENV === "development") {
   app.get("/docs", (c) => c.text("Not Found", 404));
 }
 
-// test
-validateConfig();
-
+// Validate env at startup
 if (process.env.NODE_ENV === "development") {
   showRoutes(app);
 }

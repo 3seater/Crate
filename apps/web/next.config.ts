@@ -1,51 +1,8 @@
-import { createRequire } from "node:module";
 import { env } from "@doji/env/web";
 import bundleAnalyzer from "@next/bundle-analyzer";
 import { withSentryConfig } from "@sentry/nextjs";
 import { withVercelToolbar } from "@vercel/toolbar/plugins/next";
 import type { NextConfig } from "next";
-
-const require = createRequire(import.meta.url);
-
-const cryptoBrowserifyPath = require.resolve("crypto-browserify");
-
-interface WebpackNormalModuleFactory {
-  hooks: {
-    beforeResolve: {
-      tap: (name: string, fn: (data: { request?: string }) => void) => void;
-    };
-  };
-}
-
-/** Rewrites `node:crypto` for client bundles (Webpack does not resolve `node:` URIs; Turbopack does). */
-function rewriteNodeCryptoForClient() {
-  return {
-    apply(compiler: {
-      hooks: {
-        normalModuleFactory: {
-          tap: (
-            name: string,
-            fn: (nmf: WebpackNormalModuleFactory) => void
-          ) => void;
-        };
-      };
-    }) {
-      compiler.hooks.normalModuleFactory.tap(
-        "RewriteNodeCrypto",
-        (normalModuleFactory: WebpackNormalModuleFactory) => {
-          normalModuleFactory.hooks.beforeResolve.tap(
-            "RewriteNodeCrypto",
-            (data: { request?: string }) => {
-              if (data.request === "node:crypto") {
-                data.request = cryptoBrowserifyPath;
-              }
-            }
-          );
-        }
-      );
-    },
-  };
-}
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -53,21 +10,33 @@ const withBundleAnalyzer = bundleAnalyzer({
   analyzerMode: "static",
 });
 
-/** Build CSP connect-src including the API server (required for tRPC). */
+/** Build CSP connect-src. Covers tRPC (/api/trpc on same origin), WalletConnect, DexScreener prices. */
 const getCspConnectSrc = () => {
-  const serverUrl = env.NEXT_PUBLIC_SERVER_URL;
   const sentryCspReportOrigin = env.NEXT_PUBLIC_SENTRY_CSP_REPORT_URI
     ? new URL(env.NEXT_PUBLIC_SENTRY_CSP_REPORT_URI).origin
     : null;
   const sentryCspConnect = sentryCspReportOrigin
     ? ` ${sentryCspReportOrigin}`
     : "";
-  // `https://*.doji.bet` covers `api.doji.bet` when the build env URL differs (e.g. *.vercel.app vs custom domain).
-  return `'self' ${serverUrl}${sentryCspConnect} https://*.doji.bet https://status.doji.bet https://*.magic.link https://*.alchemy.com https://*.drpc.org https://*.publicnode.com https://*.nodies.app https://polymarket.com https://*.polymarket.com wss://*.polymarket.com https://*.pusher.com wss://*.pusher.com https://*.walletconnect.com https://*.reown.com`;
+  return [
+    "'self'",
+    // tRPC is on same origin via /api/trpc — no external server URL needed
+    // External price APIs called server-side — no client CSP entry needed
+    // WalletConnect / Reown
+    "https://*.walletconnect.com",
+    "https://*.reown.com",
+    "wss://*.walletconnect.com",
+    "https://pulse.walletconnect.org",
+    "https://api.web3modal.org",
+    // Sentry
+    sentryCspConnect,
+  ]
+    .filter(Boolean)
+    .join(" ");
 };
 
 const cspBaseDirectives = [
-  "frame-src 'self' https://dexscreener.com https://vercel.live",
+  "frame-src 'self' https://dexscreener.com",
   `connect-src ${getCspConnectSrc()}`,
   "worker-src 'self' blob:",
 ];
@@ -172,13 +141,8 @@ const nextConfig: NextConfig = {
     turbopackFileSystemCacheForBuild: true,
     staleTimes: { dynamic: 30 },
   },
-  /** Webpack resolves `node:crypto` in browser bundles (e.g. Polymarket SDK); Turbopack already handles this. */
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.plugins.push(rewriteNodeCryptoForClient());
-    }
-    return config;
-  },
+  /** No custom webpack plugins needed — Turbopack handles everything. */
+  webpack: (config) => config,
   async headers() {
     const headers: {
       source: string;

@@ -12,11 +12,14 @@ const DynamicSpeedInsights = dynamic(
 );
 
 /**
- * Client wrapper for Vercel Analytics + SpeedInsights (requires ssr: false).
- * Custom events: `trackWebEvent` from `@/lib/analytics/track-client` (client)
- * and `trackWebEventOnServer` from `@/lib/analytics/track-server` (server).
+ * Vercel Analytics + SpeedInsights — only renders on Vercel deployments.
+ * On Netlify/other hosts VERCEL is undefined, so these are no-ops.
  */
 export function AnalyticsScripts() {
+  // VERCEL env var is injected automatically on Vercel; absent everywhere else.
+  if (!process.env.VERCEL) {
+    return null;
+  }
   return (
     <>
       <DynamicAnalytics />

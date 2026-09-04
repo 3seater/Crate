@@ -1,6 +1,5 @@
 import "client-only";
 import type { AppRouter } from "@doji/contract";
-import { env } from "@doji/env/web";
 import { logger } from "@doji/logger/client";
 import { addBreadcrumb, captureMessage, metrics } from "@sentry/nextjs";
 import { QueryCache, QueryClient } from "@tanstack/react-query";
@@ -383,7 +382,7 @@ const trpcClient = createTRPCClient<AppRouter>({
     }),
     sanitizeResultLink(),
     httpBatchStreamLink({
-      url: `${env.NEXT_PUBLIC_SERVER_URL}/trpc`,
+      url: "/api/trpc",
       // Use standard Accept header instead of custom trpc-accept to avoid CORS preflight
       streamHeader: "accept",
       // Avoid sub-2k limits that force POST / split batches and can fail on heavy inputs.
