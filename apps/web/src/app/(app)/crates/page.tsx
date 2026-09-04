@@ -42,7 +42,6 @@ export default function CratesPage() {
       </nav>
 
       <section className="catalog-hero">
-        <p className="eyebrow">All crates</p>
         <h1>
           All <em>crates.</em>
         </h1>
