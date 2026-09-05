@@ -139,9 +139,11 @@ button {
 .nav-connect-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 7px;
   height: 36px;
-  padding: 0 16px;
+  width: 130px;
+  padding: 0 12px;
   border-radius: 999px;
   background: var(--green);
   color: #0b0d09;
@@ -151,10 +153,17 @@ button {
   font-weight: 500;
   line-height: 1;
   cursor: pointer;
+  overflow: hidden;
   transition:
     opacity 0.15s ease,
     transform 0.15s ease;
   white-space: nowrap;
+}
+.nav-connect-btn span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
 .nav-connect-btn:hover {
   opacity: 0.88;
