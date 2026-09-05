@@ -30,11 +30,13 @@ export function SiteNav() {
         <a href="/#steps">How it works</a>
         <a href="/#faq">FAQ</a>
       </div>
-      <ConnectButton
-        accountStatus="address"
-        chainStatus="none"
-        showBalance={false}
-      />
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <ConnectButton
+          accountStatus="address"
+          chainStatus="none"
+          showBalance={false}
+        />
+      </div>
     </nav>
   );
 }

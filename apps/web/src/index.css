@@ -109,10 +109,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  height: 52px;
-  padding: 0 8px 0 16px;
-  /* floating pill */
+  gap: 4px;
+  height: 48px;
+  padding: 0 6px 0 14px;
   position: fixed;
   top: 16px;
   left: 50%;
@@ -122,7 +121,6 @@ button {
   max-width: calc(100vw - 40px);
   z-index: 100;
   border-radius: 999px;
-  /* liquid glass */
   background: rgba(11, 13, 9, 0.65);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -134,13 +132,14 @@ button {
     0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Force RainbowKit wrapper div to not break flex alignment */
-.nav > div[data-testid="rk-connect-button"],
-.nav > div:last-child {
-  display: flex;
-  align-items: center;
-  height: 100%;
+/* RainbowKit wrapper alignment fix */
+.nav > div,
+.nav > div[data-testid="rk-connect-button"] {
+  display: flex !important;
+  align-items: center !important;
+  height: 36px;
 }
+
 .brand {
   display: inline-flex;
   gap: 8px;
@@ -151,10 +150,12 @@ button {
   line-height: 1;
   letter-spacing: -0.01em;
   color: var(--foreground);
+  margin-right: 8px;
 }
+
 .brand > span {
   display: block;
-  transform: translateY(1px);
+  transform: none;
 }
 .crate-logo {
   display: block;
@@ -172,6 +173,7 @@ button {
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 2px;
   font-size: 14px;
   font-weight: 400;
