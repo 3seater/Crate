@@ -26,44 +26,18 @@
 }
 html {
   scroll-behavior: smooth;
-  background-color: var(--background);
-  background-image:
-    radial-gradient(circle, rgba(165, 226, 0, 0.07) 1px, transparent 1px),
-    radial-gradient(
-      ellipse 80% 60% at 75% 0%,
-      rgba(165, 226, 0, 0.04) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 60% 50% at 10% 100%,
-      rgba(40, 60, 0, 0.06) 0%,
-      transparent 70%
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--background);
+    background-image: radial-gradient(
+      circle,
+      rgba(165, 226, 0, 0.05) 1px,
+      transparent 1px
     );
-  background-size:
-    32px 32px,
-    100% 100%,
-    100% 100%;
-  background-attachment: fixed;
-  animation: grid-breathe 8s ease-in-out infinite alternate;
-}
+    background-size: 32px 32px;
+    background-attachment: fixed;
+  }
 
-@keyframes grid-breathe {
-  0% {
-    background-size:
-      32px 32px,
-      100% 100%,
-      100% 100%;
-    opacity: 1;
-  }
-  100% {
-    background-size:
-      34px 34px,
-      100% 100%,
-      100% 100%;
-    opacity: 0.92;
-  }
-}
-body {
   margin: 0;
   font-family: var(--font-inter, system-ui, -apple-system, sans-serif);
   color: var(--foreground);
@@ -75,93 +49,79 @@ body {
   overflow-x: hidden;
 }
 
-/* Animated background orb — drifts slowly, gives depth */
-body::before {
+/* Animated background orbs — GPU-composited via transform/opacity only */
+body::before,
+body::after {
   content: "";
   position: fixed;
-  inset: 0;
+  border-radius: 50%;
   z-index: -1;
   pointer-events: none;
-  background:
-    radial-gradient(
-      ellipse 55% 40% at var(--orb-x, 70%) var(--orb-y, 20%),
-      rgba(165, 226, 0, 0.055) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 40% 35% at var(--orb2-x, 20%) var(--orb2-y, 75%),
-      rgba(165, 226, 0, 0.03) 0%,
-      transparent 65%
-    );
-  animation: orb-drift 18s ease-in-out infinite alternate;
-  will-change: background;
+  filter: blur(90px);
+  will-change: transform, opacity;
 }
 
-@keyframes orb-drift {
+body::before {
+  width: 60vw;
+  height: 50vw;
+  top: -10vw;
+  right: -5vw;
+  background: radial-gradient(
+    ellipse,
+    rgba(165, 226, 0, 0.055) 0%,
+    transparent 70%
+  );
+  animation: orb-a 22s ease-in-out infinite alternate;
+}
+
+body::after {
+  width: 45vw;
+  height: 40vw;
+  bottom: -5vw;
+  left: -5vw;
+  background: radial-gradient(
+    ellipse,
+    rgba(165, 226, 0, 0.03) 0%,
+    transparent 70%
+  );
+  animation: orb-b 28s ease-in-out infinite alternate;
+}
+
+@keyframes orb-a {
   0% {
-    background:
-      radial-gradient(
-        ellipse 55% 40% at 70% 15%,
-        rgba(165, 226, 0, 0.055) 0%,
-        transparent 70%
-      ),
-      radial-gradient(
-        ellipse 40% 35% at 15% 80%,
-        rgba(165, 226, 0, 0.03) 0%,
-        transparent 65%
-      );
+    transform: translate(0, 0) scale(1);
+    opacity: 0.7;
   }
-  25% {
-    background:
-      radial-gradient(
-        ellipse 60% 45% at 80% 35%,
-        rgba(165, 226, 0, 0.045) 0%,
-        transparent 70%
-      ),
-      radial-gradient(
-        ellipse 45% 30% at 25% 60%,
-        rgba(165, 226, 0, 0.035) 0%,
-        transparent 65%
-      );
+  33% {
+    transform: translate(-8vw, 8vw) scale(1.1);
+    opacity: 0.9;
   }
-  50% {
-    background:
-      radial-gradient(
-        ellipse 50% 50% at 60% 55%,
-        rgba(165, 226, 0, 0.04) 0%,
-        transparent 70%
-      ),
-      radial-gradient(
-        ellipse 35% 40% at 10% 30%,
-        rgba(165, 226, 0, 0.04) 0%,
-        transparent 65%
-      );
-  }
-  75% {
-    background:
-      radial-gradient(
-        ellipse 65% 38% at 40% 25%,
-        rgba(165, 226, 0, 0.05) 0%,
-        transparent 70%
-      ),
-      radial-gradient(
-        ellipse 42% 32% at 75% 70%,
-        rgba(165, 226, 0, 0.03) 0%,
-        transparent 65%
-      );
+  66% {
+    transform: translate(4vw, 14vw) scale(0.9);
+    opacity: 0.6;
   }
   100% {
-    background:
-      radial-gradient(
-        ellipse 55% 42% at 65% 10%,
-        rgba(165, 226, 0, 0.055) 0%,
-        transparent 70%
-      ),
-      radial-gradient(
-        ellipse 38% 38% at 20% 85%,
-        rgba(165, 226, 0, 0.03) 0%,
-        transparent 65%
-      );
+    transform: translate(-4vw, 4vw) scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes orb-b {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  33% {
+    transform: translate(6vw, -4vw) scale(1.08);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translate(10vw, 4vw) scale(0.95);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(4vw, -6vw) scale(1.1);
+    opacity: 0.7;
   }
 }
 a {
