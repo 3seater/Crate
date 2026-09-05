@@ -108,16 +108,28 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
-  padding: 0 5vw;
-  /* liquid glass nav */
-  background: rgba(11, 13, 9, 0.55);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border-bottom: 1px solid rgba(165, 226, 0, 0.08);
-  position: sticky;
-  top: 0;
+  height: 52px;
+  padding: 0 16px;
+  /* floating pill */
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  min-width: 560px;
+  max-width: calc(100vw - 40px);
   z-index: 100;
+  border-radius: 999px;
+  /* liquid glass */
+  background: rgba(11, 13, 9, 0.65);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(165, 226, 0, 0.15);
+  box-shadow:
+    inset 0 1px 0 rgba(165, 226, 0, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.3);
 }
 .brand {
   display: inline-flex;
@@ -149,7 +161,7 @@ button {
 
 .nav-links {
   display: flex;
-  gap: 30px;
+  gap: 4px;
   font-size: 13px;
   color: var(--muted);
 }
@@ -167,9 +179,18 @@ button {
     transform 0.25s ease,
     box-shadow 0.25s ease;
 }
+.nav-links a,
+.text-button {
+  padding: 6px 14px;
+  border-radius: 999px;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
 .nav-links a:hover,
 .text-button:hover {
-  color: var(--green);
+  color: var(--foreground);
+  background: rgba(165, 226, 0, 0.08);
 }
 .connect-button:hover,
 .ghost-button:hover,
@@ -212,15 +233,16 @@ button {
 }
 .connect-button,
 .ghost-button {
-  padding: 10px 17px;
+  padding: 8px 16px;
   font-size: 12px;
+  border-radius: 999px;
   /* liquid glass */
-  background: rgba(165, 226, 0, 0.04);
-  border: 1px solid rgba(165, 226, 0, 0.18);
+  background: rgba(165, 226, 0, 0.08);
+  border: 1px solid rgba(165, 226, 0, 0.22);
   backdrop-filter: blur(12px) saturate(140%);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   box-shadow:
-    inset 0 1px 0 rgba(165, 226, 0, 0.12),
+    inset 0 1px 0 rgba(165, 226, 0, 0.14),
     inset 0 -1px 0 rgba(0, 0, 0, 0.2),
     0 2px 8px rgba(0, 0, 0, 0.25);
 }
@@ -253,7 +275,7 @@ button {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   min-height: 700px;
-  padding: 100px 8vw 48px;
+  padding: 140px 8vw 48px;
   border-bottom: 1px solid var(--line);
 }
 .hero-copy {
@@ -787,7 +809,19 @@ footer:not(.site-footer) .brand {
 .wallet-options button {
   display: flex;
   justify-content: space-between;
-  padding: 17px;
+  align-items: center;
+  padding: 14px 16px;
+  background: rgba(165, 226, 0, 0.04);
+  border: 1px solid rgba(165, 226, 0, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(165, 226, 0, 0.07);
+}
+.wallet-options button:hover {
+  background: rgba(165, 226, 0, 0.08);
+  border-color: var(--green);
+}
+padding: 17px;
   font-size: 13px;
   text-align: left;
   background: transparent;
@@ -1492,13 +1526,33 @@ footer:not(.site-footer) .brand {
   }
 }
 
-/* ─── RainbowKit button override — match v0 connect-button style ─────────── */
+/* ─── RainbowKit overrides — green theme ─────────────────────────────────── */
 [data-testid="rk-connect-button"],
 [data-testid="rk-connect-button"] button,
 .iekbcc0[data-testid="rk-connect-button"] {
+  background: rgba(165, 226, 0, 0.08) !important;
+  border: 1px solid rgba(165, 226, 0, 0.2) !important;
+  border-radius: 999px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(165, 226, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  color: #f0f5e8 !important;
 }
+
+/* RainbowKit modal backdrop */
+[data-rk] [role="dialog"] {
+  background: rgba(11, 13, 9, 0.88) !important;
+  border: 1px solid rgba(165, 226, 0, 0.12) !important;
+  backdrop-filter: blur(28px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(160%) !important;
+}
+
 /* Override the default RainbowKit blue with our green */
 :root {
+  --rk-colors-accentColor: #a5e200;
+  --rk-colors-accentColorForeground: #0b0d09;
 }
 
 /* ─── Login page ──────────────────────────────────────────────────────────── */
