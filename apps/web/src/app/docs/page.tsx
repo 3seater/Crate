@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createPageMetadata } from "@/lib/seo";
 import { ScrollProgress } from "@/domains/baskets/components/scroll-progress";
+import { SiteNav } from "@/domains/baskets/components/site-nav";
 
 export const metadata = createPageMetadata({
   title: { absolute: "Docs — Crate" },
@@ -36,7 +37,7 @@ const SECTIONS = [
   {
     id: "crates",
     heading: "The crates",
-    body: `Each crate has a fixed set of constituents and weights. Weights are rebalanced periodically by the Crate team. Current crates: Blue Chips (blue-chip exposure), Feline Index (cat coin sector), and RHC Ecosystem (Robinhood Chain native protocols). More crates will be added as the ecosystem grows.`,
+    body: `Each crate is a fixed-weight token index built around a specific market narrative on Robinhood Chain. The six live indexes are: Blue Chips, Feline Index, DeFi Core, Launchpad Pack, AI & Infra, and Mag 4 — covering sector exposure from tokenized equities to DeFi infrastructure to the cat coin meta. Weights are fixed at launch and displayed transparently in the order panel. New crates will be added as new narratives emerge on the chain.`,
   },
   {
     id: "robinhood-chain",
@@ -51,7 +52,7 @@ const SECTIONS = [
   {
     id: "security",
     heading: "Security",
-    body: `Crate contracts are non-custodial — your funds move directly from your wallet to the constituent tokens. The contracts are not upgradeable. A full audit will be published here before the public launch. In the meantime, use the testnet or keep amounts small.`,
+    body: `Crate contracts are non-custodial — your funds move directly from your wallet to the constituent tokens. The contracts are not upgradeable. Audit details will be published in this documentation. If you have security concerns, reach out via X (@tryCrate).`,
   },
   {
     id: "faq",
@@ -82,21 +83,7 @@ export default function DocsPage() {
   return (
     <main className="docs-shell">
       <ScrollProgress />
-      {/* Nav */}
-      <nav className="nav">
-        <Link className="brand" href="/">
-          <Mark />
-          <span>crate</span>
-        </Link>
-        <div className="nav-links">
-          <Link href="/">Overview</Link>
-          <Link href="/crates">Crates</Link>
-          <Link href="/docs">Docs</Link>
-        </div>
-        <Link className="ghost-button" href="/">
-          ← Back
-        </Link>
-      </nav>
+      <SiteNav />
 
       <div className="docs-layout">
         {/* Sidebar */}
