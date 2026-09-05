@@ -198,7 +198,7 @@ button {
   transition: transform 0.3s ease;
 }
 .brand:hover .crate-logo {
-  transform: rotate(-8deg) scale(1.08);
+  transform: none;
 }
 
 .nav-links {
