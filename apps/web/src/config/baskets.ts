@@ -148,12 +148,13 @@ export const BASKETS: BasketConfig[] = validateBaskets([
         weight: 0.5,
       },
       {
-        symbol: "LONG",
-        name: "Long.xyz",
-        address: "0x8B3F4F39873dEA4c1bE3cCAFf06b8a8f6E4E00e1",
-        poolAddress: "0x3a1e4f8e9c2b7d5f0a6c9e2b4d7f1a3c5e8b0d2f",
+        symbol: "HOOKR",
+        name: "Hookr.fun",
+        address: "0x18E674231A58c239Dc7DaeDcffE15Ec3A24cff5c",
+        poolAddress:
+          "0x590dcb6a87828bf688b48089a62239b693378f1fb64d2286e6a399ed8c005fdf",
         logoUrl:
-          "https://dd.dexscreener.com/ds-data/tokens/robinhood/0x8b3f4f39873dea4c1be3ccaff06b8a8f6e4e00e1.png",
+          "https://cdn.dexscreener.com/cms/images/8HVsUvtM_VyD-mXb?width=800&height=800&quality=95&format=auto",
         weight: 0.3,
       },
       {
@@ -238,6 +239,44 @@ export const BASKETS: BasketConfig[] = validateBaskets([
         poolAddress: "0xddcbba3666f578e3f09516f21ff85bfee859ab5e",
         logoUrl: "/stocks/sp500.png",
         weight: 0.2,
+      },
+    ],
+  },
+  {
+    id: "paired",
+    name: "Paired",
+    description:
+      "Meme coins paired with tokenized stocks — the defining meta of Robinhood Chain",
+    constituents: [
+      {
+        symbol: "NUDES",
+        name: "Send Nudes",
+        address: "0xbe98b75361935b18d688409424a869a4C3dC7401",
+        poolAddress:
+          "0x383957bce2341f59ff97c47eda2ad3b3b839b7050adc8a4747a398abca0ad552",
+        logoUrl:
+          "https://cdn.dexscreener.com/cms/images/32efGaEMuDFyUCLi?width=800&height=800&quality=95&format=auto",
+        weight: 0.4,
+      },
+      {
+        symbol: "BONER",
+        name: "Boner Coin",
+        address: "0x98096d17e191B3dA1d5f99a6D7b3584351b11E18",
+        poolAddress:
+          "0x9c89b04303dfa76f3f6fb02c2b77be0e8a00ab8fa00d507119acd54ab3e8640d",
+        logoUrl:
+          "https://cdn.dexscreener.com/cms/images/zHSvsb5W3vIdMePa?width=800&height=800&quality=95&format=auto",
+        weight: 0.35,
+      },
+      {
+        symbol: "microduck",
+        name: "microduck",
+        address: "0xD5f1afEA47b1A9eab414D2ee740cF1d6d039E725",
+        poolAddress:
+          "0xcde4d35e341901bc0308c2ffc789448ccd0f238a59597fe702e6710484b9c370",
+        logoUrl:
+          "https://cdn.dexscreener.com/cms/images/PRPmxR0LalitfHcU?width=800&height=800&quality=95&format=auto",
+        weight: 0.25,
       },
     ],
   },
