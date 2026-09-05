@@ -47,10 +47,9 @@ html {
 }
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter, system-ui, -apple-system, sans-serif);
   color: var(--foreground);
   background: transparent;
-  /* Prevents layout shift when scrollbar appears/disappears (e.g. modal open) */
   scrollbar-gutter: stable;
 }
 a {
@@ -146,11 +145,12 @@ button {
   display: inline-flex;
   gap: 8px;
   align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  font-weight: 600;
+  font-family: var(--font-inter, system-ui, sans-serif);
+  font-size: 14px;
+  font-weight: 500;
   line-height: 1;
-  letter-spacing: -0.07em;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
 }
 .brand > span {
   display: block;
@@ -172,8 +172,10 @@ button {
 
 .nav-links {
   display: flex;
-  gap: 4px;
-  font-size: 13px;
+  gap: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: var(--font-inter, system-ui, sans-serif);
   color: var(--muted);
 }
 .nav-links a,
@@ -251,7 +253,9 @@ button {
 .ghost-button {
   padding: 0 16px;
   height: 36px;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-inter, system-ui, sans-serif);
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
