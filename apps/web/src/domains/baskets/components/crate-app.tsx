@@ -10,6 +10,7 @@ import { useBasketBuy } from "@/domains/baskets/hooks/use-basket-buy";
 import { useBasketPrices } from "@/domains/baskets/hooks/use-basket-prices";
 import { useEthPrice } from "@/domains/baskets/hooks/use-eth-price";
 import { SiteNav } from "@/domains/baskets/components/site-nav";
+import { HeroArt } from "@/domains/baskets/components/hero-art";
 import { ScrollProgress } from "@/domains/baskets/components/scroll-progress";
 import { formatUsdCompact } from "@/utils/format";
 
