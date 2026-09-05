@@ -7,7 +7,7 @@ import { API_PATH_POLYMARKET_SIGN } from "@/config";
 
 export const APP_NAME = "Crate";
 export const APP_TITLE = "Crate";
-export const APP_DESCRIPTION = "Curated exposure for chaotic markets.";
+export const APP_DESCRIPTION = "curated exposure for chaotic markets.";
 export const APP_KEYWORDS = [
   "Polymarket",
   "prediction markets",
