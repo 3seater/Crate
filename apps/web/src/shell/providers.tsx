@@ -15,6 +15,7 @@ import { robinhoodChain } from "@/config/chains";
 import { WalletSyncProvider } from "@/domains/baskets/components/wallet-sync-provider";
 import { registerQueryClient } from "@/lib/session-manager";
 import { TopLoadingBar } from "@/shell/top-loading-bar";
+import { PreventScrollLock } from "@/shell/prevent-scroll-lock";
 import { Toaster } from "@/ui/sonner";
 import { TooltipProvider } from "@/ui/tooltip";
 
@@ -80,6 +81,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           <WagmiProvider config={wagmiConfig}>
             <QueryClientProvider client={queryClient}>
               <RainbowKitProvider theme={rainbowTheme}>
+                <PreventScrollLock />
                 <Suspense fallback={null}>
                   <TopLoadingBar />
                 </Suspense>
