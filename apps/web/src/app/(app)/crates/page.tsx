@@ -10,6 +10,19 @@ export const metadata = createPageMetadata({
   description: "Curated token indexes for Robinhood Chain.",
 });
 
+function Mark() {
+  return (
+    <Image
+      alt="Crate"
+      className="crate-logo"
+      height={27}
+      src="/crate-logo.svg"
+      unoptimized
+      width={27}
+    />
+  );
+}
+
 export default function CratesPage() {
   return (
     <main className="site-shell">
