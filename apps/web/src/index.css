@@ -110,8 +110,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
   height: 52px;
-  padding: 0 16px;
+  padding: 0 8px 0 16px;
   /* floating pill */
   position: fixed;
   top: 16px;
@@ -132,6 +133,14 @@ button {
     inset 0 -1px 0 rgba(0, 0, 0, 0.3),
     0 8px 32px rgba(0, 0, 0, 0.4),
     0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Force RainbowKit wrapper div to not break flex alignment */
+.nav > div[data-testid="rk-connect-button"],
+.nav > div:last-child {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 .brand {
   display: inline-flex;
@@ -182,9 +191,14 @@ button {
     box-shadow 0.25s ease;
 }
 .nav-links a,
+.nav-links a,
 .text-button {
-  padding: 6px 14px;
+  padding: 4px 12px;
   border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  line-height: 1;
   transition:
     color 0.2s ease,
     background 0.2s ease;
@@ -235,9 +249,14 @@ button {
 }
 .connect-button,
 .ghost-button {
-  padding: 8px 16px;
+  padding: 0 16px;
+  height: 36px;
   font-size: 13px;
   border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   background: rgba(165, 226, 0, 0.06);
   border: 1px solid rgba(165, 226, 0, 0.18);
   backdrop-filter: blur(12px) saturate(140%);
