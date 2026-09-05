@@ -259,13 +259,15 @@ button {
 .primary-button {
   position: relative;
   display: inline-flex;
-  gap: 27px;
+  gap: 10px;
   align-items: center;
-  justify-content: space-between;
-  padding: 17px 20px;
+  justify-content: center;
+  height: 44px;
+  padding: 0 22px;
   overflow: hidden;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-inter, system-ui, sans-serif);
   color: #0b0d09;
   background: #a5e200;
   border: 0;
@@ -279,13 +281,13 @@ button {
   transform: translateY(-1px);
 }
 .primary-button span {
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 14px;
+  font-weight: 500;
 }
 .connect-button,
 .ghost-button {
-  padding: 0 16px;
-  height: 36px;
+  padding: 0 22px;
+  height: 44px;
   font-size: 14px;
   font-weight: 500;
   font-family: var(--font-inter, system-ui, sans-serif);
