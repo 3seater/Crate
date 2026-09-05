@@ -234,17 +234,17 @@ button {
 .connect-button,
 .ghost-button {
   padding: 8px 16px;
-  font-size: 12px;
+  font-size: 13px;
   border-radius: 999px;
-  /* liquid glass */
-  background: rgba(165, 226, 0, 0.08);
-  border: 1px solid rgba(165, 226, 0, 0.22);
+  background: rgba(165, 226, 0, 0.06);
+  border: 1px solid rgba(165, 226, 0, 0.18);
   backdrop-filter: blur(12px) saturate(140%);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   box-shadow:
-    inset 0 1px 0 rgba(165, 226, 0, 0.14),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
-    0 2px 8px rgba(0, 0, 0, 0.25);
+    inset 0 1px 0 rgba(165, 226, 0, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+  color: var(--foreground);
 }
 .connect-button span,
 .ghost-button span {
@@ -820,12 +820,6 @@ footer:not(.site-footer) .brand {
 .wallet-options button:hover {
   background: rgba(165, 226, 0, 0.08);
   border-color: var(--green);
-}
-padding: 17px;
-  font-size: 13px;
-  text-align: left;
-  background: transparent;
-  border: 1px solid var(--line);
 }
 .wallet-options button:hover {
   border-color: var(--green);
