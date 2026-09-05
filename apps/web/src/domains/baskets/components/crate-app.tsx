@@ -1,6 +1,6 @@
 "use client";
 
-import { ConnectButton, useConnectModal } from "@rainbow-me/rainbowkit";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -9,7 +9,7 @@ import { BASKETS } from "@/config/baskets";
 import { useBasketBuy } from "@/domains/baskets/hooks/use-basket-buy";
 import { useBasketPrices } from "@/domains/baskets/hooks/use-basket-prices";
 import { useEthPrice } from "@/domains/baskets/hooks/use-eth-price";
-import { HeroArt } from "@/domains/baskets/components/hero-art";
+import { SiteNav } from "@/domains/baskets/components/site-nav";
 import { ScrollProgress } from "@/domains/baskets/components/scroll-progress";
 import { formatUsdCompact } from "@/utils/format";
 
@@ -533,22 +533,7 @@ export default function CrateApp() {
   return (
     <main className="site-shell">
       <ScrollProgress />
-      <nav className="nav">
-        <Link className="brand" href="/">
-          <Mark />
-          <span>crate</span>
-        </Link>
-        <div className="nav-links">
-          <Link href="/crates">Crates</Link>
-          <a href="#steps">How it works</a>
-          <a href="#faq">FAQ</a>
-        </div>
-        <ConnectButton
-          accountStatus="address"
-          chainStatus="none"
-          showBalance={false}
-        />
-      </nav>
+      <SiteNav />
 
       <section className="hero" id="top">
         <div className="hero-copy">

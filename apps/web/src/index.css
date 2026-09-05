@@ -50,6 +50,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--foreground);
   background: transparent;
+  /* Prevents layout shift when scrollbar appears/disappears (e.g. modal open) */
+  scrollbar-gutter: stable;
 }
 a {
   color: inherit;
@@ -745,7 +747,7 @@ footer:not(.site-footer) .brand {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 10;
+  z-index: 200;
   display: grid;
   place-items: center;
   padding: 20px;

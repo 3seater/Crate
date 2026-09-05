@@ -3,43 +3,18 @@ import Link from "next/link";
 import { createPageMetadata } from "@/lib/seo";
 import { ScrollProgress } from "@/domains/baskets/components/scroll-progress";
 import { CrateGrid } from "@/domains/baskets/components/crate-grid";
+import { SiteNav } from "@/domains/baskets/components/site-nav";
 
 export const metadata = createPageMetadata({
   title: { absolute: "All Crates — Crate" },
   description: "Curated token indexes for Robinhood Chain.",
 });
 
-function Mark() {
-  return (
-    <Image
-      alt="Crate"
-      className="crate-logo"
-      height={27}
-      src="/crate-logo.svg"
-      unoptimized
-      width={27}
-    />
-  );
-}
-
 export default function CratesPage() {
   return (
     <main className="site-shell">
       <ScrollProgress />
-      <nav className="nav">
-        <Link className="brand" href="/">
-          <Mark />
-          <span>crate</span>
-        </Link>
-        <div className="nav-links">
-          <Link href="/">Overview</Link>
-          <Link href="/crates">Crates</Link>
-          <a href="/#steps">How it works</a>
-        </div>
-        <Link className="ghost-button" href="/">
-          ← Back
-        </Link>
-      </nav>
+      <SiteNav />
 
       <section className="catalog-hero">
         <h1>
