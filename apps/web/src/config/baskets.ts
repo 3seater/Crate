@@ -280,6 +280,42 @@ export const BASKETS: BasketConfig[] = validateBaskets([
       },
     ],
   },
+  {
+    id: "speculative",
+    name: "Speculative",
+    description: "High-conviction early-stage plays on Robinhood Chain",
+    constituents: [
+      {
+        symbol: "urmom",
+        name: "ur mom",
+        address: "0x4874845b0d4aCffd896DdE1E42828A543717AF7f",
+        poolAddress:
+          "0x826ae3756e19d32a75cad183ce156554864f0087aa55879f33a7b8fb82ff4eee",
+        logoUrl:
+          "https://cdn.dexscreener.com/cms/images/z7P7xZsuuI8HPMQx?width=800&height=800&quality=95&format=auto",
+        weight: 0.4,
+      },
+      {
+        symbol: "PIPEDOG",
+        name: "pipedog",
+        address: "0x5Cb6F181081301b44905F3ae15419112ecaBd8A6",
+        poolAddress: "0xb7f10f74b39291b9290b779978e19a7637c742d6",
+        logoUrl:
+          "https://cdn.dexscreener.com/cms/images/4S5N79kV0jhT7y6K?width=800&height=800&quality=95&format=auto",
+        weight: 0.35,
+      },
+      {
+        symbol: "MEME",
+        name: "A Meme Coin",
+        address: "0x385F4f8ae47651ce5F58F5265395a669f8281e18",
+        poolAddress:
+          "0xc6e298e137f2905398db87e6eae49ede64d231fee37330fa433fec917f4618b6",
+        logoUrl:
+          "https://cdn.dexscreener.com/cms/images/pPWqEwHoGm1tbUMt?width=800&height=800&quality=95&format=auto",
+        weight: 0.25,
+      },
+    ],
+  },
 ]);
 
 /** Look up a basket by its id slug. Returns undefined when not found. */
