@@ -316,6 +316,44 @@ export const BASKETS: BasketConfig[] = validateBaskets([
       },
     ],
   },
+  {
+    id: "elon-coded",
+    name: "Elon-Coded",
+    description:
+      "Meme coins paired with SPCX — pure Elon/SpaceX narrative plays",
+    constituents: [
+      {
+        symbol: "18932",
+        name: "Robinhood Asteroid",
+        address: "0x5759A852243A56A48853Af1d28fd4e0f33747C9B",
+        poolAddress:
+          "0xedf5d3c9f4a0cb59734c13e73309d70ddafa19ca113790449311554a6f6c4f4e",
+        logoUrl:
+          "https://cdn.dexscreener.com/cms/images/4Hg0txNIr17lqBph?width=800&height=800&quality=95&format=auto",
+        weight: 0.4,
+      },
+      {
+        symbol: "DOGE-1",
+        name: "DOGE-1",
+        address: "0x3eC8A8174129D5cBeCef67eE2AF8621319c34c03",
+        poolAddress:
+          "0x037dea9a1851a87f997c42cc9bf18659675f642d01d28fc7b1cc94695a0ad54c",
+        logoUrl:
+          "https://cdn.dexscreener.com/cms/images/RUqi9brv6X8jlQgT?width=800&height=800&quality=95&format=auto",
+        weight: 0.35,
+      },
+      {
+        symbol: "urmom",
+        name: "ur mom",
+        address: "0x4874845b0d4aCffd896DdE1E42828A543717AF7f",
+        poolAddress:
+          "0x826ae3756e19d32a75cad183ce156554864f0087aa55879f33a7b8fb82ff4eee",
+        logoUrl:
+          "https://cdn.dexscreener.com/cms/images/z7P7xZsuuI8HPMQx?width=800&height=800&quality=95&format=auto",
+        weight: 0.25,
+      },
+    ],
+  },
 ]);
 
 /** Look up a basket by its id slug. Returns undefined when not found. */
