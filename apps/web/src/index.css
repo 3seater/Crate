@@ -96,7 +96,7 @@ button {
   max-width: 1600px;
   margin: auto;
   overflow: hidden;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 .primary-button,
 .ghost-button,
@@ -106,7 +106,7 @@ button {
 .wallet-modal,
 .buy-modal,
 .prism {
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .nav {
@@ -291,7 +291,7 @@ button {
   font-size: 14px;
   font-weight: 500;
   font-family: var(--font-inter, system-ui, sans-serif);
-  border-radius: 999px;
+  border-radius: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1654,7 +1654,7 @@ footer:not(.site-footer) .brand {
   padding: 0 14px;
   background: transparent;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   color: var(--foreground);
   font-size: 18px;
   letter-spacing: 0.2em;
