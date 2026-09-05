@@ -50,7 +50,11 @@ body {
   font-family: var(--font-inter, system-ui, -apple-system, sans-serif);
   color: var(--foreground);
   background: transparent;
+  /* Prevent layout shift when modals add overflow:hidden */
   scrollbar-gutter: stable;
+  /* Override RainbowKit's padding-right injection */
+  padding-right: 0 !important;
+  overflow-x: hidden;
 }
 a {
   color: inherit;
@@ -118,7 +122,8 @@ button {
   transform: translateX(-50%);
   width: fit-content;
   min-width: 560px;
-  max-width: calc(100vw - 40px);
+  /* Use 100dvw to stay immune to scrollbar-induced width changes */
+  max-width: calc(100dvw - 40px);
   z-index: 100;
   border-radius: 999px;
   background: rgba(11, 13, 9, 0.65);
