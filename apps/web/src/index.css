@@ -26,25 +26,22 @@
 }
 html {
   scroll-behavior: smooth;
-  html {
-    scroll-behavior: smooth;
-    background-color: var(--background);
-    background-image: radial-gradient(
-      circle,
-      rgba(165, 226, 0, 0.05) 1px,
-      transparent 1px
-    );
-    background-size: 32px 32px;
-    background-attachment: fixed;
-  }
+  background-color: var(--background);
+  background-image: radial-gradient(
+    circle,
+    rgba(165, 226, 0, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+  background-attachment: fixed;
+}
 
+body {
   margin: 0;
   font-family: var(--font-inter, system-ui, -apple-system, sans-serif);
   color: var(--foreground);
   background: transparent;
-  /* Prevent layout shift when modals add overflow:hidden */
   scrollbar-gutter: stable;
-  /* Override RainbowKit's padding-right injection */
   padding-right: 0 !important;
   overflow-x: hidden;
 }
